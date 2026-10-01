@@ -1,8 +1,13 @@
-
 /* ============================================================
-   AWAY TYPEFACES — supplied by away, embedded and subset to
-   Latin + punctuation + arrows so the page ships as one file.
-   Avantime = editorial display. Hanken Grotesk = body.
+   AWAY TYPEFACES
+   Space Grotesk = editorial display (headlines, numerals,
+   buttons, nav links). Hanken Grotesk = body and all small
+   uppercase labels. Both are served by the Webflow project;
+   the page-level head link tops up the weights Webflow's
+   site-level link doesn't cover.
+
+   Matches the managed-office and honest-version pages.
+   Avantime is NOT in use on the website for now.
    ============================================================ */
 
 
@@ -38,10 +43,13 @@
   --light-40:rgba(253,247,243,.4);
   --light-14:rgba(253,247,243,.16);
 
-  /* Type. Avantime is away's editorial display face; it is a licensed
-     webfont inside the Webflow project. The stack degrades to Hanken
-     Grotesk so this file renders correctly standalone. */
-  --display:'Avantime','Hanken Grotesk',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+  /* Type. Space Grotesk for display, Hanken Grotesk for body —
+     the same pairing as the away homepage (Head1-Hero uses Space
+     Grotesk; section-sub_title uses Hanken).
+     Space Grotesk tops out at 700 and has NO true italic — never
+     ask for 800/900 or font-style:italic on the display face or
+     the browser fakes it and it reads as a fallback. */
+  --display:'Space Grotesk','Hanken Grotesk',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
   --body:'Hanken Grotesk',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
 
   /* Spatial system */
@@ -118,6 +126,8 @@ em,.em{font-style:italic;color:var(--orange);font-weight:600}
 /* Handwritten annotation — away's whimsy device */
 .hand{font-family:var(--display);font-style:italic;font-size:clamp(16px,1.35vw,20px);font-weight:600;color:var(--teal);line-height:1.15;letter-spacing:-.02em}
 .hand.o{color:var(--orange)}
+.hand.l{color:var(--dune)}
+.annot .hand{max-width:34ch}
 
 /* ============================================================ BUTTONS */
 .btn{
@@ -716,3 +726,62 @@ em,.em{font-style:italic;color:var(--orange);font-weight:600}
 .annot{display:flex;align-items:center;gap:10px;margin-top:18px}
 .annot svg{flex:none;color:var(--orange)}
 mark{background:linear-gradient(transparent 58%,var(--orange-12) 58%);color:inherit;padding:0 2px}
+
+
+/* ============================================================
+   DISPLAY FACE — Space Grotesk
+   Mirrors the honest-version page. Three jobs:
+   (a) put buttons, nav links, tabs and pills on the display face
+   (b) kill faux italics — Space Grotesk ships no italic, so
+       `font-style:italic` synthesises an oblique that reads as a
+       broken fallback. Emphasis is carried by SIGNAL ORANGE
+       instead, which is how the brand system marks it anyway.
+   (c) pull tracking in — Space Grotesk runs wider than Avantime
+       did, so the big sizes need more negative letter-spacing.
+   ============================================================ */
+
+/* (a) buttons, links, tabs, pills */
+.btn,.nav-links a,.nav-cta,.tab,.pill,.role-tag,.cfg-back,
+.mcta .btn,.stepper .qty,.foot-l a{
+  font-family:var(--display);
+}
+
+/* (b) no synthetic italics on the display face.
+   `em` inside a .display heading inherits Space Grotesk — 14 of
+   them across the three embeds. They keep the orange, lose the
+   slant. `.hand` and `.hero-sub` move to Hanken, which has a
+   genuine italic at every weight. */
+.display em,.display .em,
+.h1 em,.h2 em,.h3 em,.h4 em,
+.aff-h em,.final-h em,.foot-tag em,
+.pane-q em,.rec-name em,.ops-nm em,.rung-t em{
+  font-style:normal;
+  color:var(--orange);
+  font-weight:600;
+}
+.hand,.hero-sub{
+  font-family:var(--body);
+  font-style:italic;
+}
+
+/* (c) tracking — Space Grotesk is wide, the display sizes are big */
+.h1{letter-spacing:-.038em}
+.hero h1{letter-spacing:-.038em}
+.h2{letter-spacing:-.034em}
+.h3,.h4{letter-spacing:-.026em}
+.final-h,.foot-tag{letter-spacing:-.036em}
+.aff-h,.pane-q,.rec-name,.ops-nm{letter-spacing:-.028em}
+.rung-t,.tl-t,.aud-n,.os-vt,.shape-n,.fn-n,.faq-q,.cmp-tbl thead th{letter-spacing:-.02em}
+/* numerals run widest of all */
+.asm-num,.gcc-num,.delta-n,.os-sn,.rng-val,.bar-lbl b,.price-n{letter-spacing:-.045em}
+
+/* Weight ceiling. Every display rule in this file already sits at
+   600, which Space Grotesk has. This is a guard so a later edit
+   can't push the display face past 700 into synthetic-bold. */
+.display,.h4,.hand,.hero-sub,.rung-t,.pane-q,.fn-n,.shape-n,.asm-num,
+.rec-name,.ops-nm,.cmp-tbl thead th,.price-n,.rng-val,.bar-lbl b,
+.delta-n,.gcc-num,.tl-t,.os-vt,.os-sn,.aud-n,.aff-h,.faq-q,
+.final-h,.foot-tag{
+  font-synthesis-weight:none;
+  font-synthesis-style:none;
+}
