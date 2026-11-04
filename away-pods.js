@@ -3,16 +3,14 @@
 'use strict';
 
 /* ============================================================
-   CONFIGURATION — set these when wiring the page up
+   CONFIGURATION, set these when wiring the page up
    ============================================================ */
-const FORM_ENDPOINT = '';                        // ← POST target. Empty = hand off to Tally.
-const TALLY_URL     = 'https://tally.so/r/7RN8LL';
 const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const $  = (s, c = document) => c.querySelector(s);
 const $$ = (s, c = document) => [...c.querySelectorAll(s)];
 
 /* ============================================================
-   NAV — stuck state, scroll progress, Bangalore clock
+   NAV, stuck state, scroll progress, Bangalore clock
    ============================================================ */
 const nav = $('#nav'), bar = $('#progress');
 const onScroll = () => {
@@ -49,55 +47,8 @@ clock(); setInterval(clock, 20000);
 /* ============================================================
    REVEAL
    ============================================================ */
-const io = new IntersectionObserver((es) => es.forEach(e => {
-  if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-}), { threshold: .12, rootMargin: '0px 0px -8% 0px' });
-$$('.rv').forEach(el => io.observe(el));
-
 /* ============================================================
-   01 — HERO: the team assembling
-   ============================================================ */
-(() => {
-  const nodes = $$('#nodes .node'), links = $$('.link-l'), badges = $$('.hero-badge');
-  const play = () => {
-    nodes.forEach((n, i) => setTimeout(() => {
-      n.classList.remove('off');
-      if (links[i]) links[i].classList.add('on');
-    }, RM ? 0 : 380 + i * 190));
-    badges.forEach((b, i) => setTimeout(() => b.classList.remove('off'), RM ? 0 : 1700 + i * 260));
-  };
-  // the six labels cycle, so the breadth of roles reads without scrolling
-  const SETS = [
-    ['SDR', 'Researcher', 'Content'],
-    ['CRM Ops', 'RevOps', 'Finance Ops'],
-    ['Support', 'Success', 'Onboarding'],
-    ['Designer', 'Video', 'Copywriter'],
-    ['Engineer', 'QA', 'DevOps'],
-    ['AI Ops', 'Automation', 'SEO / GEO']
-  ];
-  const labels = $$('.node-lbl');
-  let tick = 0;
-  const cycle = () => {
-    const i = tick % labels.length, set = SETS[i];
-    const next = set[Math.floor(tick / labels.length) % set.length];
-    const el = labels[i];
-    el.style.opacity = '0';
-    setTimeout(() => { el.textContent = next; el.style.opacity = '1'; }, 340);
-    tick++;
-  };
-
-  const o = new IntersectionObserver((es) => {
-    if (es[0].isIntersecting) {
-      play();
-      if (!RM) setTimeout(() => setInterval(cycle, 1400), 2600);
-      o.disconnect();
-    }
-  }, { threshold: .3 });
-  o.observe($('#stage'));
-})();
-
-/* ============================================================
-   02 — LADDER tabs
+   02, LADDER tabs
    ============================================================ */
 (() => {
   const tabs = $$('.rung'), panels = $$('.rp');
@@ -118,13 +69,13 @@ $$('.rv').forEach(el => io.observe(el));
 })();
 
 /* ============================================================
-   03 — POD EXPLORER
+   03, POD EXPLORER
    ============================================================ */
 const PODS = {
   revenue: {
     kicker: 'Revenue Pod',
     title: 'Build a revenue execution team around the pipeline work you already know you need.',
-    blurb: 'The unglamorous half of revenue — research, enrichment, CRM discipline, follow-up — is exactly the work that repeats weekly and rarely gets a dedicated owner.',
+    blurb: 'The unglamorous half of revenue, research, enrichment, CRM discipline, follow-up, is exactly the work that repeats weekly and rarely gets a dedicated owner.',
     roles: ['SDR / Outbound Associate', 'Lead Researcher', 'CRM Operations', 'Revenue Operations', 'Sales Support'],
     flows: ['Outbound account research', 'Lead enrichment', 'CRM hygiene', 'Reply triage', 'Pipeline reporting'],
     for: 'B2B SaaS, agencies, services businesses and consultants with a defined ICP.',
@@ -135,29 +86,29 @@ const PODS = {
   marketing: {
     kicker: 'Marketing Pod',
     title: 'Build a marketing execution team around the campaigns and channels you already run.',
-    blurb: 'Strategy stays with you. What moves to India is the execution rhythm — production, distribution, tracking, reporting — that determines whether the strategy actually ships.',
+    blurb: 'Strategy stays with you. What moves to India is the execution rhythm, production, distribution, tracking, reporting, that determines whether the strategy actually ships.',
     roles: ['Growth Marketer', 'Content Marketer', 'Designer', 'Marketing Operations', 'SEO / GEO Associate'],
     flows: ['Content repurposing', 'Campaign execution support', 'AI SEO / GEO visibility monitoring', 'Analytics reporting', 'Landing page updates'],
     for: 'Startups, D2C brands, SaaS companies and agencies with an existing channel mix.',
     start: '1 Growth Marketer + 1 Content Marketer, designer added as volume justifies it.',
     support: 'Role design, sourcing, workspace, WorkOS, SOPs for the recurring parts, weekly reporting.',
-    model: 'Managed Role. Away does not take responsibility for growth outcomes on a role engagement.'
+    model: 'Managed Role. away does not take responsibility for growth outcomes on a role engagement.'
   },
   creative: {
     kicker: 'Creative Pod',
     title: 'Build a creative team that holds your brand context instead of relearning it every brief.',
-    blurb: 'The original Away Pod, and still one of the strongest fits — creative work rewards continuity, and continuity is what a managed team gives you that a marketplace cannot.',
+    blurb: 'The original away Pod, and still one of the strongest fits, creative work rewards continuity, and continuity is what a managed team gives you that a marketplace cannot.',
     roles: ['Graphic Designer', 'Motion Designer', 'Video Editor', 'Copywriter', 'Creative Coordinator', 'Creative Director'],
     flows: ['Asset production', 'Social content production', 'Video editing pipeline', 'Design QA', 'Asset library management'],
     for: 'Agencies, in-house brand teams, media and creator-led businesses with steady output.',
-    start: '1 Designer + 1 Video Editor, coordinated by your side or an Away coordinator.',
+    start: '1 Designer + 1 Video Editor, coordinated by your side or an away coordinator.',
     support: 'Sourcing against portfolio and craft, workspace, WorkOS, brief-to-delivery visibility.',
-    model: 'Managed Role or Managed Pod, depending on whether coordination sits with you or Away.'
+    model: 'Managed Role or Managed Pod, depending on whether coordination sits with you or away.'
   },
   cx: {
     kicker: 'Customer Experience Pod',
     title: 'Build a support operation that answers consistently, not heroically.',
-    blurb: 'Support is one of the better candidates for output responsibility — once the rules and escalation paths are written down, quality becomes measurable.',
+    blurb: 'Support is one of the better candidates for output responsibility, once the rules and escalation paths are written down, quality becomes measurable.',
     roles: ['Customer Support Associate', 'Customer Success Operations', 'Knowledge Base Associate', 'Support QA', 'Onboarding Associate'],
     flows: ['Ticket triage', 'First response', 'Knowledge base upkeep', 'Customer onboarding', 'Support reporting'],
     for: 'SaaS, e-commerce, marketplaces and communities with recurring inbound volume.',
@@ -179,7 +130,7 @@ const PODS = {
   eng: {
     kicker: 'Engineering Pod',
     title: 'Build engineering capacity that stays with your codebase.',
-    blurb: 'You own the architecture, the roadmap and the technical direction. Away owns finding the people, housing them, and making sure the operating rhythm around them holds.',
+    blurb: 'You own the architecture, the roadmap and the technical direction. away owns finding the people, housing them, and making sure the operating rhythm around them holds.',
     roles: ['Frontend Engineer', 'Backend Engineer', 'Full-stack Engineer', 'QA Engineer', 'DevOps / Infrastructure Support'],
     flows: ['Regression and release QA', 'Bug triage', 'Documentation upkeep', 'Environment and deployment support'],
     for: 'SaaS companies, product teams and technical agencies extending delivery capacity.',
@@ -212,7 +163,7 @@ const PODS = {
   ecom: {
     kicker: 'E-commerce Operations Pod',
     title: 'Build the daily operations layer behind the storefront.',
-    blurb: 'Catalogue, listings, orders, returns, marketplace admin and support — high-volume, rule-driven work that repeats every single day and quietly consumes founder time.',
+    blurb: 'Catalogue, listings, orders, returns, marketplace admin and support, high-volume, rule-driven work that repeats every single day and quietly consumes founder time.',
     roles: ['E-commerce Operations Associate', 'Catalogue / Listings Associate', 'Customer Support Associate', 'Marketplace Operations', 'Performance Creative'],
     flows: ['Catalogue and listing upkeep', 'Order and returns operations', 'Marketplace administration', 'Support triage', 'Weekly operations reporting'],
     for: 'D2C brands, marketplace sellers and multi-channel retail operations.',
@@ -300,7 +251,7 @@ const PODS = {
 })();
 
 /* ============================================================
-   04 — BUILD YOUR POD
+   04, BUILD YOUR POD
    ============================================================ */
 const FUNCTIONS = [
   { k: 'revenue',   n: 'Revenue',            d: 'Pipeline, outbound, CRM' },
@@ -385,23 +336,23 @@ const ROLES = {
     ['Tell us the role', "We'll design the role card with you"],
     ['Operations Associate', 'A safe first hire while the shape settles'],
     ['Research Associate', 'Useful in almost every configuration'],
-    ["Founder's Office Associate", 'The most common first Away Pod hire']
+    ["Founder's Office Associate", 'The most common first away Pod hire']
   ]
 };
 
 const LAYERS = {
-  role:     ['Role design', 'Sourcing & vetting', 'Vetting', 'Away workspace', 'Device setup', 'WorkOS', 'Task visibility', 'Weekly reporting', 'Replacement support'],
-  workflow: ['Workflow design', 'SOP library', 'Sourcing & vetting', 'Away workspace', 'WorkOS', 'AI-assisted execution', 'QA checklist', 'SLA', 'Weekly reporting'],
-  pod:      ['Team architecture', 'Sourcing & vetting', 'Away workspace', 'Device setup', 'WorkOS dashboard', 'SOP library', 'Delivery lead', 'Weekly reporting', 'Monthly review', 'Replacement bench'],
-  gcc:      ['India team architecture', 'Sourcing & vetting', 'Away workspace', 'Management layer', 'WorkOS', 'SOP library', 'Delivery governance', 'Reporting', 'Expansion planning', 'Replacement bench']
+  role:     ['Role design', 'Sourcing & vetting', 'Vetting', 'away workspace', 'Device setup', 'WorkOS', 'Task visibility', 'Weekly reporting', 'Replacement support'],
+  workflow: ['Workflow design', 'SOP library', 'Sourcing & vetting', 'away workspace', 'WorkOS', 'AI-assisted execution', 'QA checklist', 'SLA', 'Weekly reporting'],
+  pod:      ['Team architecture', 'Sourcing & vetting', 'away workspace', 'Device setup', 'WorkOS dashboard', 'SOP library', 'Delivery lead', 'Weekly reporting', 'Monthly review', 'Replacement bench'],
+  gcc:      ['India team architecture', 'Sourcing & vetting', 'away workspace', 'Management layer', 'WorkOS', 'SOP library', 'Delivery governance', 'Reporting', 'Expansion planning', 'Replacement bench']
 };
 
 const MODEL_LABEL = { role: 'Managed Role', workflow: 'Managed Workflow', pod: 'Managed Pod', gcc: 'Nano GCC' };
 const MODEL_NOTE = {
-  role:     'On a <b>Managed Role</b>, Away owns hiring, workspace, WorkOS, visibility, reporting and replacement. You own functional strategy, priorities and the business outcome.',
-  workflow: 'On a <b>Managed Workflow</b>, Away can own the defined outputs — because inputs, SOPs, QA and an SLA are agreed in writing first. You own strategy, approvals and business decisions.',
-  pod:      'On a <b>Managed Pod</b>, Away additionally owns coordination between the roles and delivery quality within the agreed scope. You own strategy and commercial targets.',
-  gcc:      'On a <b>Nano GCC</b>, Away helps establish and operate the India cell per the contracted model. Employment structure is decided with your own advisers.'
+  role:     'On a <b>Managed Role</b>, away owns hiring, workspace, WorkOS, visibility, reporting and replacement. You own functional strategy, priorities and the business outcome.',
+  workflow: 'On a <b>Managed Workflow</b>, away can own the defined outputs because inputs, SOPs, QA and an SLA are agreed in writing first. You own strategy, approvals and business decisions.',
+  pod:      'On a <b>Managed Pod</b>, away additionally owns coordination between the roles and delivery quality within the agreed scope. You own strategy and commercial targets.',
+  gcc:      'On a <b>Nano GCC</b>, away helps establish and operate the India cell per the contracted model. Employment structure is decided with your own advisers.'
 };
 
 let CFG = { fn: null, shape: null, roles: {}, params: {}, showAll: false };
@@ -526,10 +477,10 @@ function drawAssembly() {
   place(inner, 58, 0, '#FDF7F3');
   if (outer) place(outer, 84, inner, '#E4BF71');
 
-  stage.innerHTML = `<svg viewBox="0 0 260 184" role="img" aria-label="${n} people arranged around the Away operating layer">
+  stage.innerHTML = `<svg viewBox="0 0 260 184" role="img" aria-label="${n} people arranged around the away operating layer">
     ${links}
     <circle cx="${cx}" cy="${cy}" r="22" fill="#FF502A"/>
-    <text x="${cx}" y="${cy + 3.5}" text-anchor="middle" font-family="Hanken Grotesk,sans-serif" font-size="9" font-weight="700" letter-spacing=".8" fill="#FDF7F3">AWAY</text>
+    <text x="${cx}" y="${cy + 3.5}" text-anchor="middle" font-family="Hanken Grotesk,sans-serif" font-size="9" font-weight="700" letter-spacing=".8" fill="#FDF7F3">away</text>
     ${parts}
     <line x1="16" y1="174" x2="244" y2="174" stroke="#FDF7F3" stroke-width="1.3" opacity=".3" stroke-linecap="round"/>
   </svg>`;
@@ -547,7 +498,6 @@ const pillGroup = (id, key, multi = false) => {
 };
 pillGroup('#mgmtPills', 'management');
 pillGroup('#jdPills', 'jd');
-pillGroup('#wantPills', 'intent');
 
 /* -- Step 5 -------------------------------------------------- */
 const POD_NAME = {
@@ -564,12 +514,12 @@ function renderRec() {
 
   $('#recBadge').textContent = MODEL_LABEL[m];
   $('#recName').textContent  = `${base} ${suffix}`;
-  $('#recSub').textContent   = `${n || '—'} ${n === 1 ? 'person' : 'people'} · ${city.replace(/ —.*/, '')}`;
+  $('#recSub').textContent   = `${n || '-'} ${n === 1 ? 'person' : 'people'} · ${city.replace(/, .*/, '')}`;
 
   const roster = Object.entries(CFG.roles);
   $('#recRoster').innerHTML = roster.length
     ? roster.map(([r, q]) => `<li><span class="rec-qty">${q}</span><span>${r}</span></li>`).join('')
-    : `<li><span class="rec-qty">?</span><span>No roles selected yet — we'll propose a starting structure on the call.</span></li>`;
+    : `<li><span class="rec-qty">?</span><span>No roles selected yet. We'll propose a starting structure on the call.</span></li>`;
 
   $('#recLayer').innerHTML = LAYERS[m].map(l => `<span class="layer-tag">${l}</span>`).join('');
   $('#recNote').innerHTML = MODEL_NOTE[m] +
@@ -588,7 +538,7 @@ const HINTS = {
   1: 'Choose a function to begin',
   2: 'Choose the kind of support you need',
   3: 'Add roles, or continue and we will suggest a structure',
-  4: 'All optional — skip anything you would rather discuss',
+  4: 'All optional, skip anything you would rather discuss',
   5: 'Directional only. Nothing here is a quote.'
 };
 
@@ -636,7 +586,7 @@ $('#editCfg').addEventListener('click', () => { $('#build').scrollIntoView({ beh
 gate();
 
 /* ============================================================
-   FORM — carries the configurator payload
+   FORM, carries the configurator payload
    ============================================================ */
 function payload() {
   const m = model(), n = headcount();
@@ -651,55 +601,42 @@ function payload() {
 
 function syncForm() {
   const p = payload();
-  $('#podConfigField').value = JSON.stringify(p);
+
   const recall = $('#formRecall');
   if (p.people || CFG.fn) {
     recall.hidden = false;
     const bits = [p.model];
     if (p.people) bits.push(`${p.people} ${p.people === 1 ? 'person' : 'people'}`);
     if (p.roles) bits.push(p.roles);
-    if (p.city) bits.push(p.city.replace(/ —.*/, ''));
+    if (p.city) bits.push(p.city.split(', ')[0]);
     $('#recallText').textContent = bits.filter(Boolean).join(' · ') + '. ';
   } else recall.hidden = true;
 
-  const q = new URLSearchParams();
-  Object.entries(p).forEach(([k, v]) => { if (v) q.set(k, String(v)); });
-  $('#tallyLink').href = TALLY_URL + '?' + q.toString();
 }
 
-$('#podForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const st = $('#formStatus'), btn = $('#formSubmit');
-  const name = $('#f-name'), email = $('#f-email');
-  if (!name.value.trim()) { st.className = 'form-status err'; st.textContent = 'We need a name to reply to.'; name.focus(); return; }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) { st.className = 'form-status err'; st.textContent = 'That email address does not look right.'; email.focus(); return; }
-
-  const data = { ...Object.fromEntries(new FormData(e.target).entries()), ...payload(), page: 'away-pods' };
-
-  if (!FORM_ENDPOINT) {
-    st.className = 'form-status ok';
-    st.textContent = 'Opening the Away enquiry form with your Pod details filled in…';
-    const q = new URLSearchParams();
-    Object.entries(data).forEach(([k, v]) => { if (v && k !== 'pod_config') q.set(k, String(v)); });
-    window.open(TALLY_URL + '?' + q.toString(), '_blank', 'noopener');
-    return;
-  }
-  btn.disabled = true; btn.textContent = 'Sending…';
+const enquiryForm = $('#podForm');
+const enquiryStatus = $('#formStatus');
+enquiryForm.addEventListener('submit', async event => {
+  event.preventDefault();
+  enquiryStatus.textContent = '';
+  const btn = $('#formSubmit');
+  if (btn.disabled) return;
+  btn.disabled = true;
   try {
-    const r = await fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
-    if (!r.ok) throw new Error(r.status);
-    st.className = 'form-status ok';
-    st.textContent = 'Got it. We will come back to you with a role, workflow or team architecture — usually within one working day.';
-    e.target.reset(); btn.textContent = 'Sent';
-  } catch (err) {
-    st.className = 'form-status err';
-    st.innerHTML = 'That did not send. Please email <a href="mailto:hello@away.center" style="color:inherit;text-decoration:underline">hello@away.center</a> or use the form link below.';
-    btn.disabled = false; btn.innerHTML = 'Try again';
+    await podsEnquiry.send(enquiryForm, {page: 'main', pod_config: JSON.stringify(payload())});
+    enquiryStatus.className = 'form-status ok';
+    enquiryStatus.textContent = 'Thanks. Your enquiry has been received.';
+    enquiryForm.reset();
+  } catch (error) {
+    enquiryStatus.className = 'form-status err';
+    enquiryStatus.textContent = error.message;
+  } finally {
+    btn.disabled = false;
   }
 });
 
 /* ============================================================
-   05 — OPERATING LAYER accordion + rings
+   05, OPERATING LAYER accordion + rings
    ============================================================ */
 (() => {
   const items = $$('.ops-item');
@@ -726,7 +663,7 @@ $('#podForm').addEventListener('submit', async (e) => {
 })();
 
 /* ============================================================
-   07 — CALCULATOR (all inputs supplied by the visitor)
+   07, CALCULATOR (all inputs supplied by the visitor)
    ============================================================ */
 (() => {
   const num = (s) => Math.max(0, parseFloat(String(s).replace(/[^\d.]/g, '')) || 0);
@@ -745,7 +682,7 @@ $('#podForm').addEventListener('submit', async (e) => {
     $('#barA').style.width = (L / max * 100) + '%';
     $('#barB').style.width = (A / max * 100) + '%';
     const d = L - A;
-    $('#outDelta').textContent = (d >= 0 ? '' : '−') + fmt(Math.abs(d), cur);
+    $('#outDelta').textContent = (d >= 0 ? '' : '-') + fmt(Math.abs(d), cur);
     $('#outPct').textContent = L > 0
       ? `${d >= 0 ? 'Lower' : 'Higher'} by ${Math.round(Math.abs(d) / L * 100)}% against your own local figure, across ${n.value} ${+n.value === 1 ? 'person' : 'people'} for twelve months.`
       : 'Enter your local cost to compare.';
@@ -759,15 +696,15 @@ $('#podForm').addEventListener('submit', async (e) => {
 })();
 
 /* ============================================================
-   08 — NANO GCC growth
+   08, NANO GCC growth
    ============================================================ */
 (() => {
   const wrap = $('#people'), MAX = 15;
   const CAPS = {
-    3:  'A first cell. Two operators and a coordinator, with an Away delivery lead shared across clients.',
+    3:  'A first cell. Two operators and a coordinator, with an away delivery lead shared across clients.',
     5:  'A working unit. Enough people for specialisation, with a dedicated delivery rhythm.',
     10: 'A genuine India team. Multiple functions, an internal lead, a defined operating cadence.',
-    15: 'An operating cell. Your India presence, running its own rituals inside the Away layer.'
+    15: 'An operating cell. Your India presence, running its own rituals inside the away layer.'
   };
   wrap.innerHTML = Array.from({ length: MAX }, (_, i) =>
     `<svg class="person" viewBox="0 0 26 34" fill="none" aria-hidden="true" data-i="${i}">
@@ -798,7 +735,7 @@ $('#podForm').addEventListener('submit', async (e) => {
 })();
 
 /* ============================================================
-   11 — WORKOS module views
+   11, WORKOS module views
    ============================================================ */
 const OS = {
   role: { t: 'Role Card', s: 'Growth Marketer · Bangalore · Client: Northbeam Labs', html: `
@@ -806,10 +743,10 @@ const OS = {
       <div class="os-f"><dt>Role type</dt><dd>Managed Role</dd></div>
       <div class="os-f"><dt>City</dt><dd>Bangalore</dd></div>
       <div class="os-f"><dt>Workspace</dt><dd>away Koramangala</dd></div>
-      <div class="os-f"><dt>Device</dt><dd>Assigned, Away-managed</dd></div>
+      <div class="os-f"><dt>Device</dt><dd>Assigned, away-managed</dd></div>
       <div class="os-f"><dt>Reporting cadence</dt><dd>Weekly, Friday</dd></div>
       <div class="os-f"><dt>Client manager</dt><dd>Head of Growth</dd></div>
-      <div class="os-f"><dt>Away delivery lead</dt><dd>Assigned</dd></div>
+      <div class="os-f"><dt>away delivery lead</dt><dd>Assigned</dd></div>
       <div class="os-f"><dt>Replacement plan</dt><dd>Backup identified</dd></div>
     </dl>
     <p class="os-sec-t">This role owns</p>
@@ -829,7 +766,7 @@ const OS = {
     <ul class="os-bul"><li>Tag lead source on all new records</li><li>Update deal stages against last activity</li><li>Flag stalled deals over 21 days</li><li>Apply lost-reason taxonomy</li><li>Generate pipeline hygiene report</li></ul>
     <p class="os-sec-t">QA checklist</p>
     <ul class="os-bul"><li>Every field change traceable to a source</li><li>Assumptions marked, not silently applied</li><li>Report reconciles to CRM totals</li></ul>` },
-  op: { t: 'Operator Profile', s: 'Away-side view of the person doing the work', html: `
+  op: { t: 'Operator Profile', s: 'away-side view of the person doing the work', html: `
     <dl class="os-fields">
       <div class="os-f"><dt>Role</dt><dd>CRM Operations Associate</dd></div>
       <div class="os-f"><dt>City</dt><dd>Bangalore</dd></div>
@@ -845,10 +782,10 @@ const OS = {
   task: { t: 'Task Board', s: 'Every task carries an SOP link and evidence', html: `
     <div class="os-tasks">
       <div class="os-task"><span class="os-chk done"><svg width="9" height="7" viewBox="0 0 9 7" fill="none" aria-hidden="true"><path d="M1 3.5L3.3 6 8 1" stroke="#DFFDB3" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><span class="os-tname">Weekly CRM hygiene pass</span><span class="os-tmeta">SOP-014 · evidence attached · 2h 10m</span></span><span class="os-st st-done">Client ready</span></div>
-      <div class="os-task"><span class="os-chk done"><svg width="9" height="7" viewBox="0 0 9 7" fill="none" aria-hidden="true"><path d="M1 3.5L3.3 6 8 1" stroke="#DFFDB3" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><span class="os-tname">ICP account research — batch 12</span><span class="os-tmeta">SOP-006 · 40 accounts · enriched</span></span><span class="os-st st-qa">In QA</span></div>
+      <div class="os-task"><span class="os-chk done"><svg width="9" height="7" viewBox="0 0 9 7" fill="none" aria-hidden="true"><path d="M1 3.5L3.3 6 8 1" stroke="#DFFDB3" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><span class="os-tname">ICP account research, batch 12</span><span class="os-tmeta">SOP-006 · 40 accounts · enriched</span></span><span class="os-st st-qa">In QA</span></div>
       <div class="os-task"><span class="os-chk"></span><span><span class="os-tname">Lost-reason taxonomy update</span><span class="os-tmeta">SOP-014 · due Thursday</span></span><span class="os-st st-prog">In progress</span></div>
       <div class="os-task"><span class="os-chk"></span><span><span class="os-tname">Sequence copy review</span><span class="os-tmeta">Waiting on client approval · 2 days</span></span><span class="os-st st-block">Blocked</span></div>
-      <div class="os-task"><span class="os-chk"></span><span><span class="os-tname">Pipeline report — week 32</span><span class="os-tmeta">SOP-021 · scheduled Friday</span></span><span class="os-st st-prog">Queued</span></div>
+      <div class="os-task"><span class="os-chk"></span><span><span class="os-tname">Pipeline report, week 32</span><span class="os-tmeta">SOP-021 · scheduled Friday</span></span><span class="os-st st-prog">Queued</span></div>
     </div>` },
   rep: { t: 'Weekly Report', s: 'Shows movement, not a timesheet', html: `
     <div class="os-rep">
@@ -860,30 +797,30 @@ const OS = {
     <p class="os-sec-t">Decisions we need from you</p>
     <ul class="os-bul"><li>Approve the revised lost-reason list before Friday</li><li>Confirm whether tier-3 accounts stay in scope</li><li>Sign off on the sequence copy sitting in review</li></ul>
     <p class="os-sec-t">Risks and suggestions</p>
-    <ul class="os-bul"><li>Enrichment credits run out in nine days at current volume</li><li>Two steps of SOP-006 are now automatable — we would like to propose it</li></ul>
+    <ul class="os-bul"><li>Enrichment credits run out in nine days at current volume</li><li>Two steps of SOP-006 are now automatable. We would like to propose it</li></ul>
     <p class="tiny" style="color:var(--light-40);margin-top:16px">Example values, shown to illustrate the report structure.</p>` },
   sop: { t: 'SOP Library', s: 'The asset that survives any individual leaving', html: `
     <ul class="os-bul">
-      <li><strong>SOP-006</strong> — Outbound account research and enrichment</li>
-      <li><strong>SOP-014</strong> — CRM hygiene and pipeline pass</li>
-      <li><strong>SOP-021</strong> — Weekly reporting pack</li>
-      <li><strong>SOP-030</strong> — Founder follow-up and action tracking</li>
-      <li><strong>SOP-042</strong> — Support triage and escalation rules</li>
-      <li><strong>SOP-055</strong> — Content repurposing and publishing</li>
-      <li><strong>SOP-061</strong> — AI output review checklist</li>
+      <li><strong>SOP-006</strong>, Outbound account research and enrichment</li>
+      <li><strong>SOP-014</strong>, CRM hygiene and pipeline pass</li>
+      <li><strong>SOP-021</strong>, Weekly reporting pack</li>
+      <li><strong>SOP-030</strong>, Founder follow-up and action tracking</li>
+      <li><strong>SOP-042</strong>, Support triage and escalation rules</li>
+      <li><strong>SOP-055</strong>, Content repurposing and publishing</li>
+      <li><strong>SOP-061</strong>, AI output review checklist</li>
     </ul>
     <p class="os-sec-t">Why this matters</p>
     <ul class="os-bul"><li>Every SOP has inputs, steps, human review points, an output format and a QA checklist</li><li>When an operator changes, the process does not restart from zero</li><li>Repeated tasks visible here become candidates for a Managed Workflow</li></ul>` },
-  ct: { t: 'Control Tower', s: 'Away-internal view — how we catch problems early', html: `
+  ct: { t: 'Control Tower', s: 'away-internal view, how we catch problems early', html: `
     <div class="os-rep">
-      <div class="os-stat"><p class="os-sn">—</p><p class="os-sl">Client health</p></div>
-      <div class="os-stat"><p class="os-sn">—</p><p class="os-sl">Overdue rate</p></div>
-      <div class="os-stat"><p class="os-sn">—</p><p class="os-sl">QA score</p></div>
-      <div class="os-stat"><p class="os-sn">—</p><p class="os-sl">Replacement risk</p></div>
+      <div class="os-stat"><p class="os-sn"></p><p class="os-sl">Client health</p></div>
+      <div class="os-stat"><p class="os-sn"></p><p class="os-sl">Overdue rate</p></div>
+      <div class="os-stat"><p class="os-sn"></p><p class="os-sl">QA score</p></div>
+      <div class="os-stat"><p class="os-sn"></p><p class="os-sl">Replacement risk</p></div>
     </div>
     <p class="os-sec-t">Tracked internally per client</p>
     <ul class="os-bul"><li>Operator performance and attendance</li><li>Task overdue rate and blocker resolution time</li><li>QA score and scope-creep incidents</li><li>Renewal risk and expansion opportunity</li></ul>
-    <p class="tiny" style="color:var(--light-40);margin-top:16px">Away-internal module. Values are deliberately not shown here.</p>` }
+    <p class="tiny" style="color:var(--light-40);margin-top:16px">away-internal module. Values are deliberately not shown here.</p>` }
 };
 (() => {
   const view = $('#osView'), navs = $$('.os-nav');
@@ -905,7 +842,7 @@ const OS = {
 })();
 
 /* ============================================================
-   10 — TIMELINE dots
+   10, TIMELINE dots
    ============================================================ */
 (() => {
   const o = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); o.unobserve(e.target); } }), { threshold: .5 });
@@ -913,7 +850,7 @@ const OS = {
 })();
 
 /* ============================================================
-   14 — FAQ
+   14, FAQ
    ============================================================ */
 (() => {
   const items = $$('.faq-i');

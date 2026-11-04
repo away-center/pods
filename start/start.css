@@ -6,17 +6,17 @@ body{margin:0}
 .ap-page{--ap-orange:#FF502A;--ap-paper:#FDF7F3;--ap-teal:#075056;--ap-line:rgba(7,80,86,.2);background:var(--ap-paper);color:var(--ap-teal);font-family:"Hanken Grotesk",Arial,sans-serif;font-size:16px;line-height:1.55;font-weight:400;-webkit-font-smoothing:antialiased;isolation:isolate}
 .ap-page *,.ap-page *::before,.ap-page *::after{box-sizing:border-box}
 .ap-page [hidden]{display:none!important}
-.ap-page :where(h1,h2,h3,p,figure,ul){margin:0}
-.ap-page :where(h1,h2,h3){color:inherit;font-family:Avantime,"Hanken Grotesk",sans-serif;font-weight:600;letter-spacing:-.025em;text-wrap:balance}
-.ap-page :where(a){color:inherit;text-decoration:none}
+.ap-page :where(h1,h2,h3,p,figure,ul):not(:where(.hero *)){margin:0}
+.ap-page :where(h1,h2,h3):not(:where(.hero *)){color:inherit;font-family:Avantime,"Hanken Grotesk",sans-serif;font-weight:600;letter-spacing:-.025em;text-wrap:balance}
+.ap-page :where(a):not(:where(.hero *)){color:inherit;text-decoration:none}
 .ap-page :where(button,input,select,textarea){font:inherit}
 .ap-page a,.ap-page input,.ap-page summary,.ap-page textarea,.ap-page select{-webkit-tap-highlight-color:transparent}
 .ap-page :focus-visible{outline:3px solid var(--ap-teal);outline-offset:5px}
 .ap-page ::selection{background:var(--ap-orange);color:var(--ap-teal)}
 .ap-container{width:min(1280px,calc(100% - 40px));margin-inline:auto}
 .ap-section{padding-block:64px}
-.ap-page h1{font-size:clamp(46px,7.3vw,96px);line-height:.99;letter-spacing:-.035em}
-.ap-page h1>span{color:var(--ap-orange)}
+.ap-page h1:not(:where(.hero *)){font-size:clamp(46px,7.3vw,96px);line-height:.99;letter-spacing:-.035em}
+.ap-page h1:not(:where(.hero *))>span{color:var(--ap-orange)}
 .ap-page h2{font-size:clamp(38px,4.7vw,62px);line-height:1.06}
 .ap-page h2 span{font-weight:400}
 .ap-page h3{font-size:28px;line-height:1.15}
@@ -56,3 +56,9 @@ body{margin:0}
 @media(min-width:992px){.ap-page{padding-bottom:0}.ap-container{width:min(1280px,calc(100% - 96px))}.ap-nav{min-height:96px}.ap-nav-note{display:flex}.ap-button-small{font-size:14px;padding:13px 19px}.ap-hero{grid-template-columns:1.2fr .8fr;align-items:center;gap:52px;padding-block:70px 52px}.ap-hero-photo{margin-bottom:0!important}.ap-hero-photo>img{height:585px;border-top-left-radius:170px}.ap-hero-photo figcaption{font-size:11px}.ap-photo-note{width:154px;height:162px;right:-17px;bottom:104px;padding:22px}.ap-photo-note strong{font-size:68px}.ap-lead{font-size:16px}.ap-proof-strip{padding-block:24px;flex-wrap:nowrap;font-size:12px}.ap-proof-strip>span:last-child{flex-basis:auto}.ap-section{padding-block:100px}.ap-section-heading{margin-bottom:42px}.ap-ownership{grid-template-columns:.8fr 1.2fr;gap:22px}.ap-owner{padding:38px}.ap-owner-foot{margin-top:40px!important}.ap-breadth-grid{grid-template-columns:1fr 1fr;gap:80px;align-items:center}.ap-heading-row{flex-direction:row;align-items:flex-end;margin-bottom:44px}.ap-models{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.ap-model{padding:25px 22px}.ap-model p{font-size:13px}.ap-model h3{font-size:27px}.ap-model-path{margin-top:30px!important;gap:23px}.ap-benefits{grid-template-columns:repeat(4,minmax(0,1fr));gap:30px;margin-top:55px}.ap-benefits h3{max-width:220px}.ap-gallery{grid-template-columns:1.5fr 1fr;gap:24px}.ap-gallery img{height:410px}.ap-samples{grid-template-columns:1.4fr 1fr 1fr 1fr;align-items:center;gap:24px;padding-block:30px}.ap-samples>a{border-top:0;border-left:1px solid var(--ap-line);padding:10px 0 10px 24px;flex-direction:column;align-items:flex-start;gap:7px}.ap-convert-grid{grid-template-columns:1fr 1fr;gap:100px;align-items:center}.ap-form-panel{padding:40px}.ap-convert-note{margin-top:70px}.ap-faq{grid-template-columns:.7fr 1.3fr;gap:70px}.ap-footer{padding-block:34px}.ap-mobile-cta{display:none!important}}
 @media(min-width:1400px){.ap-hero{gap:70px}.ap-lead{font-size:17px}.ap-hero-photo>img{height:610px}.ap-model{padding:28px}.ap-model h3{font-size:30px}.ap-model p{font-size:14px}}
 @media(prefers-reduced-motion:reduce){.ap-page *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+.ap-brand{font:700 34px/1 var(--display);color:var(--ap-orange);letter-spacing:-.07em}
+.ap-fields{display:grid;grid-template-columns:minmax(0,1fr);gap:0 16px}
+@media(min-width:600px){.ap-fields{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.ap-success.ap-submitted{display:block}
+.ap-page .hero{font:400 clamp(16px,1.05vw,17.5px)/1.62 var(--body);color:var(--ink);letter-spacing:-.005em}
