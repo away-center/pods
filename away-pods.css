@@ -794,7 +794,8 @@ mark{background:linear-gradient(transparent 58%,var(--orange-12) 58%);color:inhe
 .form-model label{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border:1px solid var(--light-14);border-radius:var(--r-sm);cursor:pointer}
 .form-model label+label{margin-top:8px}
 .form-model label:has(:checked){border-color:var(--dune)}
-.form-model input[type=radio]{width:auto;min-height:0;margin:4px 0 0;accent-color:var(--orange)}
+.form-model input[type=radio]{appearance:auto;flex:none;width:auto;min-height:0;padding:0;margin:4px 0 0;box-shadow:none;accent-color:var(--orange)}
 .form-model small{display:block;color:var(--light-70);font-weight:400}
+.fld select{appearance:auto}
 .fld select option{color:var(--ink);background:var(--offwhite)}
-.brand-case{text-transform:none}
+.brand-case,.own-t.own-away{text-transform:none}
