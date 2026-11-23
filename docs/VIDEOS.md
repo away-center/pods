@@ -43,3 +43,15 @@ Intended role: Explain what Pods is, who benefits, and common visitor questions.
 Do not embed inaccessible Frame.io share URLs as raw `video src` links. A Frame.io share page is not a verified direct video media URL. Browser access from this chat could not retrieve the MP4 originals. Obtain publicly shareable downloadable MP4s or a Drive folder with download permission before creating media markup. Prefer optimized 1080p H.264 MP4 derivatives, preserve high-resolution masters outside site assets, and request captions/transcripts and poster-frame approval. Uploaded brand art can complement video poster compositions but existing graphics must remain untouched.
 
 Brand asset inventory supplied: `04a Birds eye view.jpg`, `IMG_2367.PNG`, `IMG_2376.PNG`, `IMG_2378.PNG`, `IMG_2399.PNG`, `IMG_2401.PNG`, `IMG_2380.PNG`, `IMG_2424.PNG`, `Sofa 1a.PNG`, `Table and plant 1a.PNG`, `Table and toaster 1a.PNG`, `Gmail 1.PNG`, `Printer 1a.PNG`, `07 VR.PNG`. They are in the user's conversation, not yet included in GitHub. Most are transparent RGBA PNG graphics. Add selectively once contextual placement is confirmed; do not replace current illustrations.
+
+## Integration prepared from verified Drive files (23 November 2026)
+
+The folder is accessible to the connected Drive account and contains the four verified MP4 files. The original files are large (107 MB, 112 MB, 59 MB and 59 MB). They must not be dropped into the production page as 4K direct downloads. The code adds a two-video native player showcase after `#ladder` and a responsive FAQ player in `#faq`, with zero existing text/graphics/interaction removal. Native players are intentionally hidden until direct hosted MP4 URLs are configured in `site-config.js`. The Drive **view** links are not playable MP4 source URLs; embedding them as if they were media URLs would create broken videos. The native player already pauses when less than 20% visible, when the tab is hidden, or when another clip starts; no autoplay and no automatic resume. The UJ player switches from 16:9 landscape to 9:16 portrait on narrow mobile viewports. Source switching is paused and attempts to maintain playback time. Add VTT captions when approved/transcribed.
+
+Mapping:
+- nirvaan1: 1c7kf file? **No** — confirmed `Away_Pods_1_4K.mp4` is Drive file ID `1HxpN9CfDuBiwL8WbeW4lRiUGlLjjg6u4` (1:13).
+- nirvaan2: `Away_Pods_2_4K.mp4`, Drive file ID `1c7kfTaSWB_xSq5TardrZlM7k6GFWi7r9` (1:22).
+- uj landscape: `Away_Pods_3_16x9_animated.mp4`, Drive file ID `144yJgPNYqMA142ji9z92Ooh1MkyZCuLQ` (1:51).
+- uj portrait: `Away_Pods_3_9x16_animated.mp4`, Drive file ID `1lq5QGVbqILqrJ_C4vvpNGAwstsjv9NX-` (1:51).
+
+**Publishing blocker:** Original downloads are available but the connected GitHub text-file tool does not upload native MP4 binaries, and suitable direct streaming URLs have not been published. Upload optimized encodes to dedicated static media hosting (e.g. Vercel Blob/CDN) before populating `site-config.js`. Do not introduce iframe-based Drive video players: their playback cannot be reliably paused/resumed via native HTMLVideoElement. No production deployment made.
