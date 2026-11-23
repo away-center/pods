@@ -1,0 +1,65 @@
+name: Prepare approved Pods preview media
+
+on:
+  push:
+    branches:
+      - preview/pods-v2
+    paths:
+      - .github/workflows/prepare-pods-media.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  prepare:
+    if: github.ref == 'refs/heads/preview/pods-v2'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: preview/pods-v2
+          persist-credentials: true
+      - name: Prepare public media from the four approved Drive exports
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m venv /tmp/pods-gdown
+          /tmp/pods-gdown/bin/pip install --quiet 'gdown>=5,<6'
+          mkdir -p media /tmp/pods-sources
+          download () {
+            local id="$1" filename="$2"
+            /tmp/pods-gdown/bin/gdown --id "$id" --output "/tmp/pods-sources/$filename" --no-cookies
+            test -s "/tmp/pods-sources/$filename"
+          }
+          download '1HxpN9CfDuBiwL8WbeW4lRiUGlLjjg6u4' 'nirvaan_01.mp4'
+          download '1c7kfTaSWB_xSq5TardrZlM7k6GFWi7r9' 'nirvaan_02.mp4'
+          download '144yJgPNYqMA142ji9z92Ooh1MkyZCuLQ' 'uj_landscape.mp4'
+          download '1lq5QGVbqILqrJ_C4vvpNGAwstsjv9NX-' 'uj_portrait.mp4'
+          for key in nirvaan_01 nirvaan_02 uj_landscape uj_portrait; do
+            if [ "$key" = "uj_portrait" ]; then dimensions='scale=-2:720'; else dimensions='scale=-2:720'; fi
+            ffmpeg -hide_banner -loglevel error -nostdin -y -i "/tmp/pods-sources/$key.mp4" \
+              -vf "$dimensions" -c:v libx264 -preset veryfast -crf 29 -pix_fmt yuv420p \
+              -c:a aac -b:a 80k -movflags +faststart "media/$key.mp4"
+            ffmpeg -hide_banner -loglevel error -nostdin -y -ss 2.5 -i "media/$key.mp4" \
+              -frames:v 1 -q:v 4 "media/$key.jpg"
+            test -s "media/$key.mp4"
+            test -s "media/$key.jpg"
+          done
+          ls -lh media
+          for f in media/*.mp4; do
+            bytes="$(stat -c%s "$f")"
+            test "$bytes" -lt 20000000 || { echo "Media too large: $f"; exit 1; }
+          done
+      - name: Commit media to isolated preview branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add media/
+          if ! git diff --cached --quiet; then
+            git commit -m "Add optimized approved Pods videos and poster frames to preview"
+            git push origin HEAD:preview/pods-v2
+          fi
