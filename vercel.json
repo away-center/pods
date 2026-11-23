@@ -1,1 +1,9 @@
-{"$schema":"https://openapi.vercel.sh/vercel.json","git":{"deploymentEnabled":{"enhancement/pods-v2":false}}}
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "git": {
+    "deploymentEnabled": {
+      "enhancement/pods-v2": false,
+      "preview/pods-v2": true
+    }
+  }
+}
