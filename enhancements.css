@@ -89,3 +89,12 @@ h3,h4,.ap-page :is(h3,h4){font-weight:700;letter-spacing:-.015em}
 .pods-video-grid video,.pods-video-single video{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;background:#0d0d0d}
 .pods-video-grid figcaption,.pods-video-single figcaption{font:500 14px/1.5 "Hanken Grotesk",sans-serif;margin-top:12px}
 @media(max-width:700px){.pods-video-grid{grid-template-columns:1fr}.pods-video-single video[data-mobile-portrait]{aspect-ratio:9/16;max-height:75vh}}
+
+.pods-video-showcase{padding-top:clamp(36px,4.5vw,72px);padding-bottom:clamp(36px,4.5vw,72px);border-bottom:1px solid var(--ink-14)}
+.pods-video-showcase .pods-video-grid{margin:0}
+.pods-faq-video{margin:28px 0 0!important}
+.pods-faq-video video{border-radius:4px}
+.pods-video-grid video{border-radius:4px}
+.pods-video-grid figcaption,.pods-video-single figcaption{color:var(--teal);font-size:14px}
+.pods-video-single video[data-mobile-portrait="true"]{width:min(100%,340px);aspect-ratio:9/16;object-fit:contain;max-height:min(76vh,610px)}
+@media (max-width:700px){.pods-video-grid{grid-template-columns:1fr}.pods-faq-video{margin-block:24px!important}}
