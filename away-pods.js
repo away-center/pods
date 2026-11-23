@@ -33,13 +33,17 @@ clock(); setInterval(clock, 20000);
   let past = false, inTarget = false;
   const paint = () => {
     const on = past && !inTarget;
+    bar.inert = !on;
+    bar.setAttribute('aria-hidden', String(!on));
     if (on) bar.hidden = false;
     requestAnimationFrame(() => bar.classList.toggle('on', on));
   };
   new IntersectionObserver(es => { past = !es[0].isIntersecting; paint(); },
     { rootMargin: '-70% 0px 0px 0px' }).observe($('.hero'));
+  const targetVisibility = new Map();
   const near = new IntersectionObserver(es => {
-    inTarget = es.some(e => e.isIntersecting); paint();
+    es.forEach(e => targetVisibility.set(e.target, e.isIntersecting));
+    inTarget = [...targetVisibility.values()].some(Boolean); paint();
   }, { threshold: 0 });
   [$('#build'), $('#enquire')].forEach(el => near.observe(el));
 })();
@@ -616,23 +620,9 @@ function syncForm() {
 
 const enquiryForm = $('#podForm');
 const enquiryStatus = $('#formStatus');
-enquiryForm.addEventListener('submit', async event => {
-  event.preventDefault();
-  enquiryStatus.textContent = '';
-  const btn = $('#formSubmit');
-  if (btn.disabled) return;
-  btn.disabled = true;
-  try {
-    await podsEnquiry.send(enquiryForm, {page: 'main', pod_config: JSON.stringify(payload())});
-    enquiryStatus.className = 'form-status ok';
-    enquiryStatus.textContent = 'Thanks. Your enquiry has been received.';
-    enquiryForm.reset();
-  } catch (error) {
-    enquiryStatus.className = 'form-status err';
-    enquiryStatus.textContent = error.message;
-  } finally {
-    btn.disabled = false;
-  }
+podsEnquiry.bind(enquiryForm, {
+  status: enquiryStatus,
+  context: () => ({page: 'main', pod_config: JSON.stringify(payload())})
 });
 
 /* ============================================================

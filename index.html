@@ -6,15 +6,18 @@
   <title>away Pods · Nano GCC</title>
   <link rel="stylesheet" href="away-pods.css">
   <script src="/hero.js" defer></script>
+  <script src="/site-config.js" defer></script>
   <script src="/enquiry.js" defer></script>
   <script src="away-pods.js" defer></script>
+  <link rel="stylesheet" href="/enhancements.css">
+  <script defer src="/enhancements.js"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
 <div class="mcta" id="mcta" hidden>
   <span class="mcta-t">One role, or a whole India team</span>
-  <a class="btn btn-primary" href="#build">Build your Pod</a>
+  <a class="btn btn-primary" href="/start/" data-cta-source="home-mobile">Build your Pod</a>
 </div>
 
 <!-- ==================== NAV ==================== -->
@@ -24,7 +27,8 @@
       <img class="wordmark" src="https://cdn.prod.website-files.com/680e8cf49bf5c7568993a036/68105e228dad96121b072128_Away%20Logo%20Signal%20Orange%20(2).svg" alt="away" width="100" height="31" style="width:100px;height:auto">
     </a>
     <span class="nav-meta">Bangalore · <b id="blrTime"></b></span>
-    <nav class="nav-links" aria-label="Page sections">
+    <button class="pods-menu" type="button" data-menu aria-controls="pods-navigation" aria-expanded="false">Menu</button>
+    <nav id="pods-navigation" class="nav-links" aria-label="Page sections">
       <a href="#ladder">Models</a>
       <a href="#explorer">Pods</a>
       <a href="#layer">Operating layer</a>
@@ -32,7 +36,7 @@
       <a href="#pricing">Pricing</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <div class="nav-cta"><a class="btn btn-primary" href="#build">Build your Pod</a></div>
+    <div class="nav-cta"><a class="btn btn-primary" href="/start/" data-cta-source="home-header">Build your Pod</a></div>
     <div class="progress" id="progress" aria-hidden="true"></div>
   </div>
 </header>
@@ -41,6 +45,7 @@
 <main>
 <!-- ==================== 01 HERO ==================== -->
 <section class="hero" id="main">
+<!-- VIDEO INSERTION POINT main: placement/order pending user input; preserve all existing graphics. See docs/VIDEOS.md. -->
   <div class="wrap hero-grid">
     <div>
       <p class="eyebrow rv"><span class="brand-case">away Pods · Nano GCC</span></p>
@@ -48,7 +53,7 @@
       <p class="hero-sub rv rv-d1">Without building the infrastructure around it.</p>
       <p class="lead rv rv-d2">away.center helps global companies hire, house, operate and scale India-based teams through sourcing and vetting, deploying from away.center workspaces.</p>
       <div class="btn-row hero-cta rv rv-d3">
-        <a class="btn btn-primary" href="#build">Build your Pod <svg class="ar" width="15" height="12" viewBox="0 0 15 12" fill="none" aria-hidden="true"><path d="M1 6h12M9 2l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="btn btn-primary" href="/start/" data-cta-source="home-hero">Build your Pod <svg class="ar" width="15" height="12" viewBox="0 0 15 12" fill="none" aria-hidden="true"><path d="M1 6h12M9 2l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <a class="btn btn-ghost" href="#ladder">See how it works</a>
       </div>
       <div class="hero-meta rv rv-d4">
@@ -296,6 +301,7 @@
 </section>
 <!-- ==================== 04 OPERATING LAYER ==================== -->
 <section class="pad" id="layer">
+<!-- VIDEO INSERTION POINT layer: placement/order pending user input; preserve all existing graphics. See docs/VIDEOS.md. -->
   <div class="wrap">
     <div class="two-col" style="margin-bottom:clamp(32px,4vw,52px)">
       <div class="rv">
@@ -371,6 +377,7 @@
 
 <!-- ==================== 05 WORKSPACE ==================== -->
 <section class="pad" id="workspace" style="background:var(--seashell)">
+<!-- VIDEO INSERTION POINT workspace: placement/order pending user input; preserve all existing graphics. See docs/VIDEOS.md. -->
   <div class="wrap">
     <div class="two-col">
       <div class="rv">
@@ -395,6 +402,7 @@
 <!-- ==================== 06 WORKOS ==================== -->
 
 <section class="pad os" id="workos">
+<!-- VIDEO INSERTION POINT workos: placement/order pending user input; preserve all existing graphics. See docs/VIDEOS.md. -->
     <div class="wrap">
       <div class="two-col">
         <div class="rv">
@@ -1033,11 +1041,13 @@
           <div class="form-grid">
             <div class="fld"><label for="f-name">Name <span aria-hidden="true">*</span></label><input type="text" id="f-name" name="name" required maxlength="120" autocomplete="name"></div>
             <div class="fld"><label for="f-company">Company</label><input type="text" id="f-company" name="company" maxlength="160" autocomplete="organization"></div>
+            <div class="fld"><label for="f-email">Email <span aria-hidden="true">*</span></label><input type="email" id="f-email" name="email" required maxlength="254" autocomplete="email"></div>
+            <div class="fld span2"><label for="f-brief">What would you like to build or outsource in India? <span aria-hidden="true">*</span></label><textarea id="f-brief" required name="brief" maxlength="5000" placeholder="For example: a customer support team, back office processing, or an engineering function."></textarea></div>
+</div>
+<details class="optional-fields"><summary>Additional details (optional)</summary><div class="form-grid">
             <div class="fld"><label for="f-country">Country</label><input type="text" id="f-country" name="hq_country" maxlength="100" autocomplete="country-name"></div>
             <div class="fld"><label for="f-website">Company website</label><input type="text" id="f-website" name="company_website" inputmode="url" maxlength="254" autocomplete="url" placeholder="yourcompany.com"></div>
-            <div class="fld"><label for="f-email">Email <span aria-hidden="true">*</span></label><input type="email" id="f-email" name="email" required maxlength="254" autocomplete="email"></div>
             <div class="fld"><label for="f-phone">Phone / WhatsApp (optional)</label><input type="tel" id="f-phone" name="phone" maxlength="50" autocomplete="tel"></div>
-            <div class="fld span2"><label for="f-brief">What would you like to build or outsource in India?</label><textarea id="f-brief" name="brief" maxlength="5000" placeholder="For example: a customer support team, back office processing, or an engineering function."></textarea></div>
             <div class="fld"><label for="f-initial_team_size">Approximate initial team size</label><select id="f-initial_team_size" name="initial_team_size"><option>Not sure yet</option><option>1 person</option><option>2-4 people</option><option>5-10 people</option><option>11-15 people</option><option>16+ people</option></select></div>
             <div class="fld"><label for="f-target_timing">Target start date or timing</label><select id="f-target_timing" name="target_timing"><option>Not sure yet</option><option>As soon as possible</option><option>Within 1 month</option><option>In 1-3 months</option><option>In 3-6 months</option><option>In more than 6 months</option></select></div>
             <fieldset class="fld span2 form-model">
@@ -1047,7 +1057,7 @@
               <label><input type="radio" name="operating_model" value="Not sure yet" checked> <span>Not sure yet<small>We can work this out in our first conversation.</small></span></label>
             </fieldset>
             <div class="fld span2"><label for="f-additional_information">Additional information (optional)</label><textarea id="f-additional_information" name="additional_information" maxlength="5000" placeholder="Anything else that would help, such as hours, time zones, or your preferred location in India."></textarea></div>
-          </div>
+</div></details>
           <div hidden aria-hidden="true"><label>Leave this blank<input name="contact_url" tabindex="-1" autocomplete="off"></label></div>
           <div class="form-foot">
             <button type="submit" class="btn btn-primary" id="formSubmit">Send this to away.center <svg class="ar" width="15" height="12" viewBox="0 0 15 12" fill="none" aria-hidden="true"><path d="M1 6h12M9 2l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -1055,7 +1065,7 @@
           </div>
           <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
           <p class="tiny" style="color:var(--light-40);margin-top:16px">We'll only use these details to respond to your enquiry. No lists, no sequences you didn't ask for.</p>
-        </form>
+        </form><div class="enquiry-success" data-enquiry-success tabindex="-1" role="region" aria-label="Enquiry received" hidden><h3>Thanks. Your enquiry has been received.</h3><p>We’ll review your requirements and get back to you.</p><a class="btn btn-primary" data-founder-calendar hidden>Book a founder conversation</a><p data-calendar-fallback>We’ll follow up by email. A founder conversation is optional.</p></div>
       </div>
     </div>
   </section>
@@ -1072,7 +1082,7 @@
           <div class="foot-mark"><img class="wordmark" src="https://cdn.prod.website-files.com/680e8cf49bf5c7568993a036/68105e228dad96121b072128_Away%20Logo%20Signal%20Orange%20(2).svg" alt="away" width="100" height="31" style="width:100px;height:auto"></div>
           <p class="tiny" style="color:rgba(253,247,243,.5);max-width:34ch">away Pods is a managed India operating layer, built by away.center. Bangalore, Vizag and Kolkata.</p>
         </div>
-        <div><h5><span class="brand-case">away Pods</span></h5><ul class="foot-l"><li><a href="#ladder">Managed Role</a></li><li><a href="#ladder">Managed Workflow</a></li><li><a href="#ladder">Managed Pod</a></li><li><a href="#gcc">Nano GCC</a></li><li><a href="#build">Build your Pod</a></li></ul></div>
+        <div><h5><span class="brand-case">away Pods</span></h5><ul class="foot-l"><li><a href="#ladder">Managed Role</a></li><li><a href="#ladder">Managed Workflow</a></li><li><a href="#ladder">Managed Pod</a></li><li><a href="#gcc">Nano GCC</a></li><li><a href="/start/" data-cta-source="home-footer">Build your Pod</a></li></ul></div>
         <div><h5>Spaces</h5><ul class="foot-l"><li><a href="https://www.away.center/bangalore">Bangalore</a></li><li><a href="https://www.away.center/vizag">Vizag Daba Gardens</a></li><li><a href="https://www.away.center/ramnagar">Vizag Ramnagar</a></li><li><a href="https://www.away.center/signature-workspaces-kolkata">Kolkata</a></li><li><a href="https://app.away.center/">Book on-demand</a></li></ul></div><!-- VERIFY: /ramnagar slug not confirmed in Webflow -->
         <div><h5><span class="brand-case">away</span></h5><ul class="foot-l"><li><a href="https://www.away.center/about-us">About</a></li><li><a href="https://www.away.center/events">Events at away.center</a></li><li><a href="https://www.away.center/blog">Blog</a></li><li><a href="https://www.away.center/careers">Careers</a></li><li><a href="https://www.away.center/contact-us">Contact</a></li></ul></div><!-- VERIFY: /events /blog /careers /contact-us slugs not confirmed in Webflow; /about-us confirmed -->
       </div>
@@ -1081,6 +1091,6 @@
         <span>away.center is not an employer of record, payroll provider or legal, tax or compliance adviser.</span>
       </div>
     </div>
-  </footer>
+  <nav class="support-links wrap" aria-label="Pods information"><a href="/contact/">Contact Pods</a><a href="/about/">About Pods</a><a href="/security/">Security</a><a href="/privacy-policy/">Privacy Policy (draft)</a><a href="/terms-of-use/">Terms of Use (draft)</a></nav></footer>
 </body>
 </html>

@@ -1,0 +1,2 @@
+{"name":"away-pods","private":true,"scripts":{"preview":"node scripts/preview.cjs","test":"node --test tests/enquiry.test.cjs","test:browser":"node tests/browser.cjs"},"devDependencies":{"playwright":"1.56.1"}}
+

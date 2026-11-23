@@ -1,0 +1,42 @@
+@font-face{font-family:"Libre Caslon Text";src:url("/assets/fonts/LibreCaslonText-Regular.ttf") format("truetype");font-weight:400;font-display:swap}
+@font-face{font-family:"Libre Caslon Text";src:url("/assets/fonts/LibreCaslonText-Italic.ttf") format("truetype");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:"Libre Caslon Text";src:url("/assets/fonts/LibreCaslonText-Bold.ttf") format("truetype");font-weight:700;font-display:swap}
+:root{--editorial:"Libre Caslon Text",Georgia,serif}
+[hidden]{display:none!important}
+.hero h1,.ap-page .hero h1,.support-page h1{font-family:var(--editorial);font-weight:400;letter-spacing:-.045em;line-height:1.1}
+.hero{background:#faf8f4;border-bottom:1px solid var(--ink-14)}
+.pad:not(.os):not(.final){border-bottom:1px solid var(--ink-14)}
+.btn,.ap-button{min-height:44px}
+.btn-primary,.ap-button,.ap-page .ap-button{color:#1a1a1a}
+:focus-visible{outline:3px solid #075056;outline-offset:4px}
+.final :focus-visible,.os :focus-visible,.foot :focus-visible{outline-color:#dffdb3}
+input,textarea,select{font-size:16px!important}
+.optional-fields{grid-column:1/-1;margin:12px 0 24px;border-top:1px solid currentColor;padding-top:12px}
+.optional-fields summary{cursor:pointer;min-height:44px;padding:12px 0;font-weight:600}
+.optional-fields>div{padding-top:16px}
+.form-status.pending{display:block}
+.enquiry-success{padding:28px 0;scroll-margin-top:100px}
+.enquiry-success h3{font-family:var(--editorial);font-size:32px;line-height:1.2;margin-bottom:20px}
+.enquiry-success p{margin:16px 0}
+.support-links{display:flex;gap:12px 24px;flex-wrap:wrap;padding:28px 0}
+.support-links a{display:inline-flex;align-items:center;min-height:44px;text-underline-offset:4px}
+.pods-menu{display:none;margin-left:auto;min-width:44px;min-height:44px;border:1px solid currentColor;padding:10px}
+.support-page{background:#faf8f4;color:#075056}
+.support-header{border-bottom:1px solid var(--ink-14)}
+.support-header .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:80px}
+.support-header nav{display:flex;gap:24px;align-items:center}
+.support-header a{min-height:44px;display:inline-flex;align-items:center}
+.support-main{max-width:860px;margin:auto;padding:80px 24px}
+.support-main h1{font-size:clamp(44px,7vw,80px);margin-bottom:32px}
+.support-main h2{font-size:26px;margin:36px 0 16px}
+.support-main p{line-height:1.8;margin-bottom:20px}
+.support-main .inner-hero,.support-main .content-prose,.support-main .wrap{padding:0;width:auto;max-width:none}
+.support-main .legal-notice{padding:20px;border:1px solid #075056;margin:30px 0;background:#e8e1d7}
+.support-main form{margin-top:30px}
+.support-main label{display:block;margin-bottom:8px;font-weight:600}
+.support-main input,.support-main textarea{display:block;width:100%;padding:12px;border:1px solid #59716f;background:transparent;color:#075056;margin-bottom:24px}
+.support-main button{padding:14px 24px;background:#ff502a;color:#1a1a1a}
+.support-main .form-status{display:block}
+@media(max-width:1000px){.pods-menu{display:block}.nav-in{position:relative}.nav-links.is-open{display:flex;position:absolute;top:64px;left:0;right:0;flex-direction:column;align-items:stretch;background:#faf8f4;padding:20px;gap:8px;max-height:75vh;overflow:auto;border:1px solid var(--ink-14)}.nav-links a{padding:10px;min-height:44px}.support-header nav{flex-wrap:wrap;gap:10px}.support-header .wrap{flex-wrap:wrap;padding-block:16px}}
+@media(max-width:600px){.hero h1,.ap-page .hero h1{font-size:clamp(40px,10vw,62px)}.hero .stage{max-width:100%;min-width:0}.ap-nav{gap:12px}.ap-brand img{max-width:80px}.ap-button-small{font-size:12px!important}.form-grid{grid-template-columns:minmax(0,1fr)}.form-grid .span2{grid-column:1}.support-main{padding-top:48px}.support-links{gap:8px 20px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;animation-iteration-count:1!important}.rv{opacity:1!important;transform:none!important}}

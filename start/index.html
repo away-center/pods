@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="/away-pods.css">
   <link rel="stylesheet" href="/start/start.css">
   <script src="/hero.js" defer></script>
+  <script src="/site-config.js" defer></script>
   <script src="/enquiry.js" defer></script>
   <script src="/start/start.js" defer></script>
   <script type="application/ld+json">
@@ -30,6 +31,8 @@
   "inLanguage": "en"
 }
   </script>
+  <link rel="stylesheet" href="/enhancements.css">
+  <script defer src="/enhancements.js"></script>
 </head>
 <body>
 <div class="ap-page" id="ap-page">
@@ -135,6 +138,7 @@
       </div></section>
 
       <section class="ap-section ap-container" aria-labelledby="ap-workspace-title">
+<!-- VIDEO INSERTION POINT start-workspace: pending assets and placement approval; see docs/VIDEOS.md. -->
         <div class="ap-heading-row"><div><p class="ap-eyebrow">05 / A place you can actually visit</p><h2 id="ap-workspace-title">Your India team.<br><span>Right here in Bangalore.</span></h2></div><p class="ap-section-aside">The real away floor.<br>The everyday setting for focused work.</p></div>
 
         <div class="ap-samples"><div><h3>See the operating standard.</h3><p>Ask for the documents behind the work.</p></div><a href="#ap-start" data-ap-sample="Role card"><span>Role card</span><small>Request a sample ↗</small></a><a href="#ap-start" data-ap-sample="Workflow card"><span>Workflow card</span><small>Request a sample ↗</small></a><a href="#ap-start" data-ap-sample="Weekly report"><span>Weekly report</span><small>Request a sample ↗</small></a></div>
@@ -147,22 +151,24 @@
             <form id="ap-form" name="away-pods-start" method="post" action="/api/enquiry" aria-label="Map my India setup">
               <p class="ap-form-intro">Let’s start with the work.</p>
               <p id="ap-intent-note" class="ap-intent-note" hidden></p>
-              <div class="ap-fields">
+<div class="ap-fields">
                 <div class="ap-field"><label for="ap-first-name">First name <span aria-hidden="true">*</span></label><input class="ap-input" id="ap-first-name" name="first_name" type="text" autocomplete="given-name" maxlength="120" required></div>
-                <div class="ap-field"><label for="ap-last-name">Last name <span aria-hidden="true">*</span></label><input class="ap-input" id="ap-last-name" name="last_name" type="text" autocomplete="family-name" maxlength="120" required></div>
                 <div class="ap-field"><label for="ap-email">Company email <span aria-hidden="true">*</span></label><input class="ap-input" id="ap-email" name="email" type="email" autocomplete="email" maxlength="254" required></div>
                 <div class="ap-field"><label for="ap-company">Company name</label><input class="ap-input" id="ap-company" name="company" type="text" autocomplete="organization" maxlength="160"></div>
-                <div class="ap-field"><label for="ap-country">HQ country <span aria-hidden="true">*</span></label><select class="ap-input" id="ap-country" name="hq_country" autocomplete="country-name" required><option value="">Select a country</option></select></div>
+</div>
+              <div class="ap-field"><label for="ap-message">Message <span aria-hidden="true">*</span></label><textarea class="ap-input ap-textarea" id="ap-message" name="brief" required maxlength="5000" rows="4" placeholder="How can we help you?"></textarea></div>
+<details class="optional-fields"><summary>Additional details (optional)</summary><div class="ap-fields">
+                <div class="ap-field"><label for="ap-last-name">Last name</label><input class="ap-input" id="ap-last-name" name="last_name" type="text" autocomplete="family-name" maxlength="120"></div>
+                <div class="ap-field"><label for="ap-country">HQ country</label><select class="ap-input" id="ap-country" name="hq_country" autocomplete="country-name"><option value="">Select a country</option></select></div>
                 <div class="ap-field"><label for="ap-phone">Phone number</label><input class="ap-input" id="ap-phone" name="phone" type="tel" autocomplete="tel" maxlength="50"></div>
-              </div>
-              <div class="ap-field"><label for="ap-message">Message</label><textarea class="ap-input ap-textarea" id="ap-message" name="brief" maxlength="5000" rows="4" placeholder="How can we help you?"></textarea></div>
+</div></details>
               <div id="ap-hidden-fields"></div>
               <div hidden aria-hidden="true"><label>Leave this blank<input name="contact_url" tabindex="-1" autocomplete="off"></label></div>
               <button type="submit" class="ap-button ap-submit">Send enquiry</button>
               <p class="ap-form-privacy">We’ll use these details to respond to your enquiry.</p>
               <p id="ap-form-error" class="ap-form-error" role="alert" hidden></p>
             </form>
-            <div class="ap-success w-form-done" tabindex="-1" role="region" aria-label="Enquiry received"><span class="ap-success-mark" aria-hidden="true">✓</span><h3>Your next chapter<br>starts here.</h3><p>Thanks, your enquiry has been received. Let’s talk through the work.</p><a class="ap-button" href="#ap-start" data-ap-calendar="success">Book a founder call <span aria-hidden="true">↗</span></a><p data-ap-calendar-fallback hidden>We’ll follow up by email to arrange a founder call.</p></div>
+            <div class="ap-success w-form-done" tabindex="-1" role="region" aria-label="Enquiry received"><span class="ap-success-mark" aria-hidden="true">✓</span><h3>Your next chapter<br>starts here.</h3><p>Thanks, your enquiry has been received. Let’s talk through the work.</p><a class="ap-button" data-ap-calendar="success" hidden>Book a founder call <span aria-hidden="true">↗</span></a><p data-ap-calendar-fallback hidden>We’ll follow up by email to arrange a founder call.</p></div>
           </div>
         </div>
       </div></section>
@@ -176,7 +182,7 @@
         <a href="/" class="ap-text-link ap-full-model">See the full away Pods model <span aria-hidden="true">→</span></a>
       </div></section>
     </main>
-    <footer class="ap-footer"><div class="ap-container"><a class="ap-brand" href="https://www.away.center/" aria-label="away home"><img src="https://cdn.prod.website-files.com/680e8cf49bf5c7568993a036/68105e228dad96121b072128_Away%20Logo%20Signal%20Orange%20(2).svg" alt="away" width="100" height="31"></a><p>A way to work. A way to grow.</p><span>© <span data-ap-year>2026</span> away</span></div></footer>
+    <footer class="ap-footer"><div class="ap-container"><a class="ap-brand" href="https://www.away.center/" aria-label="away home"><img src="https://cdn.prod.website-files.com/680e8cf49bf5c7568993a036/68105e228dad96121b072128_Away%20Logo%20Signal%20Orange%20(2).svg" alt="away" width="100" height="31"></a><p>A way to work. A way to grow.</p><span>© <span data-ap-year>2026</span> away</span></div><nav class="support-links wrap" aria-label="Pods information"><a href="/contact/">Contact Pods</a><a href="/about/">About Pods</a><a href="/security/">Security</a><a href="/privacy-policy/">Privacy Policy (draft)</a><a href="/terms-of-use/">Terms of Use (draft)</a></nav></footer>
     <div class="ap-mobile-cta" hidden><a href="#ap-start" class="ap-button" data-ap-cta="mobile-sticky">Tell us what you’re hiring <span aria-hidden="true">↗</span></a></div>
   </div>
 </body>
