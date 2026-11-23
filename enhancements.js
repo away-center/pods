@@ -22,26 +22,66 @@
     new MutationObserver(sync).observe(item,{attributes:true,attributeFilter:['aria-expanded']}); sync();
   });
 
-  // Future Pods videos: click-to-play only; pause outside the viewport or when
-  // another clip starts. No network requests or players until real video URLs exist.
-  const podsVideos = [...document.querySelectorAll('video[data-pods-video]')];
-  podsVideos.forEach(video => {
-    video.removeAttribute('autoplay');
-    video.autoplay = false;
+  // Additive native media players. Empty config means no empty/broken embeds.
+  // Sources must be direct downloadable HTTPS MP4 URLs, not Drive viewing pages.
+  const placements = {
+    nirvaan1: {label:'Away Pods — introduction', title:'An introduction to away Pods'},
+    nirvaan2: {label:'Away Pods — how the model works', title:'How away Pods works'},
+    uj: {label:'Away Pods — questions answered', title:'Questions about away Pods'}
+  };
+  const mediaConfig = window.PODS_CONFIG?.videos || {};
+  const podsVideos = [];
+  const isHttps = value => typeof value === 'string' && /^https:\/\/[^\s]+$/i.test(value);
+  const narrow = window.matchMedia('(max-width: 700px)');
+  document.querySelectorAll('[data-pods-video-slot]').forEach(slot => {
+    const key = slot.dataset.podsVideoSlot;
+    const data = mediaConfig[key];
+    if (!data || !isHttps(data.landscape)) return;
+    const video = document.createElement('video');
+    video.setAttribute('data-pods-video', '');
+    video.setAttribute('aria-label', placements[key]?.label || 'Away Pods video');
     video.controls = true;
+    video.autoplay = false;
     video.playsInline = true;
-    if (!video.hasAttribute('preload')) video.preload = 'metadata';
+    video.preload = 'none';
+    if (isHttps(data.poster)) video.poster = data.poster;
+    const sourceForViewport = () => key === 'uj' && narrow.matches && isHttps(data.portrait) ? data.portrait : data.landscape;
+    const setSource = () => {
+      if (video.src === sourceForViewport()) return;
+      const wasStarted = video.currentTime > 0 && !video.ended;
+      const previousTime = video.currentTime;
+      video.pause();
+      video.src = sourceForViewport();
+      if (wasStarted) video.addEventListener('loadedmetadata', () => {
+        video.currentTime = Math.min(previousTime, video.duration || previousTime);
+      }, {once:true});
+      video.dataset.mobilePortrait = String(key === 'uj' && narrow.matches && isHttps(data.portrait));
+    };
+    setSource();
+    if (key === 'uj') narrow.addEventListener('change', setSource);
+    if (isHttps(data.captions)) {
+      const track = document.createElement('track');
+      track.kind = 'captions'; track.srclang = 'en'; track.label = 'English'; track.src = data.captions;
+      video.append(track);
+    }
+    const caption = document.createElement('figcaption');
+    caption.textContent = placements[key]?.title || 'Away Pods video';
+    slot.append(video, caption);
+    slot.hidden = false;
+    podsVideos.push(video);
     video.addEventListener('play', () => {
       podsVideos.forEach(other => { if (other !== video && !other.paused) other.pause(); });
     });
   });
+  const showcase = document.querySelector('[data-pods-video-showcase]');
+  if (showcase && showcase.querySelector('figure:not([hidden])')) showcase.hidden = false;
   if (podsVideos.length && 'IntersectionObserver' in window) {
-    const offscreenPause = new IntersectionObserver(entries => {
+    const pauseOffscreen = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.intersectionRatio < 0.2 && !entry.target.paused) entry.target.pause();
       });
     }, {threshold:[0,0.2,0.5,1]});
-    podsVideos.forEach(video => offscreenPause.observe(video));
+    podsVideos.forEach(video => pauseOffscreen.observe(video));
   }
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) podsVideos.forEach(video => { if (!video.paused) video.pause(); });
