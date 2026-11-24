@@ -10,7 +10,7 @@ const $  = (s, c = document) => c.querySelector(s);
 const $$ = (s, c = document) => [...c.querySelectorAll(s)];
 
 /* ============================================================
-   NAV, stuck state, scroll progress, Bangalore clock
+   NAV, stuck state and scroll progress
    ============================================================ */
 const nav = $('#nav'), bar = $('#progress');
 const onScroll = () => {
@@ -20,11 +20,7 @@ const onScroll = () => {
 };
 addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
-const clock = () => {
-  const t = new Date().toLocaleTimeString('en-GB', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit' });
-  $('#blrTime').textContent = t;
-};
-clock(); setInterval(clock, 20000);
+
 
 /* Sticky mobile bar: appears after the hero, steps aside at the two
    places where the same action is already on screen. */
@@ -33,13 +29,17 @@ clock(); setInterval(clock, 20000);
   let past = false, inTarget = false;
   const paint = () => {
     const on = past && !inTarget;
+    bar.inert = !on;
+    bar.setAttribute('aria-hidden', String(!on));
     if (on) bar.hidden = false;
     requestAnimationFrame(() => bar.classList.toggle('on', on));
   };
   new IntersectionObserver(es => { past = !es[0].isIntersecting; paint(); },
     { rootMargin: '-70% 0px 0px 0px' }).observe($('.hero'));
+  const targetVisibility = new Map();
   const near = new IntersectionObserver(es => {
-    inTarget = es.some(e => e.isIntersecting); paint();
+    es.forEach(e => targetVisibility.set(e.target, e.isIntersecting));
+    inTarget = [...targetVisibility.values()].some(Boolean); paint();
   }, { threshold: 0 });
   [$('#build'), $('#enquire')].forEach(el => near.observe(el));
 })();
@@ -384,6 +384,8 @@ function selectFn(k) {
   $$('.fn').forEach(b => b.setAttribute('aria-pressed', b.dataset.fn === k));
   buildRoleList();
   gate();
+  // Function is a single choice: show the next question immediately.
+  if (step === 1) goto(2);
 }
 $$('.fn').forEach(b => b.addEventListener('click', () => selectFn(b.dataset.fn)));
 
@@ -392,6 +394,8 @@ $$('.shape').forEach(b => b.addEventListener('click', () => {
   CFG.shape = b.dataset.shape;
   $$('.shape').forEach(x => x.setAttribute('aria-pressed', x === b));
   gate();
+  // Support type is a single choice. Role counts are not, so stop at Step 3.
+  if (step === 2) goto(3);
 }));
 
 /* -- Step 3 -------------------------------------------------- */
@@ -547,8 +551,10 @@ function gate() {
   const ok = step === 1 ? !!CFG.fn : step === 2 ? !!CFG.shape : true;
   next.disabled = !ok;
   $('#cfgHint').textContent = HINTS[step];
-  next.innerHTML = (step === 4 ? 'See my setup' : step === 5 ? 'Continue to enquiry' : 'Continue') +
+  next.innerHTML = (step === 3 ? 'Done choosing roles' : step === 4 ? 'See my setup' : step === 5 ? 'Continue to enquiry' : 'Continue') +
     ' <svg class="ar" width="15" height="12" viewBox="0 0 15 12" fill="none" aria-hidden="true"><path d="M1 6h12M9 2l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  // Steps 1 and 2 advance automatically upon making their single selection.
+  next.hidden = step <= 2;
   $('#cfgBack').hidden = step === 1;
   $$('.step-dot').forEach(d => {
     const s = +d.dataset.s;
@@ -563,12 +569,20 @@ function goto(s) {
   if (step === 3) { buildRoleList(); drawAssembly(); }
   if (step === 5) renderRec();
   gate();
-  const y = $('#build').getBoundingClientRect().top + scrollY - 70;
-  if (scrollY > y + 120 || scrollY < y - 400) scrollTo({ top: y, behavior: RM ? 'auto' : 'smooth' });
+  // Position the next question itself below the viewport top and sticky nav.
+  // The old jump targeted #build, often leaving the question below the fold.
+  const pane = $('.pane.on');
+  if (pane) {
+    requestAnimationFrame(() => {
+      const offset = innerWidth <= 1000 ? 78 : 94;
+      const y = Math.max(0, pane.getBoundingClientRect().top + scrollY - offset);
+      scrollTo({top:y,behavior:'auto'});
+    });
+  }
 }
 
 $('#cfgNext').addEventListener('click', () => {
-  if (step === 5) { $('#enquire').scrollIntoView({ behavior: RM ? 'auto' : 'smooth' }); $('#f-name').focus({ preventScroll: true }); return; }
+  if (step === 5) { $('#podForm').scrollIntoView({ behavior: 'auto', block: 'start' }); $('#f-name').focus({ preventScroll: true }); return; }
   goto(step + 1);
 });
 $('#cfgBack').addEventListener('click', () => goto(step - 1));
@@ -581,7 +595,11 @@ $('#restartCfg').addEventListener('click', () => {
   $('#q-city').value = 'Bangalore';
   syncForm(); goto(1);
 });
-$('#recCta').addEventListener('click', () => setTimeout(() => $('#f-name').focus({ preventScroll: true }), 400));
+$('#recCta').addEventListener('click', event => {
+  event.preventDefault();
+  $('#podForm').scrollIntoView({ behavior: 'auto', block: 'start' });
+  $('#f-name').focus({ preventScroll: true });
+});
 $('#editCfg').addEventListener('click', () => { $('#build').scrollIntoView({ behavior: RM ? 'auto' : 'smooth' }); goto(1); });
 gate();
 
@@ -616,23 +634,9 @@ function syncForm() {
 
 const enquiryForm = $('#podForm');
 const enquiryStatus = $('#formStatus');
-enquiryForm.addEventListener('submit', async event => {
-  event.preventDefault();
-  enquiryStatus.textContent = '';
-  const btn = $('#formSubmit');
-  if (btn.disabled) return;
-  btn.disabled = true;
-  try {
-    await podsEnquiry.send(enquiryForm, {page: 'main', pod_config: JSON.stringify(payload())});
-    enquiryStatus.className = 'form-status ok';
-    enquiryStatus.textContent = 'Thanks. Your enquiry has been received.';
-    enquiryForm.reset();
-  } catch (error) {
-    enquiryStatus.className = 'form-status err';
-    enquiryStatus.textContent = error.message;
-  } finally {
-    btn.disabled = false;
-  }
+podsEnquiry.bind(enquiryForm, {
+  status: enquiryStatus,
+  context: () => ({page: 'main', pod_config: JSON.stringify(payload())})
 });
 
 /* ============================================================
@@ -869,9 +873,16 @@ const OS = {
 /* ============================================================
    Nav anchor offset for keyboard users
    ============================================================ */
-$$('a[href^="#"]').forEach(a => a.addEventListener('click', () => {
+$$('a[href^="#"]').forEach(a => a.addEventListener('click', event => {
   const t = document.getElementById(a.getAttribute('href').slice(1));
-  if (t) setTimeout(() => { t.setAttribute('tabindex', '-1'); t.focus({ preventScroll: true }); }, 500);
+  if (!t) return;
+  if (t.id === 'podForm') {
+    event.preventDefault();
+    t.scrollIntoView({ behavior: 'auto', block: 'start' });
+    $('#f-name').focus({ preventScroll: true });
+    return;
+  }
+  setTimeout(() => { t.setAttribute('tabindex', '-1'); t.focus({ preventScroll: true }); }, 500);
 }));
 
 })();

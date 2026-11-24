@@ -1,0 +1,1121 @@
+@font-face{font-family:"Libre Caslon Text";src:url("/assets/fonts/LibreCaslonText-Regular.ttf") format("truetype");font-weight:400;font-display:swap}
+@font-face{font-family:"Libre Caslon Text";src:url("/assets/fonts/LibreCaslonText-Italic.ttf") format("truetype");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:"Libre Caslon Text";src:url("/assets/fonts/LibreCaslonText-Bold.ttf") format("truetype");font-weight:700;font-display:swap}
+:root{--editorial:"Libre Caslon Text",Georgia,serif}
+[hidden]{display:none!important}
+.hero h1,.ap-page .hero h1,.support-page h1{font-family:var(--editorial);font-weight:400;letter-spacing:-.045em;line-height:1.1}
+.hero{background:#faf8f4;border-bottom:1px solid var(--ink-14)}
+.pad:not(.os):not(.final){border-bottom:1px solid var(--ink-14)}
+.btn,.ap-button{min-height:44px}
+.btn-primary,.ap-button,.ap-page .ap-button{color:#1a1a1a}
+:focus-visible{outline:3px solid #075056;outline-offset:4px}
+.final :focus-visible,.os :focus-visible,.foot :focus-visible{outline-color:#dffdb3}
+input,textarea,select{font-size:16px!important}
+.optional-fields{grid-column:1/-1;margin:12px 0 24px;border-top:1px solid currentColor;padding-top:12px}
+.optional-fields summary{cursor:pointer;min-height:44px;padding:12px 0;font-weight:600}
+.optional-fields>div{padding-top:16px}
+.form-status.pending{display:block}
+.enquiry-success{padding:28px 0;scroll-margin-top:100px}
+.enquiry-success h3{font-family:var(--editorial);font-size:32px;line-height:1.2;margin-bottom:20px}
+.enquiry-success p{margin:16px 0}
+.support-links{display:flex;gap:12px 24px;flex-wrap:wrap;padding:28px 0}
+.support-links a{display:inline-flex;align-items:center;min-height:44px;text-underline-offset:4px}
+.pods-menu{display:none;margin-left:auto;min-width:44px;min-height:44px;border:1px solid currentColor;padding:10px}
+.support-page{background:#faf8f4;color:#075056}
+.support-header{border-bottom:1px solid var(--ink-14)}
+.support-header .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:80px}
+.support-header nav{display:flex;gap:24px;align-items:center}
+.support-header a{min-height:44px;display:inline-flex;align-items:center}
+.support-main{max-width:860px;margin:auto;padding:80px 24px}
+.support-main h1{font-size:clamp(44px,7vw,80px);margin-bottom:32px}
+.support-main h2{font-size:26px;margin:36px 0 16px}
+.support-main p{line-height:1.8;margin-bottom:20px}
+.support-main .inner-hero,.support-main .content-prose,.support-main .wrap{padding:0;width:auto;max-width:none}
+.support-main .legal-notice{padding:20px;border:1px solid #075056;margin:30px 0;background:#e8e1d7}
+.support-main form{margin-top:30px}
+.support-main label{display:block;margin-bottom:8px;font-weight:600}
+.support-main input,.support-main textarea{display:block;width:100%;padding:12px;border:1px solid #59716f;background:transparent;color:#075056;margin-bottom:24px}
+.support-main button{padding:14px 24px;background:#ff502a;color:#1a1a1a}
+.support-main .form-status{display:block}
+@media(max-width:1000px){.pods-menu{display:block}.nav-in{position:relative}.nav-links.is-open{display:flex;position:absolute;top:64px;left:0;right:0;flex-direction:column;align-items:stretch;background:#faf8f4;padding:20px;gap:8px;max-height:75vh;overflow:auto;border:1px solid var(--ink-14)}.nav-links a{padding:10px;min-height:44px}.support-header nav{flex-wrap:wrap;gap:10px}.support-header .wrap{flex-wrap:wrap;padding-block:16px}}
+@media(max-width:600px){.hero h1,.ap-page .hero h1{font-size:clamp(40px,10vw,62px)}.hero .stage{max-width:100%;min-width:0}.ap-nav{gap:12px}.ap-brand img{max-width:80px}.ap-button-small{font-size:12px!important}.form-grid{grid-template-columns:minmax(0,1fr)}.form-grid .span2{grid-column:1}.support-main{padding-top:48px}.support-links{gap:8px 20px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;animation-iteration-count:1!important}.rv{opacity:1!important;transform:none!important}}
+
+
+/* 2026-11-23 — Complete Libre Caslon typography adoption.
+   Keep Hanken Grotesk for interface/body copy and all existing text unchanged. */
+:root{--display:var(--editorial)}
+body,.ap-page,.support-page{font-family:"Hanken Grotesk",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+h1,h2,h3,h4,.display,.hero-sub,.hand,.rung-t,.pane-q,.support-page h1,.support-page h2,.support-page h3,
+.ap-page :is(h1,h2,h3,h4),.ap-page .ap-photo-note strong,.ap-page .ap-convert-note>span,
+.ap-page .ap-form-intro,.ap-page .ap-brand{
+  font-family:var(--editorial);
+  font-synthesis:none;
+}
+h1,h2,.display,.ap-page :is(h1,h2){font-weight:400;letter-spacing:-.035em;text-wrap:balance}
+h3,h4,.ap-page :is(h3,h4){font-weight:700;letter-spacing:-.015em}
+.hero h1,.ap-page .hero h1{
+  font-size:clamp(46px,6vw,82px);
+  font-weight:400;
+  line-height:1.06;
+  letter-spacing:-.045em;
+}
+.hero-sub{font-size:clamp(23px,3vw,39px);font-weight:400;line-height:1.18;letter-spacing:-.025em}
+.h2{font-size:clamp(35px,4.9vw,64px);line-height:1.12}
+.h3{font-size:clamp(25px,2.8vw,37px);line-height:1.17}
+.h4{font-size:clamp(20px,1.8vw,27px);line-height:1.2}
+.ap-page h1:not(:where(.hero *)){font-size:clamp(44px,6.4vw,86px);line-height:1.07}
+.ap-page h2{font-size:clamp(34px,4.6vw,61px);line-height:1.12}
+.ap-page h3{font-size:clamp(25px,2.6vw,36px);line-height:1.18}
+.ap-page .ap-owner h3{font-size:clamp(31px,3vw,41px)}
+.ap-page .ap-convert-copy h2{font-size:clamp(40px,5.4vw,73px)}
+.ap-page .ap-form-intro{font-size:clamp(25px,2.5vw,34px);font-weight:700;line-height:1.18}
+.ap-page .ap-photo-note strong{font-size:clamp(40px,4.1vw,62px);font-weight:700;line-height:1.08}
+.ap-page .ap-convert-note>span{font-weight:400}
+.support-main h1{font-size:clamp(43px,6.5vw,78px);line-height:1.08}
+.support-main h2{font-size:clamp(28px,3.2vw,40px);line-height:1.17}
+@media(max-width:600px){
+  .hero h1,.ap-page .hero h1{font-size:clamp(34px,9.3vw,54px);line-height:1.09}
+  .hero-sub{font-size:clamp(22px,6.1vw,30px)}
+  .h2,.ap-page h2{font-size:clamp(31px,8vw,43px)}
+  .h3,.ap-page h3{font-size:clamp(24px,6.7vw,30px)}
+  .ap-page h1:not(:where(.hero *)){font-size:clamp(39px,9.5vw,58px)}
+  .ap-page .ap-convert-copy h2{font-size:clamp(37px,9vw,54px)}
+  .support-main h1{font-size:clamp(39px,9.7vw,56px)}
+}
+/* Dormant until real supplied videos are available; no empty players introduced. */
+.pods-video-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,2.4vw,32px);margin-block:32px}
+.pods-video-grid figure{min-width:0;margin:0}
+.pods-video-grid video,.pods-video-single video{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;background:#0d0d0d}
+.pods-video-grid figcaption,.pods-video-single figcaption{font:500 14px/1.5 "Hanken Grotesk",sans-serif;margin-top:12px}
+@media(max-width:700px){.pods-video-grid{grid-template-columns:1fr}.pods-video-single video[data-mobile-portrait]{aspect-ratio:9/16;max-height:75vh}}
+
+.pods-video-showcase{padding-top:clamp(36px,4.5vw,72px);padding-bottom:clamp(36px,4.5vw,72px);border-bottom:1px solid var(--ink-14)}
+.pods-video-showcase .pods-video-grid{margin:0}
+.pods-faq-video{margin:28px 0 0!important}
+.pods-faq-video video{border-radius:4px}
+.pods-video-grid video{border-radius:4px}
+.pods-video-grid figcaption,.pods-video-single figcaption{color:var(--teal);font-size:14px}
+.pods-video-single video[data-mobile-portrait="true"]{width:min(100%,340px);aspect-ratio:9/16;object-fit:contain;max-height:min(76vh,610px)}
+@media (max-width:700px){.pods-video-grid{grid-template-columns:1fr}.pods-faq-video{margin-block:24px!important}}
+
+/* Official away Pods wordmark: use on all website headers, drafts, and footer. */
+:where(.nav-logo,.ap-brand,.pods-brand-link){display:inline-flex;align-items:center;flex-shrink:0;line-height:1;text-decoration:none}
+.nav-logo .pods-brand-logo,.ap-page .ap-brand .pods-brand-logo,.support-header .pods-brand-link .pods-brand-logo,.foot .pods-brand-logo{display:block;width:clamp(150px,15vw,200px);height:auto;max-width:200px;object-fit:contain}
+.foot .pods-brand-logo{filter:brightness(0) invert(1)}
+.support-header .pods-brand-link{min-height:44px}
+@media(max-width:600px){.nav-logo .pods-brand-logo,.ap-page .ap-brand .pods-brand-logo,.support-header .pods-brand-link .pods-brand-logo{width:145px;max-width:145px}.support-header .wrap{gap:12px}.support-header nav{gap:8px 16px}}
+
+
+/* 2026-11-24 | First-fold visual hierarchy: shared between / and /start/.
+   Original hero text, SVG diagram, section order, and interaction remain intact. */
+.hero,
+.ap-page .hero{
+  padding-top:clamp(40px,5.4vw,74px);
+  padding-bottom:clamp(48px,5.8vw,72px);
+}
+.hero-grid > div:first-child{min-width:0}
+.hero .eyebrow{margin-bottom:clamp(16px,2vw,24px)}
+.hero .display.h1,
+.ap-page .hero .display.h1{
+  font-family:var(--editorial);
+  font-size:clamp(44px,5.25vw,76px);
+  font-weight:400;
+  letter-spacing:-.048em;
+  line-height:1.07;
+  max-width:100%;
+  margin-bottom:clamp(18px,2.1vw,28px);
+  text-wrap:balance;
+}
+.hero .hero-sub,
+.ap-page .hero .hero-sub{
+  display:block;
+  font-family:"Hanken Grotesk",ui-sans-serif,system-ui,sans-serif;
+  font-size:clamp(18px,1.65vw,23px);
+  font-style:normal;
+  font-weight:600;
+  line-height:1.43;
+  letter-spacing:-.013em;
+  color:var(--teal);
+  max-width:40ch;
+  padding-left:clamp(13px,1.55vw,20px);
+  border-left:3px solid var(--orange);
+  margin-bottom:clamp(22px,2.7vw,32px);
+  text-wrap:pretty;
+}
+.hero .lead,
+.ap-page .hero .lead{
+  max-width:58ch;
+  font-family:"Hanken Grotesk",ui-sans-serif,system-ui,sans-serif;
+  font-size:clamp(16px,1.17vw,18px);
+  font-weight:400;
+  line-height:1.66;
+  letter-spacing:0;
+  margin-bottom:clamp(24px,3vw,36px);
+}
+.hero .btn,
+.ap-page .hero .btn,
+.ap-page .ap-button,
+.ap-page .ap-form-panel button,
+.nav-links a,
+.nav-cta a{
+  font-family:"Hanken Grotesk",ui-sans-serif,system-ui,sans-serif;
+  letter-spacing:0;
+  font-weight:600;
+}
+.hero .hero-cta{gap:12px 14px;margin-bottom:clamp(24px,2.9vw,34px)}
+.hero .hero-cta .btn{min-height:48px}
+.hero .hero-meta{max-width:60ch}
+
+/* Add-on watch section within /start/'s existing four-model section. */
+.ap-page .ap-video-start{
+  margin-top:clamp(34px,4vw,58px);
+  padding-top:clamp(24px,3vw,36px);
+  border-top:1px solid var(--ap-line);
+}
+.ap-page .ap-video-start .pods-video-grid{margin:0}
+.ap-page .ap-video-start figure,
+.ap-page .ap-faq .pods-faq-video{min-width:0;max-width:100%}
+.ap-page .ap-video-start video,
+.ap-page .ap-faq .pods-faq-video video{
+  display:block;
+  max-width:100%;
+  border-radius:4px;
+}
+.ap-page .ap-video-start figcaption,
+.ap-page .ap-faq .pods-faq-video figcaption{
+  font-family:"Hanken Grotesk",sans-serif;
+  font-size:13px;
+  line-height:1.5;
+  color:var(--ap-teal);
+}
+.ap-page .ap-faq > div:first-child{min-width:0}
+.ap-page .ap-faq .pods-faq-video{margin:clamp(20px,2.5vw,32px) 0 0!important}
+
+@media (max-width:900px){
+  .hero .display.h1,.ap-page .hero .display.h1{font-size:clamp(43px,7.2vw,68px)}
+  .hero .hero-sub,.ap-page .hero .hero-sub{max-width:42ch}
+}
+@media (max-width:600px){
+  .hero,.ap-page .hero{padding-top:clamp(30px,6vw,42px)}
+  .hero .display.h1,.ap-page .hero .display.h1{
+    font-size:clamp(36px,9.25vw,52px);
+    line-height:1.09;
+    margin-bottom:18px;
+    letter-spacing:-.044em;
+  }
+  .hero .hero-sub,.ap-page .hero .hero-sub{
+    font-size:clamp(17px,4.9vw,20px);
+    line-height:1.42;
+    max-width:100%;
+    padding-left:13px;
+    margin-bottom:23px;
+  }
+  .hero .lead,.ap-page .hero .lead{font-size:16px;line-height:1.62;margin-bottom:26px}
+  .hero .hero-cta .btn{min-height:46px}
+  .ap-page .ap-video-start .pods-video-grid{grid-template-columns:minmax(0,1fr)}
+  .ap-page .ap-faq .pods-faq-video video[data-mobile-portrait="true"]{width:min(100%,340px);max-height:76vh;aspect-ratio:9/16}
+}
+
+/* Consistent, correctly joined decorative arrowheads beside the two handwritten notes. */
+.annot .pods-hand-arrow{display:block;width:52px;height:26px;min-width:52px;flex:0 0 52px;overflow:visible;vertical-align:middle}
+.exp-viz-foot .pods-hand-arrow{display:block;width:40px;height:20px;min-width:40px;flex:0 0 40px;overflow:visible;vertical-align:middle}
+
+
+/* 2026-11-24: /start/ operating-layer CTA — prevent flex shrink from
+   collapsing “Let's map your setup” into one word per line. */
+.ap-page .ap-why .ap-heading-row{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  align-items:start;
+  gap:clamp(20px,2.8vw,34px);
+}
+.ap-page .ap-why .ap-heading-row > div:first-child{
+  min-width:0;
+}
+.ap-page .ap-why .ap-heading-row > .ap-text-link{
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  justify-self:start;
+  flex-shrink:0;
+  width:max-content;
+  max-width:100%;
+  min-width:0;
+  min-height:48px;
+  gap:16px;
+  padding:12px 20px;
+  box-sizing:border-box;
+  border:1px solid var(--ap-orange);
+  border-radius:999px;
+  background:var(--ap-orange);
+  color:#1a1a1a;
+  font-family:"Hanken Grotesk",ui-sans-serif,system-ui,sans-serif;
+  font-size:15px;
+  line-height:1.35;
+  font-weight:700;
+  text-align:center;
+  white-space:nowrap;
+  text-decoration:none!important;
+}
+.ap-page .ap-why .ap-heading-row > .ap-text-link span{
+  display:inline-block;
+  flex:none;
+  font-size:18px;
+  line-height:1;
+}
+.ap-page .ap-why .ap-heading-row > .ap-text-link:hover{
+  background:#ff7858;
+  border-color:#ff7858;
+  color:#1a1a1a;
+  opacity:1;
+}
+.ap-page .ap-why .ap-heading-row > .ap-text-link:focus-visible{
+  outline:3px solid var(--ap-paper);
+  outline-offset:3px;
+}
+@media(min-width:1200px){
+  .ap-page .ap-why .ap-heading-row{
+    grid-template-columns:minmax(0,1fr) auto;
+    align-items:end;
+    column-gap:clamp(24px,3vw,60px);
+  }
+  .ap-page .ap-why .ap-heading-row > .ap-text-link{
+    justify-self:end;
+  }
+}
+@media(max-width:420px){
+  .ap-page .ap-why .ap-heading-row > .ap-text-link{
+    min-height:46px;
+    padding:11px 16px;
+    font-size:14px;
+    gap:12px;
+  }
+}
+
+
+/* Away brandbook palette refinement — 2026-11-24.
+   Source: Away Brand Guidelines, pp 20, 23, 26–27.
+   Keep deep colors for selective interludes and never use >2 secondary
+   colours within one composition; preserve original content and layout. */
+:root {
+  --pods-moss:#274A27;
+  --pods-seashell:#E3DACE;
+  --pods-periwinkle:#C4D2FB;
+  --pods-dune:#E4BF71;
+  --pods-lime:#DFFDB3;
+  --pods-pine:#4E361E;
+  --pods-offwhite:#FDF7F3;
+  --pods-ink:#1A1A1A;
+}
+
+/* Typography in lighter areas: calm black and moss, keeping orange for CTA. */
+.hero .display.h1, .ap-page .hero .display.h1 {color:var(--pods-ink)}
+.hero .hero-sub,.ap-page .hero .hero-sub{color:var(--pods-pine)}
+body:not(.support-page) .hero .eyebrow,
+#ladder .eyebrow,#explorer .eyebrow,#layer .eyebrow,
+#workspace .eyebrow,#pricing .eyebrow,#gcc .eyebrow,
+#faq .eyebrow {color:var(--pods-moss)}
+#ladder .display,#explorer .display,#layer .display,
+#workspace .display,#pricing .display,#gcc .display,
+#faq .display {color:var(--pods-ink)}
+#ladder .display em,#explorer .display em,#layer .display em,
+#workspace .display em,#pricing .display em,#gcc .display em,
+#faq .display em {color:var(--pods-moss)}
+#layer .ops-item[aria-expanded="true"] .ix{color:var(--pods-moss)}
+
+/* A soft periwinkle halo retains the animation and all existing graphics. */
+.hero .stage{
+  /* Periwinkle halo restored. 'closest-side' makes the fade reach full
+     transparency before all four edges of the illustration box, preventing
+     the hard top/right shadow seams from the previous farthest-corner gradient. */
+  background:radial-gradient(
+    ellipse closest-side at 52% 48%,
+    rgba(196,210,251,.56) 0%,
+    rgba(196,210,251,.28) 42%,
+    rgba(196,210,251,0) 100%
+  );
+}
+
+/* The main site alternates quieter light chapters and a few dark chapters. */
+#explorer{background:var(--pods-seashell)}
+#workspace{background:var(--pods-seashell)!important}
+#workos.os{background:var(--pods-moss);color:var(--pods-offwhite)}
+#build.cfg{background:var(--pods-pine);color:var(--pods-offwhite)}
+#pricing .calc{background:var(--pods-pine)}
+#gcc{background:var(--pods-periwinkle)!important}
+#gcc .gcc-step[aria-pressed="true"]{background:var(--pods-moss);color:var(--pods-offwhite)}
+.final#enquire{background:var(--pods-moss);color:var(--pods-offwhite)}
+#workos .eyebrow,#build .eyebrow,#enquire .eyebrow{color:var(--pods-dune)}
+#workos .display em,#build .display em,#enquire .final-h em{color:var(--pods-dune)}
+#build .step-dot.now .n{background:var(--pods-dune);color:var(--pods-ink)}
+#build .step-dot.done .n{background:var(--pods-lime);color:var(--pods-ink)}
+#build :focus-visible,#workos :focus-visible,#enquire :focus-visible{outline-color:var(--pods-lime)}
+#pricing .price-card:nth-child(2){background:var(--pods-seashell)}
+#pricing .price-card:nth-child(3){background:var(--pods-periwinkle)}
+#pricing .price-card .price-k{color:var(--pods-pine)}
+#pricing .price-card .price-n{color:var(--pods-moss)}
+#pricing .price-card{border:1px solid rgba(78,54,30,.1)}
+#faq .ff[aria-pressed="true"]{background:var(--pods-moss);color:var(--pods-offwhite)}
+#faq .faq-q{color:var(--pods-ink)}
+
+/* /start/: make the brand's secondary colors do more of the work. */
+.ap-page{--ap-line:rgba(78,54,30,.19)}
+.ap-page .ap-ownership .ap-owner-you{background:var(--pods-seashell)}
+.ap-page .ap-ownership .ap-owner-away{
+  background:var(--pods-moss);
+  border-color:var(--pods-moss);
+  color:var(--pods-offwhite);
+}
+.ap-page .ap-owner-away .ap-card-label{color:var(--pods-dune)}
+.ap-page .ap-owner-away .ap-list li::before{color:var(--pods-lime)}
+.ap-page .ap-breadth{background:var(--pods-periwinkle);color:var(--pods-ink)}
+.ap-page .ap-model:nth-child(2){background:var(--pods-seashell)}
+.ap-page .ap-model-cell{
+  background:var(--pods-lime);
+  border-color:var(--pods-lime);
+  color:var(--pods-ink);
+}
+.ap-page .ap-model-cell .ap-model-dots i{background:var(--pods-moss)}
+.ap-page .ap-models h3{color:var(--pods-ink)}
+.ap-page .ap-model-path{color:var(--pods-pine)}
+.ap-page .ap-why{
+  background:var(--pods-moss);
+  color:var(--pods-offwhite);
+}
+.ap-page .ap-why .ap-eyebrow,
+.ap-page .ap-why .ap-benefit-num{color:var(--pods-dune)}
+.ap-page .ap-why h2 span,
+.ap-page .ap-why .ap-benefits h3{color:var(--pods-offwhite)}
+.ap-page .ap-why .ap-benefits article{border-top-color:rgba(253,247,243,.3)}
+.ap-page .ap-why .ap-heading-row > .ap-text-link{
+  background:var(--pods-dune);
+  border-color:var(--pods-dune);
+  color:var(--pods-ink);
+}
+.ap-page .ap-why .ap-heading-row > .ap-text-link:hover{
+  background:var(--pods-lime);
+  border-color:var(--pods-lime);
+  color:var(--pods-ink);
+}
+.ap-page #ap-workspace-title{color:var(--pods-ink)}
+.ap-page .ap-section[aria-labelledby="ap-workspace-title"]{
+  background:var(--pods-seashell);
+  border-radius:clamp(12px,2vw,26px);
+  padding-inline:clamp(20px,3.6vw,45px);
+}
+.ap-page .ap-samples>a:hover small{color:var(--pods-moss)}
+.ap-page .ap-convert{
+  background:var(--pods-dune);
+  color:var(--pods-ink);
+}
+.ap-page .ap-convert .ap-form-panel{
+  background:var(--pods-offwhite);
+  color:var(--pods-ink);
+  box-shadow:0 20px 55px -35px rgba(78,54,30,.32);
+}
+.ap-page .ap-convert .ap-submit{
+  background:var(--pods-moss);
+  color:var(--pods-offwhite)!important;
+  border-color:var(--pods-moss);
+}
+.ap-page .ap-convert .ap-submit:hover{
+  background:var(--pods-pine);
+  border-color:var(--pods-pine);
+}
+.ap-page .ap-faq{border-top:1px solid rgba(78,54,30,.2)}
+.ap-page .ap-faq h2,.ap-page .ap-faq summary{color:var(--pods-ink)}
+.ap-page .ap-faq h2 span{color:var(--pods-moss)}
+.ap-page .ap-why :focus-visible{outline-color:var(--pods-lime)}
+
+/* Supporting pages: accessible neutrals with less dark-teal type. */
+.support-page{background:var(--pods-offwhite);color:var(--pods-ink)}
+.support-page .support-main h1,.support-page .support-main h2{color:var(--pods-moss)}
+.support-page .legal-notice{background:var(--pods-seashell)}
+.support-page .support-header{background:var(--pods-offwhite)}
+.support-page .support-main a:not(.btn){text-decoration-color:var(--pods-pine)}
+
+/* A consistent editorial framing system for each user-supplied video. */
+.pods-video-showcase{
+  background:var(--pods-periwinkle);
+  border:1px solid rgba(78,54,30,.14);
+  border-radius:clamp(14px,2.2vw,28px);
+  width:min(var(--max),calc(100% - 32px));
+  max-width:var(--max);
+  padding:clamp(22px,3.7vw,48px);
+  margin-block:clamp(28px,5vw,64px);
+}
+.pods-video-showcase .pods-video-grid{margin:0}
+.pods-video-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(16px,2.3vw,26px);
+}
+.pods-video-grid figure,
+.pods-video-single{
+  min-width:0;
+  margin:0;
+  padding:clamp(10px,1.25vw,15px);
+  border:1px solid rgba(78,54,30,.18);
+  border-radius:clamp(12px,1.7vw,20px);
+  background:var(--pods-seashell);
+  box-shadow:0 12px 34px -26px rgba(78,54,30,.35);
+  overflow:hidden;
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){
+  .pods-video-grid figure:hover,.pods-video-single:hover{
+    transform:translateY(-3px);
+    box-shadow:0 18px 32px -22px rgba(78,54,30,.32);
+  }
+}
+.pods-video-grid video,
+.pods-video-single video,
+.ap-page .ap-video-start video,
+.ap-page .ap-faq .pods-faq-video video{
+  display:block;
+  width:100%;
+  max-width:100%;
+  height:auto;
+  aspect-ratio:16/9;
+  border-radius:clamp(8px,1.2vw,12px);
+  object-fit:contain;
+  background:#171717;
+}
+.pods-media-kicker{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px 16px;
+  padding:4px 5px 13px;
+  color:var(--pods-pine);
+  font:700 10.5px/1.35 "Hanken Grotesk",sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.11em;
+}
+.pods-media-kicker .pods-media-length{
+  font-weight:600;
+  letter-spacing:.06em;
+  color:var(--pods-moss);
+}
+.pods-video-grid figcaption,
+.pods-video-single figcaption,
+.ap-page .ap-video-start figcaption,
+.ap-page .ap-faq .pods-faq-video figcaption{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin:0;
+  padding:15px 5px 6px;
+  color:var(--pods-ink);
+  font-family:"Hanken Grotesk",sans-serif;
+  font-size:clamp(14px,1.3vw,17px);
+  line-height:1.4;
+  font-weight:650;
+}
+.pods-video-grid figcaption::after,
+.pods-video-single figcaption::after{
+  content:"↗";
+  display:inline-block;
+  color:var(--pods-moss);
+  font-size:19px;
+  line-height:1;
+  flex:none;
+}
+.ap-page .ap-video-start{
+  border-top:1px solid rgba(78,54,30,.22);
+}
+.ap-page .ap-video-start .pods-video-grid figure{background:var(--pods-seashell)}
+.ap-page .ap-faq .pods-faq-video{background:var(--pods-periwinkle)}
+.pods-faq-video video[data-mobile-portrait="true"]{
+  width:min(100%,360px);
+  aspect-ratio:9/16;
+  max-height:min(70vh,640px);
+  margin-inline:auto;
+}
+@media(max-width:700px){
+  .pods-video-showcase{width:calc(100% - 24px);padding:14px;margin-block:26px}
+  .pods-video-grid{grid-template-columns:minmax(0,1fr)}
+  .pods-video-grid figure,.pods-video-single{padding:10px}
+  .pods-media-kicker{font-size:10px}
+  .pods-video-grid figcaption,.pods-video-single figcaption{font-size:15px}
+}
+@media(prefers-reduced-motion:reduce){
+  .pods-video-grid figure,.pods-video-single{transition:none;transform:none!important}
+}
+
+
+/* Desktop /start workspace card: retain Seashell rounded panel, but
+   separate it visually from the preceding Moss and following Dune sections. */
+@media(min-width:701px){
+  .ap-page .ap-section[aria-labelledby="ap-workspace-title"]{
+    margin-block:clamp(40px,5vw,78px);
+  }
+}
+@media(min-width:1200px){
+  .ap-page .ap-section[aria-labelledby="ap-workspace-title"]{
+    margin-block:72px;
+  }
+}
+
+
+/* Final lead form and workspace card refinements, 2026-11-24 */
+#workspace .ws-pt h3{
+  font-family:"Libre Caslon Text",Georgia,serif;
+  font-size:clamp(23px,2.05vw,29px);
+  font-weight:400;
+  letter-spacing:-.025em;
+  line-height:1.19;
+  color:var(--pods-pine);
+  max-width:21ch;
+  margin:13px 0 9px;
+}
+#workspace .ws-pt p{
+  font-family:"Hanken Grotesk",sans-serif;
+  font-weight:400;
+  font-size:clamp(14px,1.1vw,15px);
+  line-height:1.65;
+  color:var(--pods-ink);
+  opacity:.8;
+}
+#workspace .ws-ic{margin-bottom:13px}
+.pods-phone-fieldset{
+  display:block;
+  box-sizing:border-box;
+  min-width:0;
+  width:100%;
+  max-width:100%;
+  margin:0;
+  padding:0;
+  border:0;
+}
+.pods-phone-fieldset legend{
+  display:block;
+  width:100%;
+  margin:0 0 10px;
+  padding:0;
+  font-size:14px;
+  font-family:"Hanken Grotesk",sans-serif;
+  font-weight:650;
+  line-height:1.5;
+}
+.pods-phone-fields{
+  display:grid;
+  grid-template-columns:minmax(112px,.35fr) minmax(0,1fr);
+  gap:14px;
+  align-items:start;
+}
+.pods-phone-fields>div{min-width:0}
+.pods-phone-fields label{
+  display:block;
+  margin-bottom:7px;
+  font:500 12px/1.4 "Hanken Grotesk",sans-serif;
+}
+.pods-phone-fields input{
+  display:block;
+  width:100%;
+  max-width:100%;
+  height:48px;
+  min-height:48px;
+  box-sizing:border-box;
+  padding:10px 12px;
+  border:1px solid rgba(78,54,30,.36);
+  border-radius:5px;
+  background:var(--pods-offwhite);
+  color:var(--pods-ink);
+  font-size:16px;
+  line-height:1.35;
+  font-weight:400;
+}
+.pods-phone-fields input:focus{outline:2px solid var(--pods-moss);outline-offset:2px}
+#enquire .pods-phone-fieldset legend{color:var(--pods-offwhite)}
+#enquire .pods-phone-fields label{color:var(--pods-offwhite)}
+#enquire .pods-phone-fields input{background:var(--pods-offwhite);color:var(--pods-ink)}
+.ap-page .ap-form-panel .pods-phone-fieldset{grid-column:1/-1;margin-bottom:18px}
+.ap-page .ap-form-panel .pods-phone-fields input{background:transparent}
+.ap-page .ap-form-panel .pods-phone-fields label{color:var(--pods-pine)}
+.support-page .support-main .pods-phone-fieldset{margin-bottom:24px}
+.support-page .support-main .pods-phone-fields input{margin:0;background:transparent}
+.support-page .support-main .pods-phone-fields label{margin:0 0 7px}
+@media(max-width:480px){
+ .pods-phone-fields{grid-template-columns:minmax(92px,.38fr) minmax(0,1fr);gap:10px}
+ .pods-phone-fields input{padding-inline:9px}
+ #workspace .ws-pt h3{font-size:25px}
+}
+
+
+/* The calculator is Pine-brown, so Moss-green kicker text is illegible.
+   Use Dune as the high-contrast accent in this one dark context. */
+#pricing .calc .eyebrow.on-dark-e{
+  color:var(--pods-dune);
+  font-weight:700;
+}
+#pricing .calc .eyebrow.on-dark-e::after{
+  background:rgba(228,191,113,.6);
+}
+
+
+/* Functions overview: category chips are examples, not clickable buttons.
+   The single contextual link uses the existing /start/ CTA + attribution handler. */
+.ap-page .ap-function-invite{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:3px 14px;
+  margin-top:clamp(17px,2vw,25px);
+  color:var(--pods-ink);
+  font-family:"Hanken Grotesk",ui-sans-serif,system-ui,sans-serif;
+  font-size:14px;
+  line-height:1.5;
+}
+.ap-page .ap-function-invite > span{
+  font-weight:400;
+}
+.ap-page .ap-function-link{
+  min-height:44px;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-size:14px;
+  line-height:1.4;
+  font-weight:650;
+  color:var(--pods-moss)!important;
+  text-decoration:underline!important;
+  text-underline-offset:5px;
+  text-decoration-thickness:1px!important;
+}
+.ap-page .ap-function-link:hover{
+  color:var(--pods-pine)!important;
+  opacity:1;
+}
+.ap-page .ap-function-link:focus-visible{
+  outline:3px solid var(--pods-moss);
+  outline-offset:3px;
+}
+.ap-page .ap-function-link [aria-hidden]{
+  display:inline-block;
+  font-size:18px;
+  line-height:1;
+}
+
+
+/* 2026-11-24 — Calm editorial homepage navigation.
+   The former Signal Orange progress/separator looked like a hard border
+   against the cream hero. Retain scroll progress but soften its colour. */
+body:not(.ap-page) > .nav,
+body > header.nav {
+  background:rgba(253,247,243,.97);
+  border-bottom:1px solid rgba(78,54,30,.16);
+  box-shadow:none;
+  transition:background-color .25s ease,box-shadow .25s ease,border-color .25s ease;
+}
+body > header.nav.stuck {
+  background:rgba(253,247,243,.985);
+  border-bottom-color:rgba(78,54,30,.21);
+  box-shadow:0 8px 24px -22px rgba(78,54,30,.28);
+}
+body > header.nav .progress {
+  height:2px;
+  bottom:-1px;
+  background:var(--pods-moss);
+  opacity:.72;
+  border-radius:0;
+}
+body > header.nav:not(.stuck) .progress{opacity:0}
+body > header.nav .nav-links a{
+  color:rgba(26,26,26,.70);
+  transition:color .25s ease;
+}
+body > header.nav .nav-links a:hover,
+body > header.nav .nav-links a:focus-visible {
+  color:var(--pods-moss);
+}
+body > header.nav .nav-links a::after{
+  background:var(--pods-moss);
+  height:1px;
+}
+@media(max-width:1000px){
+  body > header.nav .nav-links.is-open{
+    background:var(--pods-offwhite);
+    border-color:rgba(78,54,30,.17);
+    box-shadow:0 16px 26px -20px rgba(78,54,30,.25);
+  }
+}
+
+
+/* 2026-11-24 | Genuine form-level anchor targets and mobile layout review. */
+#ap-form,#podForm{
+  scroll-margin-top:clamp(76px,9vw,102px);
+}
+.ap-page .ap-form-panel{
+  min-width:0;
+}
+.ap-page .ap-models>.ap-model{
+  min-width:0;
+  overflow-wrap:break-word;
+  display:flex;
+  flex-direction:column;
+}
+.ap-page .ap-model p{
+  line-height:1.58;
+}
+.ap-page .ap-model .ap-model-size{
+  margin-top:auto;
+}
+.ap-page .ap-heading-row>div,
+.ap-page .ap-breadth-grid>div,
+.ap-page .ap-convert-grid>div,
+.faq-grid>div,
+.hero-grid>div {
+  min-width:0;
+}
+.ap-page #ap-shapes-title{
+  font-size:clamp(32px,4.2vw,58px);
+  line-height:1.12;
+  max-width:19ch;
+  letter-spacing:-.034em;
+}
+.ap-page #ap-shapes-title span{color:var(--pods-moss)}
+.ap-page .ap-section[aria-labelledby="ap-workspace-title"]{
+  margin-block:clamp(26px,5vw,72px);
+}
+@media (max-width:900px){
+  .ap-page .ap-section-aside{max-width:50ch}
+  .ap-page .ap-faq,.ap-page .ap-convert-grid,.ap-page .ap-breadth-grid{min-width:0}
+  .ap-page .ap-video-start,.pods-video-grid,.pods-video-grid figure{min-width:0}
+  .ap-page .ap-models{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+@media (max-width:599px){
+  .ap-page .ap-models{grid-template-columns:minmax(0,1fr);}
+  .ap-page #ap-shapes-title{
+    max-width:100%;
+    font-size:clamp(32px,8.1vw,43px);
+    line-height:1.13;
+    letter-spacing:-.025em;
+  }
+  .ap-page .ap-section[aria-labelledby="ap-workspace-title"]{
+    margin-block:clamp(24px,7vw,36px);
+    border-radius:16px;
+  }
+  .ap-page .ap-section[aria-labelledby="ap-workspace-title"] .ap-heading-row{
+    gap:18px;
+  }
+  .ap-page .ap-model{padding:23px 20px}
+  .ap-page .ap-faq .pods-faq-video{max-width:100%}
+  .support-header .wrap{gap:8px 12px;align-items:flex-start}
+  .support-header nav{width:100%;justify-content:flex-start;gap:4px 14px}
+  .support-header nav a{font-size:13px;min-height:44px}
+  .support-main{width:100%;min-width:0;padding-inline:clamp(16px,5vw,24px)}
+  .support-main h1{overflow-wrap:break-word}
+  .support-main form,.support-main .pods-phone-fieldset{min-width:0;max-width:100%}
+  .ap-page .ap-nav{align-items:center}
+  .ap-page .ap-nav .ap-button-small{min-height:44px;padding-inline:10px;max-width:48%;font-size:12px!important}
+  .ap-page .ap-mobile-cta .ap-button{max-width:100%;white-space:normal}
+}
+@media(max-width:359px){
+  .ap-page .ap-brand img{max-width:127px}
+  .ap-page .ap-nav .ap-button-small{font-size:11px!important}
+  .pods-phone-fields{grid-template-columns:minmax(82px,.4fr) minmax(0,1fr);gap:8px}
+}
+
+
+/* Single-choice steps advance without an extra button. Multi-choice steps
+   retain their explicit action, and each new pane lands below the sticky nav. */
+#build .pane{scroll-margin-top:clamp(78px,10vw,94px)}
+#build .pane.on{min-width:0}
+#build #cfgNext[hidden]{display:none!important}
+@media(max-width:620px){
+  #build .cfg-nav{gap:10px;padding:14px 18px}
+  #build .cfg-nav .btn{min-height:46px;padding-inline:19px}
+  #build .cfg-nav .cfg-hint{flex:1 1 100%;order:-1}
+}
+
+
+/* 2026-11-24 | Readable actions across all Pods pages.
+   Normal-sized button text is designed for >=4.5:1 on its solid fill:
+   Ink/Signal Orange 5.33:1; Off White/Moss 9.44:1;
+   Off White/Pine 10.57:1; Pine/Dune 6.41:1.
+   Do not use Off White on Signal Orange (only 3.07:1). */
+:root{
+  --pods-action-ink:#1A1A1A;
+  --pods-action-light:#FDF7F3;
+}
+.btn.btn-primary,
+.nav-cta .btn.btn-primary,
+.mcta .btn.btn-primary,
+.hero .btn.btn-primary,
+#build .btn.btn-primary,
+#enquire .btn.btn-primary{
+  background:var(--orange);
+  color:var(--pods-action-ink)!important;
+  font-weight:700;
+}
+.btn.btn-primary:hover:not(:disabled){
+  background:var(--pods-dune);
+  color:var(--pods-action-ink)!important;
+  box-shadow:0 10px 22px -14px rgba(78,54,30,.38);
+}
+.btn.btn-ghost{
+  color:var(--pods-moss);
+  background:transparent;
+  box-shadow:inset 0 0 0 1.5px rgba(39,74,39,.66);
+  font-weight:650;
+}
+.btn.btn-ghost:hover{
+  color:var(--pods-ink);
+  background:var(--pods-seashell);
+  box-shadow:inset 0 0 0 1.5px var(--pods-moss);
+}
+.btn.btn-light{
+  background:var(--pods-offwhite);
+  color:var(--pods-ink);
+}
+.btn.btn-light:hover{background:var(--pods-lime);color:var(--pods-ink)}
+.btn.btn-outline-light{
+  color:var(--pods-offwhite);
+  background:transparent;
+  box-shadow:inset 0 0 0 1.5px rgba(253,247,243,.7);
+}
+.btn.btn-outline-light:hover{
+  color:var(--pods-pine);
+  background:var(--pods-offwhite);
+  box-shadow:inset 0 0 0 1.5px var(--pods-offwhite);
+}
+/* Start page header/sticky actions are orange; the exact page CSS formerly
+   forced Midnight Teal text on orange, an insufficient 2.81:1 ratio. */
+.ap-page .ap-button:not(.ap-submit){
+  background:var(--orange);
+  color:var(--pods-action-ink)!important;
+  font-weight:700;
+}
+.ap-page .ap-button:not(.ap-submit):hover{
+  background:var(--pods-moss);
+  color:var(--pods-action-light)!important;
+}
+.ap-page .ap-convert .ap-submit,
+.ap-page .ap-convert button.ap-submit{
+  background:var(--pods-moss);
+  border-color:var(--pods-moss);
+  color:var(--pods-action-light)!important;
+  font-weight:700;
+}
+.ap-page .ap-convert .ap-submit:hover{
+  background:var(--pods-pine);
+  border-color:var(--pods-pine);
+  color:var(--pods-action-light)!important;
+}
+.ap-page .ap-why .ap-heading-row > .ap-text-link{
+  background:var(--pods-dune);
+  color:var(--pods-pine)!important;
+}
+.ap-page .ap-why .ap-heading-row > .ap-text-link:hover{
+  background:var(--pods-lime);
+  color:var(--pods-ink)!important;
+}
+/* The stepper and WorkOS active tab previously used white on orange. */
+#build .stepper button:hover:not([disabled]),
+#workos .os-nav[aria-selected="true"],
+#layer .ops-item[aria-expanded="true"] .ops-plus{
+  background:var(--orange);
+  color:var(--pods-action-ink)!important;
+}
+#layer .ops-item[aria-expanded="true"] .ops-plus svg{color:var(--pods-action-ink)}
+#workos .os-nav:not([aria-selected="true"]){
+  color:var(--pods-offwhite);
+}
+#workos .os-nav:not([aria-selected="true"]):hover{
+  background:rgba(253,247,243,.14);
+  color:var(--pods-offwhite);
+}
+/* Selected builder cards are light with dark labels and subtler dark accents. */
+#build .fn[aria-pressed="true"],
+#build .shape[aria-pressed="true"]{
+  background:var(--pods-offwhite);
+  color:var(--pods-ink);
+  box-shadow:inset 0 0 0 2px var(--pods-dune);
+}
+#build .fn[aria-pressed="true"] .fn-ic,
+#build .shape[aria-pressed="true"] .shape-tag{color:var(--pods-moss)}
+#build .fn[aria-pressed="true"] .fn-d,
+#build .shape[aria-pressed="true"] .shape-d{color:rgba(26,26,26,.83)}
+#build .fn-check svg path{stroke:var(--pods-action-ink)}
+#build .pill[aria-pressed="true"]{
+  background:var(--pods-dune);
+  color:var(--pods-pine);
+  font-weight:700;
+}
+#build .pill:not([aria-pressed="true"]){
+  color:var(--pods-offwhite);
+  box-shadow:inset 0 0 0 1px rgba(253,247,243,.45);
+}
+#build .pill:hover:not([aria-pressed="true"]){
+  color:var(--pods-offwhite);
+  background:rgba(253,247,243,.14);
+}
+#build .cfg-back{color:var(--pods-offwhite);font-weight:600}
+#build .cfg-hint{color:rgba(253,247,243,.82)}
+/* Interactive filter tabs and selected state labels. */
+#explorer .tab[aria-selected="true"],
+#faq .ff[aria-pressed="true"],
+#gcc .gcc-step[aria-pressed="true"]{
+  background:var(--pods-moss);
+  color:var(--pods-offwhite);
+  font-weight:650;
+}
+#explorer .tab:not([aria-selected="true"]),
+#faq .ff:not([aria-pressed="true"]),
+#gcc .gcc-step:not([aria-pressed="true"]){
+  color:var(--pods-ink);
+}
+#ladder .rung[aria-selected="true"] .rung-n{color:var(--pods-moss)}
+/* The contact page's submit button and focus states must also be clear. */
+.support-page .support-main button[type="submit"]{
+  background:var(--orange);
+  color:var(--pods-action-ink);
+  border:1px solid transparent;
+  border-radius:5px;
+  min-height:46px;
+  font-weight:700;
+}
+.support-page .support-main button[type="submit"]:hover{
+  background:var(--pods-dune);
+  color:var(--pods-action-ink);
+}
+:where(.btn,.ap-button,.tab,.ff,.fn,.shape,.pill,.os-nav,.gcc-step,
+       .cfg-back,.pods-menu,.support-main button):focus-visible{
+  outline:3px solid var(--pods-moss);
+  outline-offset:3px;
+}
+#build :where(.btn,.fn,.shape,.pill,.cfg-back):focus-visible,
+#workos .os-nav:focus-visible,
+#enquire .btn:focus-visible{
+  outline-color:var(--pods-lime);
+}
+@media (prefers-reduced-motion:reduce){
+  .btn:hover,.ap-button:hover{transform:none}
+}
+
+
+/* 2026-11-24: Consolidated Away Pods footers across all page templates.
+   Keep Pods-first navigation, integrated information and draft legal links. */
+.foot .pods-foot-grid{
+  grid-template-columns:minmax(230px,1.55fr) repeat(3,minmax(130px,1fr));
+  align-items:start;
+  gap:clamp(24px,3.2vw,54px);
+}
+.foot .pods-foot-brand{min-width:0}
+.foot .pods-foot-logo{display:inline-flex;align-items:center;text-decoration:none}
+.foot .pods-foot-logo .pods-brand-logo{width:clamp(156px,15vw,200px);max-width:200px;height:auto}
+.foot .pods-foot-description{
+  margin-top:15px;
+  max-width:32ch;
+  color:rgba(253,247,243,.8);
+  font-family:"Hanken Grotesk",sans-serif;
+  font-size:14px;
+  line-height:1.6;
+}
+.foot .pods-foot-group{min-width:0}
+.foot .pods-foot-group h5{margin-bottom:17px;color:rgba(253,247,243,.72)}
+.foot .pods-foot-group .foot-l a{display:inline-block;color:rgba(253,247,243,.87);line-height:1.55}
+.foot .pods-foot-group .foot-l a:hover,
+.foot .pods-foot-parent:hover{color:var(--pods-dune)}
+.pods-foot-parent{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  min-height:44px;
+  margin-top:12px;
+  font:600 13px/1.5 "Hanken Grotesk",sans-serif;
+  text-decoration:underline;
+  text-underline-offset:5px;
+}
+.foot .pods-foot-parent{color:var(--pods-dune)}
+.pods-draft{font-size:.83em;opacity:.7;white-space:nowrap}
+.foot .foot-btm{margin-top:clamp(30px,4vw,50px);color:rgba(253,247,243,.7)}
+.pods-support-footer{
+  margin-top:clamp(38px,6vw,80px);
+  padding:clamp(32px,4vw,54px) 0 24px;
+  border-top:1px solid rgba(78,54,30,.18);
+  background:var(--pods-seashell);
+  color:var(--pods-ink);
+}
+.pods-support-footer-inner{
+  display:grid;
+  grid-template-columns:minmax(190px,1.15fr) minmax(0,2fr);
+  gap:clamp(26px,4vw,76px);
+}
+.pods-support-footer-brand{min-width:0}
+.pods-support-footer-brand .pods-foot-logo{display:inline-flex;align-items:center}
+.pods-support-footer-brand .pods-brand-logo{
+  display:block;
+  width:clamp(156px,15vw,200px);
+  height:auto;
+  max-width:200px;
+}
+.pods-support-footer-brand p{
+  margin:15px 0 0!important;
+  max-width:32ch;
+  color:var(--pods-ink);
+  font:400 14px/1.65 "Hanken Grotesk",sans-serif;
+}
+.pods-support-footer .pods-foot-parent{color:var(--pods-moss)}
+.pods-support-footer-groups{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(18px,2.5vw,36px);
+}
+.pods-support-footer .pods-foot-group{min-width:0}
+.pods-support-footer .pods-foot-group h5{
+  margin:0 0 14px;
+  color:var(--pods-pine);
+  font:700 11px/1.4 "Hanken Grotesk",sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+}
+.pods-support-footer .foot-l{margin:0;padding:0;list-style:none}
+.pods-support-footer .foot-l li{padding:3px 0}
+.pods-support-footer .foot-l a{
+  display:inline-flex;
+  align-items:center;
+  min-height:36px;
+  color:var(--pods-ink)!important;
+  text-decoration:none;
+  font:500 13px/1.55 "Hanken Grotesk",sans-serif;
+}
+.pods-support-footer .foot-l a:hover{color:var(--pods-moss)!important;text-decoration:underline}
+.pods-footer-legal-row{
+  margin-top:clamp(25px,3vw,38px);
+  padding-top:18px;
+  border-top:1px solid rgba(78,54,30,.18);
+  font:400 12px/1.5 "Hanken Grotesk",sans-serif;
+  color:rgba(26,26,26,.7);
+}
+.ap-page .pods-support-footer{
+  background:var(--pods-seashell);
+  border-top-color:rgba(78,54,30,.18);
+  padding-bottom:max(24px,env(safe-area-inset-bottom));
+}
+.ap-page .pods-support-footer .foot-l a{color:var(--pods-ink)!important}
+.support-page .pods-support-footer{margin-top:clamp(40px,6vw,80px)}
+@media(max-width:900px){
+  .foot .pods-foot-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 30px}
+  .pods-support-footer-inner{grid-template-columns:minmax(0,1fr);gap:28px}
+}
+@media(max-width:600px){
+  .foot .pods-foot-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:25px 18px}
+  .foot .pods-foot-brand{grid-column:1/-1}
+  .foot .pods-foot-group{min-width:0}
+  .foot .foot-tag{margin-bottom:26px}
+  .pods-support-footer-groups{grid-template-columns:repeat(2,minmax(0,1fr));gap:23px 18px}
+  .pods-support-footer-groups .pods-foot-group:last-child{grid-column:1/-1}
+  .pods-support-footer{padding-top:33px}
+  .pods-support-footer .foot-l a{min-height:38px}
+}
+@media(max-width:360px){
+  .foot .pods-foot-grid{grid-template-columns:minmax(0,1fr)}
+  .foot .pods-foot-brand{grid-column:auto}
+  .pods-support-footer-groups{grid-template-columns:minmax(0,1fr)}
+  .pods-support-footer-groups .pods-foot-group:last-child{grid-column:auto}
+}
