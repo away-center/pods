@@ -743,3 +743,79 @@ body > header.nav .nav-links a::after{
     box-shadow:0 16px 26px -20px rgba(78,54,30,.25);
   }
 }
+
+
+/* 2026-11-24 | Genuine form-level anchor targets and mobile layout review. */
+#ap-form,#podForm{
+  scroll-margin-top:clamp(76px,9vw,102px);
+}
+.ap-page .ap-form-panel{
+  min-width:0;
+}
+.ap-page .ap-models>.ap-model{
+  min-width:0;
+  overflow-wrap:break-word;
+  display:flex;
+  flex-direction:column;
+}
+.ap-page .ap-model p{
+  line-height:1.58;
+}
+.ap-page .ap-model .ap-model-size{
+  margin-top:auto;
+}
+.ap-page .ap-heading-row>div,
+.ap-page .ap-breadth-grid>div,
+.ap-page .ap-convert-grid>div,
+.faq-grid>div,
+.hero-grid>div {
+  min-width:0;
+}
+.ap-page #ap-shapes-title{
+  font-size:clamp(32px,4.2vw,58px);
+  line-height:1.12;
+  max-width:19ch;
+  letter-spacing:-.034em;
+}
+.ap-page #ap-shapes-title span{color:var(--pods-moss)}
+.ap-page .ap-section[aria-labelledby="ap-workspace-title"]{
+  margin-block:clamp(26px,5vw,72px);
+}
+@media (max-width:900px){
+  .ap-page .ap-section-aside{max-width:50ch}
+  .ap-page .ap-faq,.ap-page .ap-convert-grid,.ap-page .ap-breadth-grid{min-width:0}
+  .ap-page .ap-video-start,.pods-video-grid,.pods-video-grid figure{min-width:0}
+  .ap-page .ap-models{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+@media (max-width:599px){
+  .ap-page .ap-models{grid-template-columns:minmax(0,1fr);}
+  .ap-page #ap-shapes-title{
+    max-width:100%;
+    font-size:clamp(32px,8.1vw,43px);
+    line-height:1.13;
+    letter-spacing:-.025em;
+  }
+  .ap-page .ap-section[aria-labelledby="ap-workspace-title"]{
+    margin-block:clamp(24px,7vw,36px);
+    border-radius:16px;
+  }
+  .ap-page .ap-section[aria-labelledby="ap-workspace-title"] .ap-heading-row{
+    gap:18px;
+  }
+  .ap-page .ap-model{padding:23px 20px}
+  .ap-page .ap-faq .pods-faq-video{max-width:100%}
+  .support-header .wrap{gap:8px 12px;align-items:flex-start}
+  .support-header nav{width:100%;justify-content:flex-start;gap:4px 14px}
+  .support-header nav a{font-size:13px;min-height:44px}
+  .support-main{width:100%;min-width:0;padding-inline:clamp(16px,5vw,24px)}
+  .support-main h1{overflow-wrap:break-word}
+  .support-main form,.support-main .pods-phone-fieldset{min-width:0;max-width:100%}
+  .ap-page .ap-nav{align-items:center}
+  .ap-page .ap-nav .ap-button-small{min-height:44px;padding-inline:10px;max-width:48%;font-size:12px!important}
+  .ap-page .ap-mobile-cta .ap-button{max-width:100%;white-space:normal}
+}
+@media(max-width:359px){
+  .ap-page .ap-brand img{max-width:127px}
+  .ap-page .ap-nav .ap-button-small{font-size:11px!important}
+  .pods-phone-fields{grid-template-columns:minmax(82px,.4fr) minmax(0,1fr);gap:8px}
+}
