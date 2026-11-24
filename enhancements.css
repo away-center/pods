@@ -831,3 +831,168 @@ body > header.nav .nav-links a::after{
   #build .cfg-nav .btn{min-height:46px;padding-inline:19px}
   #build .cfg-nav .cfg-hint{flex:1 1 100%;order:-1}
 }
+
+
+/* 2026-11-24 | Readable actions across all Pods pages.
+   Normal-sized button text is designed for >=4.5:1 on its solid fill:
+   Ink/Signal Orange 5.33:1; Off White/Moss 9.44:1;
+   Off White/Pine 10.57:1; Pine/Dune 6.41:1.
+   Do not use Off White on Signal Orange (only 3.07:1). */
+:root{
+  --pods-action-ink:#1A1A1A;
+  --pods-action-light:#FDF7F3;
+}
+.btn.btn-primary,
+.nav-cta .btn.btn-primary,
+.mcta .btn.btn-primary,
+.hero .btn.btn-primary,
+#build .btn.btn-primary,
+#enquire .btn.btn-primary{
+  background:var(--orange);
+  color:var(--pods-action-ink)!important;
+  font-weight:700;
+}
+.btn.btn-primary:hover:not(:disabled){
+  background:var(--pods-dune);
+  color:var(--pods-action-ink)!important;
+  box-shadow:0 10px 22px -14px rgba(78,54,30,.38);
+}
+.btn.btn-ghost{
+  color:var(--pods-moss);
+  background:transparent;
+  box-shadow:inset 0 0 0 1.5px rgba(39,74,39,.66);
+  font-weight:650;
+}
+.btn.btn-ghost:hover{
+  color:var(--pods-ink);
+  background:var(--pods-seashell);
+  box-shadow:inset 0 0 0 1.5px var(--pods-moss);
+}
+.btn.btn-light{
+  background:var(--pods-offwhite);
+  color:var(--pods-ink);
+}
+.btn.btn-light:hover{background:var(--pods-lime);color:var(--pods-ink)}
+.btn.btn-outline-light{
+  color:var(--pods-offwhite);
+  background:transparent;
+  box-shadow:inset 0 0 0 1.5px rgba(253,247,243,.7);
+}
+.btn.btn-outline-light:hover{
+  color:var(--pods-pine);
+  background:var(--pods-offwhite);
+  box-shadow:inset 0 0 0 1.5px var(--pods-offwhite);
+}
+/* Start page header/sticky actions are orange; the exact page CSS formerly
+   forced Midnight Teal text on orange, an insufficient 2.81:1 ratio. */
+.ap-page .ap-button:not(.ap-submit){
+  background:var(--orange);
+  color:var(--pods-action-ink)!important;
+  font-weight:700;
+}
+.ap-page .ap-button:not(.ap-submit):hover{
+  background:var(--pods-moss);
+  color:var(--pods-action-light)!important;
+}
+.ap-page .ap-convert .ap-submit,
+.ap-page .ap-convert button.ap-submit{
+  background:var(--pods-moss);
+  border-color:var(--pods-moss);
+  color:var(--pods-action-light)!important;
+  font-weight:700;
+}
+.ap-page .ap-convert .ap-submit:hover{
+  background:var(--pods-pine);
+  border-color:var(--pods-pine);
+  color:var(--pods-action-light)!important;
+}
+.ap-page .ap-why .ap-heading-row > .ap-text-link{
+  background:var(--pods-dune);
+  color:var(--pods-pine)!important;
+}
+.ap-page .ap-why .ap-heading-row > .ap-text-link:hover{
+  background:var(--pods-lime);
+  color:var(--pods-ink)!important;
+}
+/* The stepper and WorkOS active tab previously used white on orange. */
+#build .stepper button:hover:not([disabled]),
+#workos .os-nav[aria-selected="true"],
+#layer .ops-item[aria-expanded="true"] .ops-plus{
+  background:var(--orange);
+  color:var(--pods-action-ink)!important;
+}
+#layer .ops-item[aria-expanded="true"] .ops-plus svg{color:var(--pods-action-ink)}
+#workos .os-nav:not([aria-selected="true"]){
+  color:var(--pods-offwhite);
+}
+#workos .os-nav:not([aria-selected="true"]):hover{
+  background:rgba(253,247,243,.14);
+  color:var(--pods-offwhite);
+}
+/* Selected builder cards are light with dark labels and subtler dark accents. */
+#build .fn[aria-pressed="true"],
+#build .shape[aria-pressed="true"]{
+  background:var(--pods-offwhite);
+  color:var(--pods-ink);
+  box-shadow:inset 0 0 0 2px var(--pods-dune);
+}
+#build .fn[aria-pressed="true"] .fn-ic,
+#build .shape[aria-pressed="true"] .shape-tag{color:var(--pods-moss)}
+#build .fn[aria-pressed="true"] .fn-d,
+#build .shape[aria-pressed="true"] .shape-d{color:rgba(26,26,26,.83)}
+#build .fn-check svg path{stroke:var(--pods-action-ink)}
+#build .pill[aria-pressed="true"]{
+  background:var(--pods-dune);
+  color:var(--pods-pine);
+  font-weight:700;
+}
+#build .pill:not([aria-pressed="true"]){
+  color:var(--pods-offwhite);
+  box-shadow:inset 0 0 0 1px rgba(253,247,243,.45);
+}
+#build .pill:hover:not([aria-pressed="true"]){
+  color:var(--pods-offwhite);
+  background:rgba(253,247,243,.14);
+}
+#build .cfg-back{color:var(--pods-offwhite);font-weight:600}
+#build .cfg-hint{color:rgba(253,247,243,.82)}
+/* Interactive filter tabs and selected state labels. */
+#explorer .tab[aria-selected="true"],
+#faq .ff[aria-pressed="true"],
+#gcc .gcc-step[aria-pressed="true"]{
+  background:var(--pods-moss);
+  color:var(--pods-offwhite);
+  font-weight:650;
+}
+#explorer .tab:not([aria-selected="true"]),
+#faq .ff:not([aria-pressed="true"]),
+#gcc .gcc-step:not([aria-pressed="true"]){
+  color:var(--pods-ink);
+}
+#ladder .rung[aria-selected="true"] .rung-n{color:var(--pods-moss)}
+/* The contact page's submit button and focus states must also be clear. */
+.support-page .support-main button[type="submit"]{
+  background:var(--orange);
+  color:var(--pods-action-ink);
+  border:1px solid transparent;
+  border-radius:5px;
+  min-height:46px;
+  font-weight:700;
+}
+.support-page .support-main button[type="submit"]:hover{
+  background:var(--pods-dune);
+  color:var(--pods-action-ink);
+}
+:where(.btn,.ap-button,.tab,.ff,.fn,.shape,.pill,.os-nav,.gcc-step,
+       .cfg-back,.pods-menu,.support-main button):focus-visible{
+  outline:3px solid var(--pods-moss);
+  outline-offset:3px;
+}
+#build :where(.btn,.fn,.shape,.pill,.cfg-back):focus-visible,
+#workos .os-nav:focus-visible,
+#enquire .btn:focus-visible{
+  outline-color:var(--pods-lime);
+}
+@media (prefers-reduced-motion:reduce){
+  .btn:hover,.ap-button:hover{transform:none}
+}
