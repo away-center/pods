@@ -1118,22 +1118,46 @@
 
   <!-- ==================== FOOTER ==================== -->
   <footer class="foot">
-    <div class="wrap">
-      <p class="foot-tag">A way to work.<br>A way to live.<br><em>A way to be.</em></p>
-      <div class="foot-grid">
-        <div>
-          <div class="foot-mark"><img class="wordmark pods-brand-logo" src="/assets/brand/away-pods-logo.svg" alt="away Pods" width="200" height="37"></div>
-          <p class="tiny" style="color:rgba(253,247,243,.5);max-width:34ch">away Pods is a managed India operating layer, built by away.center. Bangalore, Vizag and Kolkata.</p>
-        </div>
-        <div><h5><span class="brand-case">away Pods</span></h5><ul class="foot-l"><li><a href="#ladder">Managed Role</a></li><li><a href="#ladder">Managed Workflow</a></li><li><a href="#ladder">Managed Pod</a></li><li><a href="#gcc">Nano GCC</a></li><li><a href="/start/#ap-form" data-cta-source="home-footer">Build your Pod</a></li></ul></div>
-        <div><h5>Spaces</h5><ul class="foot-l"><li><a href="https://www.away.center/bangalore">Bangalore</a></li><li><a href="https://www.away.center/vizag">Vizag Daba Gardens</a></li><li><a href="https://www.away.center/ramnagar">Vizag Ramnagar</a></li><li><a href="https://www.away.center/signature-workspaces-kolkata">Kolkata</a></li><li><a href="https://app.away.center/">Book on-demand</a></li></ul></div><!-- VERIFY: /ramnagar slug not confirmed in Webflow -->
-        <div><h5><span class="brand-case">away</span></h5><ul class="foot-l"><li><a href="https://www.away.center/about-us">About</a></li><li><a href="https://www.away.center/events">Events at away.center</a></li><li><a href="https://www.away.center/blog">Blog</a></li><li><a href="https://www.away.center/careers">Careers</a></li><li><a href="https://www.away.center/contact-us">Contact</a></li></ul></div><!-- VERIFY: /events /blog /careers /contact-us slugs not confirmed in Webflow; /about-us confirmed -->
+  <div class="wrap">
+    <p class="foot-tag">A way to work.<br>A way to live.<br><em>A way to be.</em></p>
+    <div class="foot-grid pods-foot-grid">
+      <div class="pods-foot-brand">
+        <a class="foot-mark pods-foot-logo" href="/" aria-label="away Pods homepage">
+          <img class="wordmark pods-brand-logo" src="/assets/brand/away-pods-logo.svg" alt="away Pods" width="200" height="37">
+        </a>
+        <p class="pods-foot-description">away Pods is a managed India operating layer, built by away.center.</p>
+        <a class="pods-foot-parent" href="https://www.away.center/">Explore away.center <span aria-hidden="true">↗</span></a>
       </div>
-      <div class="foot-btm">
-        <span>© 2026 away. All rights reserved.</span>
-        <span>away.center is not an employer of record, payroll provider or legal, tax or compliance adviser.</span>
-      </div>
+      <nav class="pods-foot-group" aria-label="Explore away Pods">
+        <h5>Explore Pods</h5>
+        <ul class="foot-l">
+          <li><a href="#ladder">The four models</a></li>
+          <li><a href="#explorer">Types of Pods</a></li>
+          <li><a href="#gcc">Nano GCC</a></li>
+          <li><a href="/start/#ap-form" data-cta-source="home-footer">Build your Pod</a></li>
+        </ul>
+      </nav>
+      <nav class="pods-foot-group" aria-label="About and contact">
+        <h5>Company</h5>
+        <ul class="foot-l">
+          <li><a href="/about/">About Pods</a></li>
+          <li><a href="/contact/">Contact Pods</a></li>
+        </ul>
+      </nav>
+      <nav class="pods-foot-group" aria-label="Trust and legal">
+        <h5>Trust &amp; legal</h5>
+        <ul class="foot-l">
+          <li><a href="/security/">Security</a></li>
+          <li><a href="/privacy-policy/">Privacy Policy <span class="pods-draft">(draft)</span></a></li>
+          <li><a href="/terms-of-use/">Terms of Use <span class="pods-draft">(draft)</span></a></li>
+        </ul>
+      </nav>
     </div>
-  <nav class="support-links wrap" aria-label="Pods information"><a href="/contact/">Contact Pods</a><a href="/about/">About Pods</a><a href="/security/">Security</a><a href="/privacy-policy/">Privacy Policy (draft)</a><a href="/terms-of-use/">Terms of Use (draft)</a></nav></footer>
+    <div class="foot-btm">
+      <span>© 2026 away. All rights reserved.</span>
+      <span>away.center is not an employer of record, payroll provider or legal, tax or compliance adviser.</span>
+    </div>
+  </div>
+</footer>
 </body>
 </html>
