@@ -996,3 +996,126 @@ body > header.nav .nav-links a::after{
 @media (prefers-reduced-motion:reduce){
   .btn:hover,.ap-button:hover{transform:none}
 }
+
+
+/* 2026-11-24: Consolidated Away Pods footers across all page templates.
+   Keep Pods-first navigation, integrated information and draft legal links. */
+.foot .pods-foot-grid{
+  grid-template-columns:minmax(230px,1.55fr) repeat(3,minmax(130px,1fr));
+  align-items:start;
+  gap:clamp(24px,3.2vw,54px);
+}
+.foot .pods-foot-brand{min-width:0}
+.foot .pods-foot-logo{display:inline-flex;align-items:center;text-decoration:none}
+.foot .pods-foot-logo .pods-brand-logo{width:clamp(156px,15vw,200px);max-width:200px;height:auto}
+.foot .pods-foot-description{
+  margin-top:15px;
+  max-width:32ch;
+  color:rgba(253,247,243,.8);
+  font-family:"Hanken Grotesk",sans-serif;
+  font-size:14px;
+  line-height:1.6;
+}
+.foot .pods-foot-group{min-width:0}
+.foot .pods-foot-group h5{margin-bottom:17px;color:rgba(253,247,243,.72)}
+.foot .pods-foot-group .foot-l a{display:inline-block;color:rgba(253,247,243,.87);line-height:1.55}
+.foot .pods-foot-group .foot-l a:hover,
+.foot .pods-foot-parent:hover{color:var(--pods-dune)}
+.pods-foot-parent{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  min-height:44px;
+  margin-top:12px;
+  font:600 13px/1.5 "Hanken Grotesk",sans-serif;
+  text-decoration:underline;
+  text-underline-offset:5px;
+}
+.foot .pods-foot-parent{color:var(--pods-dune)}
+.pods-draft{font-size:.83em;opacity:.7;white-space:nowrap}
+.foot .foot-btm{margin-top:clamp(30px,4vw,50px);color:rgba(253,247,243,.7)}
+.pods-support-footer{
+  margin-top:clamp(38px,6vw,80px);
+  padding:clamp(32px,4vw,54px) 0 24px;
+  border-top:1px solid rgba(78,54,30,.18);
+  background:var(--pods-seashell);
+  color:var(--pods-ink);
+}
+.pods-support-footer-inner{
+  display:grid;
+  grid-template-columns:minmax(190px,1.15fr) minmax(0,2fr);
+  gap:clamp(26px,4vw,76px);
+}
+.pods-support-footer-brand{min-width:0}
+.pods-support-footer-brand .pods-foot-logo{display:inline-flex;align-items:center}
+.pods-support-footer-brand .pods-brand-logo{
+  display:block;
+  width:clamp(156px,15vw,200px);
+  height:auto;
+  max-width:200px;
+}
+.pods-support-footer-brand p{
+  margin:15px 0 0!important;
+  max-width:32ch;
+  color:var(--pods-ink);
+  font:400 14px/1.65 "Hanken Grotesk",sans-serif;
+}
+.pods-support-footer .pods-foot-parent{color:var(--pods-moss)}
+.pods-support-footer-groups{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(18px,2.5vw,36px);
+}
+.pods-support-footer .pods-foot-group{min-width:0}
+.pods-support-footer .pods-foot-group h5{
+  margin:0 0 14px;
+  color:var(--pods-pine);
+  font:700 11px/1.4 "Hanken Grotesk",sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+}
+.pods-support-footer .foot-l{margin:0;padding:0;list-style:none}
+.pods-support-footer .foot-l li{padding:3px 0}
+.pods-support-footer .foot-l a{
+  display:inline-flex;
+  align-items:center;
+  min-height:36px;
+  color:var(--pods-ink)!important;
+  text-decoration:none;
+  font:500 13px/1.55 "Hanken Grotesk",sans-serif;
+}
+.pods-support-footer .foot-l a:hover{color:var(--pods-moss)!important;text-decoration:underline}
+.pods-footer-legal-row{
+  margin-top:clamp(25px,3vw,38px);
+  padding-top:18px;
+  border-top:1px solid rgba(78,54,30,.18);
+  font:400 12px/1.5 "Hanken Grotesk",sans-serif;
+  color:rgba(26,26,26,.7);
+}
+.ap-page .pods-support-footer{
+  background:var(--pods-seashell);
+  border-top-color:rgba(78,54,30,.18);
+  padding-bottom:max(24px,env(safe-area-inset-bottom));
+}
+.ap-page .pods-support-footer .foot-l a{color:var(--pods-ink)!important}
+.support-page .pods-support-footer{margin-top:clamp(40px,6vw,80px)}
+@media(max-width:900px){
+  .foot .pods-foot-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 30px}
+  .pods-support-footer-inner{grid-template-columns:minmax(0,1fr);gap:28px}
+}
+@media(max-width:600px){
+  .foot .pods-foot-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:25px 18px}
+  .foot .pods-foot-brand{grid-column:1/-1}
+  .foot .pods-foot-group{min-width:0}
+  .foot .foot-tag{margin-bottom:26px}
+  .pods-support-footer-groups{grid-template-columns:repeat(2,minmax(0,1fr));gap:23px 18px}
+  .pods-support-footer-groups .pods-foot-group:last-child{grid-column:1/-1}
+  .pods-support-footer{padding-top:33px}
+  .pods-support-footer .foot-l a{min-height:38px}
+}
+@media(max-width:360px){
+  .foot .pods-foot-grid{grid-template-columns:minmax(0,1fr)}
+  .foot .pods-foot-brand{grid-column:auto}
+  .pods-support-footer-groups{grid-template-columns:minmax(0,1fr)}
+  .pods-support-footer-groups .pods-foot-group:last-child{grid-column:auto}
+}
