@@ -44,7 +44,13 @@
     video.autoplay = false;
     video.playsInline = true;
     video.preload = 'none';
-    if (isHttps(data.poster)) video.poster = data.poster;
+    const posterForViewport = () => key === 'uj' && narrow.matches && isHttps(data.portraitPoster)
+      ? data.portraitPoster : data.poster;
+    const applyPoster = () => {
+      const poster = posterForViewport();
+      if (isHttps(poster) && video.poster !== poster) video.poster = poster;
+    };
+    applyPoster();
     const sourceForViewport = () => key === 'uj' && narrow.matches && isHttps(data.portrait) ? data.portrait : data.landscape;
     const setSource = () => {
       if (video.src === sourceForViewport()) return;
@@ -58,7 +64,10 @@
       video.dataset.mobilePortrait = String(key === 'uj' && narrow.matches && isHttps(data.portrait));
     };
     setSource();
-    if (key === 'uj') narrow.addEventListener('change', setSource);
+    if (key === 'uj') narrow.addEventListener('change', () => {
+      applyPoster();
+      setSource();
+    });
     if (isHttps(data.captions)) {
       const track = document.createElement('track');
       track.kind = 'captions'; track.srclang = 'en'; track.label = 'English'; track.src = data.captions;
