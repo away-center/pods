@@ -216,3 +216,7 @@ h3,h4,.ap-page :is(h3,h4){font-weight:700;letter-spacing:-.015em}
   .ap-page .ap-video-start .pods-video-grid{grid-template-columns:minmax(0,1fr)}
   .ap-page .ap-faq .pods-faq-video video[data-mobile-portrait="true"]{width:min(100%,340px);max-height:76vh;aspect-ratio:9/16}
 }
+
+/* Consistent, correctly joined decorative arrowheads beside the two handwritten notes. */
+.annot .pods-hand-arrow{display:block;width:52px;height:26px;min-width:52px;flex:0 0 52px;overflow:visible;vertical-align:middle}
+.exp-viz-foot .pods-hand-arrow{display:block;width:40px;height:20px;min-width:40px;flex:0 0 40px;overflow:visible;vertical-align:middle}
