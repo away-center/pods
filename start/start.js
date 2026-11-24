@@ -42,7 +42,9 @@
     root.querySelectorAll('[data-ap-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
 
     function scrollToForm() {
-      root.querySelector('#ap-start').scrollIntoView({behavior: reducedMotion ? 'auto' : 'smooth', block: 'start'});
+      // The section starts with long editorial copy. Land at the actual form,
+      // not the top of the conversion section, especially on narrow screens.
+      form.scrollIntoView({behavior: 'auto', block: 'start'});
       root.querySelector('#ap-first-name').focus({preventScroll: true});
     }
     root.querySelectorAll('[data-ap-cta]').forEach(link => {
