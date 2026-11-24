@@ -381,17 +381,21 @@ $('#fnGrid').innerHTML = FUNCTIONS.map(f => `
 
 function selectFn(k) {
   CFG.fn = k;
-  $$('.fn').forEach(b => b.setAttribute('aria-pressed', b.dataset.fn === k));
+  $('.fn').forEach(b => b.setAttribute('aria-pressed', b.dataset.fn === k));
   buildRoleList();
   gate();
+  // Function is a single choice: show the next question immediately.
+  if (step === 1) goto(2);
 }
 $$('.fn').forEach(b => b.addEventListener('click', () => selectFn(b.dataset.fn)));
 
 /* -- Step 2 -------------------------------------------------- */
-$$('.shape').forEach(b => b.addEventListener('click', () => {
+$('.shape').forEach(b => b.addEventListener('click', () => {
   CFG.shape = b.dataset.shape;
-  $$('.shape').forEach(x => x.setAttribute('aria-pressed', x === b));
+  $('.shape').forEach(x => x.setAttribute('aria-pressed', x === b));
   gate();
+  // Support type is a single choice. Role counts are not, so stop at Step 3.
+  if (step === 2) goto(3);
 }));
 
 /* -- Step 3 -------------------------------------------------- */
@@ -547,8 +551,10 @@ function gate() {
   const ok = step === 1 ? !!CFG.fn : step === 2 ? !!CFG.shape : true;
   next.disabled = !ok;
   $('#cfgHint').textContent = HINTS[step];
-  next.innerHTML = (step === 4 ? 'See my setup' : step === 5 ? 'Continue to enquiry' : 'Continue') +
+  next.innerHTML = (step === 3 ? 'Done choosing roles' : step === 4 ? 'See my setup' : step === 5 ? 'Continue to enquiry' : 'Continue') +
     ' <svg class="ar" width="15" height="12" viewBox="0 0 15 12" fill="none" aria-hidden="true"><path d="M1 6h12M9 2l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  // Steps 1 and 2 advance automatically upon making their single selection.
+  next.hidden = step <= 2;
   $('#cfgBack').hidden = step === 1;
   $$('.step-dot').forEach(d => {
     const s = +d.dataset.s;
@@ -559,12 +565,20 @@ function gate() {
 
 function goto(s) {
   step = Math.min(5, Math.max(1, s));
-  $$('.pane').forEach(p => p.classList.toggle('on', +p.dataset.pane === step));
+  $('.pane').forEach(p => p.classList.toggle('on', +p.dataset.pane === step));
   if (step === 3) { buildRoleList(); drawAssembly(); }
   if (step === 5) renderRec();
   gate();
-  const y = $('#build').getBoundingClientRect().top + scrollY - 70;
-  if (scrollY > y + 120 || scrollY < y - 400) scrollTo({ top: y, behavior: RM ? 'auto' : 'smooth' });
+  // Position the next question itself below the viewport top and sticky nav.
+  // The old jump targeted #build, often leaving the question below the fold.
+  const pane = $('.pane.on');
+  if (pane) {
+    requestAnimationFrame(() => {
+      const offset = innerWidth <= 1000 ? 78 : 94;
+      const y = Math.max(0, pane.getBoundingClientRect().top + scrollY - offset);
+      scrollTo({top:y,behavior:'auto'});
+    });
+  }
 }
 
 $('#cfgNext').addEventListener('click', () => {
