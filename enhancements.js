@@ -82,8 +82,9 @@
       podsVideos.forEach(other => { if (other !== video && !other.paused) other.pause(); });
     });
   });
-  const showcase = document.querySelector('[data-pods-video-showcase]');
-  if (showcase && showcase.querySelector('figure:not([hidden])')) showcase.hidden = false;
+  document.querySelectorAll('[data-pods-video-showcase]').forEach(showcase => {
+    if (showcase.querySelector('figure:not([hidden])')) showcase.hidden = false;
+  });
   if (podsVideos.length && 'IntersectionObserver' in window) {
     const pauseOffscreen = new IntersectionObserver(entries => {
       entries.forEach(entry => {
