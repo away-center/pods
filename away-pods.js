@@ -10,7 +10,7 @@ const $  = (s, c = document) => c.querySelector(s);
 const $$ = (s, c = document) => [...c.querySelectorAll(s)];
 
 /* ============================================================
-   NAV, stuck state, scroll progress, Bangalore clock
+   NAV, stuck state and scroll progress
    ============================================================ */
 const nav = $('#nav'), bar = $('#progress');
 const onScroll = () => {
@@ -20,11 +20,7 @@ const onScroll = () => {
 };
 addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
-const clock = () => {
-  const t = new Date().toLocaleTimeString('en-GB', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit' });
-  $('#blrTime').textContent = t;
-};
-clock(); setInterval(clock, 20000);
+
 
 /* Sticky mobile bar: appears after the hero, steps aside at the two
    places where the same action is already on screen. */
