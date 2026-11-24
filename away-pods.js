@@ -381,7 +381,7 @@ $('#fnGrid').innerHTML = FUNCTIONS.map(f => `
 
 function selectFn(k) {
   CFG.fn = k;
-  $('.fn').forEach(b => b.setAttribute('aria-pressed', b.dataset.fn === k));
+  $$('.fn').forEach(b => b.setAttribute('aria-pressed', b.dataset.fn === k));
   buildRoleList();
   gate();
   // Function is a single choice: show the next question immediately.
@@ -390,9 +390,9 @@ function selectFn(k) {
 $$('.fn').forEach(b => b.addEventListener('click', () => selectFn(b.dataset.fn)));
 
 /* -- Step 2 -------------------------------------------------- */
-$('.shape').forEach(b => b.addEventListener('click', () => {
+$$('.shape').forEach(b => b.addEventListener('click', () => {
   CFG.shape = b.dataset.shape;
-  $('.shape').forEach(x => x.setAttribute('aria-pressed', x === b));
+  $$('.shape').forEach(x => x.setAttribute('aria-pressed', x === b));
   gate();
   // Support type is a single choice. Role counts are not, so stop at Step 3.
   if (step === 2) goto(3);
@@ -565,7 +565,7 @@ function gate() {
 
 function goto(s) {
   step = Math.min(5, Math.max(1, s));
-  $('.pane').forEach(p => p.classList.toggle('on', +p.dataset.pane === step));
+  $$('.pane').forEach(p => p.classList.toggle('on', +p.dataset.pane === step));
   if (step === 3) { buildRoleList(); drawAssembly(); }
   if (step === 5) renderRec();
   gate();
@@ -873,7 +873,7 @@ const OS = {
 /* ============================================================
    Nav anchor offset for keyboard users
    ============================================================ */
-$('a[href^="#"]').forEach(a => a.addEventListener('click', event => {
+$$('a[href^="#"]').forEach(a => a.addEventListener('click', event => {
   const t = document.getElementById(a.getAttribute('href').slice(1));
   if (!t) return;
   if (t.id === 'podForm') {
