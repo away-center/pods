@@ -568,7 +568,7 @@ function goto(s) {
 }
 
 $('#cfgNext').addEventListener('click', () => {
-  if (step === 5) { $('#enquire').scrollIntoView({ behavior: RM ? 'auto' : 'smooth' }); $('#f-name').focus({ preventScroll: true }); return; }
+  if (step === 5) { $('#podForm').scrollIntoView({ behavior: 'auto', block: 'start' }); $('#f-name').focus({ preventScroll: true }); return; }
   goto(step + 1);
 });
 $('#cfgBack').addEventListener('click', () => goto(step - 1));
@@ -581,7 +581,11 @@ $('#restartCfg').addEventListener('click', () => {
   $('#q-city').value = 'Bangalore';
   syncForm(); goto(1);
 });
-$('#recCta').addEventListener('click', () => setTimeout(() => $('#f-name').focus({ preventScroll: true }), 400));
+$('#recCta').addEventListener('click', event => {
+  event.preventDefault();
+  $('#podForm').scrollIntoView({ behavior: 'auto', block: 'start' });
+  $('#f-name').focus({ preventScroll: true });
+});
 $('#editCfg').addEventListener('click', () => { $('#build').scrollIntoView({ behavior: RM ? 'auto' : 'smooth' }); goto(1); });
 gate();
 
