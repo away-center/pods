@@ -859,9 +859,16 @@ const OS = {
 /* ============================================================
    Nav anchor offset for keyboard users
    ============================================================ */
-$$('a[href^="#"]').forEach(a => a.addEventListener('click', () => {
+$('a[href^="#"]').forEach(a => a.addEventListener('click', event => {
   const t = document.getElementById(a.getAttribute('href').slice(1));
-  if (t) setTimeout(() => { t.setAttribute('tabindex', '-1'); t.focus({ preventScroll: true }); }, 500);
+  if (!t) return;
+  if (t.id === 'podForm') {
+    event.preventDefault();
+    t.scrollIntoView({ behavior: 'auto', block: 'start' });
+    $('#f-name').focus({ preventScroll: true });
+    return;
+  }
+  setTimeout(() => { t.setAttribute('tabindex', '-1'); t.focus({ preventScroll: true }); }, 500);
 }));
 
 })();
