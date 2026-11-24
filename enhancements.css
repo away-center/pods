@@ -562,3 +562,88 @@ body:not(.support-page) .hero .eyebrow,
     margin-block:72px;
   }
 }
+
+
+/* Final lead form and workspace card refinements, 2026-11-24 */
+#workspace .ws-pt h3{
+  font-family:"Libre Caslon Text",Georgia,serif;
+  font-size:clamp(23px,2.05vw,29px);
+  font-weight:400;
+  letter-spacing:-.025em;
+  line-height:1.19;
+  color:var(--pods-pine);
+  max-width:21ch;
+  margin:13px 0 9px;
+}
+#workspace .ws-pt p{
+  font-family:"Hanken Grotesk",sans-serif;
+  font-weight:400;
+  font-size:clamp(14px,1.1vw,15px);
+  line-height:1.65;
+  color:var(--pods-ink);
+  opacity:.8;
+}
+#workspace .ws-ic{margin-bottom:13px}
+.pods-phone-fieldset{
+  display:block;
+  box-sizing:border-box;
+  min-width:0;
+  width:100%;
+  max-width:100%;
+  margin:0;
+  padding:0;
+  border:0;
+}
+.pods-phone-fieldset legend{
+  display:block;
+  width:100%;
+  margin:0 0 10px;
+  padding:0;
+  font-size:14px;
+  font-family:"Hanken Grotesk",sans-serif;
+  font-weight:650;
+  line-height:1.5;
+}
+.pods-phone-fields{
+  display:grid;
+  grid-template-columns:minmax(112px,.35fr) minmax(0,1fr);
+  gap:14px;
+  align-items:start;
+}
+.pods-phone-fields>div{min-width:0}
+.pods-phone-fields label{
+  display:block;
+  margin-bottom:7px;
+  font:500 12px/1.4 "Hanken Grotesk",sans-serif;
+}
+.pods-phone-fields input{
+  display:block;
+  width:100%;
+  max-width:100%;
+  height:48px;
+  min-height:48px;
+  box-sizing:border-box;
+  padding:10px 12px;
+  border:1px solid rgba(78,54,30,.36);
+  border-radius:5px;
+  background:var(--pods-offwhite);
+  color:var(--pods-ink);
+  font-size:16px;
+  line-height:1.35;
+  font-weight:400;
+}
+.pods-phone-fields input:focus{outline:2px solid var(--pods-moss);outline-offset:2px}
+#enquire .pods-phone-fieldset legend{color:var(--pods-offwhite)}
+#enquire .pods-phone-fields label{color:var(--pods-offwhite)}
+#enquire .pods-phone-fields input{background:var(--pods-offwhite);color:var(--pods-ink)}
+.ap-page .ap-form-panel .pods-phone-fieldset{grid-column:1/-1;margin-bottom:18px}
+.ap-page .ap-form-panel .pods-phone-fields input{background:transparent}
+.ap-page .ap-form-panel .pods-phone-fields label{color:var(--pods-pine)}
+.support-page .support-main .pods-phone-fieldset{margin-bottom:24px}
+.support-page .support-main .pods-phone-fields input{margin:0;background:transparent}
+.support-page .support-main .pods-phone-fields label{margin:0 0 7px}
+@media(max-width:480px){
+ .pods-phone-fields{grid-template-columns:minmax(92px,.38fr) minmax(0,1fr);gap:10px}
+ .pods-phone-fields input{padding-inline:9px}
+ #workspace .ws-pt h3{font-size:25px}
+}
