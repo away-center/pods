@@ -12,13 +12,15 @@ function doPost(event) {
     if (typeof data.name !== 'string' || !data.name.trim() || data.name.length > 120 ||
         typeof data.email !== 'string' || data.email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email) ||
         typeof data.brief !== 'string' || !data.brief.trim() || data.brief.length > 5000 || data.contact_url ||
+        !/^\+[1-9]\d{0,3}$/.test(data.phone_country_code || '') ||
+        !/^[0-9() .-]{6,25}$/.test(data.phone || '') ||
         !/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(data.submission_id || '')) return reply({ok:false,code:'invalid'});
     delete data.shared_secret;
     lock = LockService.getScriptLock();
     if (!lock.tryLock(10000)) return reply({ok:false});
     var sheet = SpreadsheetApp.openById(props.getProperty('SHEET_ID')).getSheetByName(props.getProperty('SHEET_NAME'));
     if (!sheet) return reply({ok:false});
-    var columns = ['submission_id','received_at','name','email','company','brief','landing_page','submission_page','cta_source','utm_source','utm_medium','utm_campaign','utm_term','utm_content','calendar_status','lead_status','details_json'];
+    var columns = ['submission_id','received_at','name','email','company','brief','landing_page','submission_page','cta_source','utm_source','utm_medium','utm_campaign','utm_term','utm_content','calendar_status','lead_status','details_json','phone_country_code','phone'];
     if (sheet.getLastRow() === 0) sheet.appendRow(columns);
     // Refuse a mismatched/old schema; never shift columns in an existing production sheet.
     var headers = sheet.getRange(1,1,1,columns.length).getValues()[0];
