@@ -8,6 +8,12 @@ const fs = require('node:fs');
   const context=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'reduce'});
   const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
   const base='http://127.0.0.1:4173';
+  // Regression: the multi-select helper is $(). The single-element $()
+  // must never be used with forEach because it aborts the whole main-page
+  // initialization before the accordion and WorkOS tabs can be attached.
+  assert.doesNotMatch(fs.readFileSync('away-pods.js','utf8'),
+    /(^|[^$])\$\([^\n)]*\)\.forEach\s*\(/m,
+    'Use $() for iterable DOM selections in the main site script');
   // Compare original DOM copy, section order, SVGs and image sources before scripts run.
   for(const file of ['index.html','start/index.html']){
     const old=execFileSync('git',['show',`33f797a79202827d2ff544334739e2892b7bcca2:${file}`],{encoding:'utf8'});
@@ -52,6 +58,8 @@ const fs = require('node:fs');
   await page.locator('button[type=submit]').click();await page.locator('[data-enquiry-success]:not([hidden])').waitFor();assert.equal(await page.locator('[data-founder-calendar]').getAttribute('href'),'https://calendar.example.test/founder');
   await page.goto(base+'/');
   assert.equal(await page.locator('.nav-meta').count(),0);
+  assert.ok((await page.locator('#osView').textContent()).includes('Role Card'),
+    'WorkOS should initialize with Role Card content rather than a blank view');
   await page.locator('.tab[data-pod="creative"]').click();assert.ok((await page.locator('#podTitle').textContent()).includes('creative'));
   await page.locator('.rung').nth(1).click();assert.equal(await page.locator('.rung').nth(1).getAttribute('aria-selected'),'true');
   await page.locator('.os-nav').nth(1).click();assert.ok((await page.locator('#osView').textContent()).includes('Workflow Card'));
