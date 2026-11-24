@@ -819,3 +819,15 @@ body > header.nav .nav-links a::after{
   .ap-page .ap-nav .ap-button-small{font-size:11px!important}
   .pods-phone-fields{grid-template-columns:minmax(82px,.4fr) minmax(0,1fr);gap:8px}
 }
+
+
+/* Single-choice steps advance without an extra button. Multi-choice steps
+   retain their explicit action, and each new pane lands below the sticky nav. */
+#build .pane{scroll-margin-top:clamp(78px,10vw,94px)}
+#build .pane.on{min-width:0}
+#build #cfgNext[hidden]{display:none!important}
+@media(max-width:620px){
+  #build .cfg-nav{gap:10px;padding:14px 18px}
+  #build .cfg-nav .btn{min-height:46px;padding-inline:19px}
+  #build .cfg-nav .cfg-hint{flex:1 1 100%;order:-1}
+}
