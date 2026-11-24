@@ -326,9 +326,15 @@ body:not(.support-page) .hero .eyebrow,
 
 /* A soft periwinkle halo retains the animation and all existing graphics. */
 .hero .stage{
-  /* Avoid a visible rectangular edge from the previous periwinkle radial fill.
-     Preserve the original animated SVG, rings and floating badges untouched. */
-  background:transparent;
+  /* Periwinkle halo restored. 'closest-side' makes the fade reach full
+     transparency before all four edges of the illustration box, preventing
+     the hard top/right shadow seams from the previous farthest-corner gradient. */
+  background:radial-gradient(
+    ellipse closest-side at 52% 48%,
+    rgba(196,210,251,.56) 0%,
+    rgba(196,210,251,.28) 42%,
+    rgba(196,210,251,0) 100%
+  );
 }
 
 /* The main site alternates quieter light chapters and a few dark chapters. */
