@@ -98,3 +98,10 @@ h3,h4,.ap-page :is(h3,h4){font-weight:700;letter-spacing:-.015em}
 .pods-video-grid figcaption,.pods-video-single figcaption{color:var(--teal);font-size:14px}
 .pods-video-single video[data-mobile-portrait="true"]{width:min(100%,340px);aspect-ratio:9/16;object-fit:contain;max-height:min(76vh,610px)}
 @media (max-width:700px){.pods-video-grid{grid-template-columns:1fr}.pods-faq-video{margin-block:24px!important}}
+
+/* Official away Pods wordmark: use on all website headers, drafts, and footer. */
+:where(.nav-logo,.ap-brand,.pods-brand-link){display:inline-flex;align-items:center;flex-shrink:0;line-height:1;text-decoration:none}
+.nav-logo .pods-brand-logo,.ap-page .ap-brand .pods-brand-logo,.support-header .pods-brand-link .pods-brand-logo,.foot .pods-brand-logo{display:block;width:clamp(150px,15vw,200px);height:auto;max-width:200px;object-fit:contain}
+.foot .pods-brand-logo{filter:brightness(0) invert(1)}
+.support-header .pods-brand-link{min-height:44px}
+@media(max-width:600px){.nav-logo .pods-brand-logo,.ap-page .ap-brand .pods-brand-logo,.support-header .pods-brand-link .pods-brand-logo{width:145px;max-width:145px}.support-header .wrap{gap:12px}.support-header nav{gap:8px 16px}}
