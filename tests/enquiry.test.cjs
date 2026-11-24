@@ -8,7 +8,7 @@ const vm = require('node:vm');
 const originalFetch = global.fetch;
 const originalEnv = {...process.env};
 afterEach(()=>{global.fetch=originalFetch;process.env={...originalEnv};});
-const valid = () => ({name:'Test Person',email:'test@example.com',brief:'A support team',submission_id:randomUUID(),landing_page:'https://preview.example/',cta_source:'hero',utm_source:'qa'});
+const valid = () => ({name:'Test Person',email:'test@example.com',brief:'A support team',phone_country_code:'+1',phone:'415 555 0199',submission_id:randomUUID(),landing_page:'https://preview.example/',cta_source:'hero',utm_source:'qa'});
 async function invoke(body,headers={},method='POST'){
   const result={};const response={setHeader(k,v){result[k]=v;},status(code){result.status=code;return this;},json(data){result.body=data;return this;}};
   await handler({method,headers:{host:'preview.example','content-type':'application/json',origin:'https://preview.example',...headers},body},response);return result;
@@ -16,7 +16,7 @@ async function invoke(body,headers={},method='POST'){
 function configure(){process.env.VERCEL_ENV='preview';process.env.PODS_TEST_ENQUIRY_ENDPOINT='https://script.google.com/macros/s/test/exec';process.env.PODS_TEST_ENQUIRY_SECRET='test-secret';}
 test('required fields, whitespace, length, UUID, email, types and honeypot',()=>{
   assert.ok(validate(valid()));
-  for(const patch of [{name:'  '},{email:'bad@'},{brief:''},{name:'x'.repeat(121)},{brief:'x'.repeat(5001)},{company:{}},{submission_id:'123'},{contact_url:'spam'}])assert.equal(validate({...valid(),...patch}),null);
+  for(const patch of [{name:'  '},{email:'bad@'},{brief:''},{name:'x'.repeat(121)},{brief:'x'.repeat(5001)},{company:{}},{submission_id:'123'},{contact_url:'spam'},{phone_country_code:''},{phone_country_code:'1'},{phone_country_code:'+000'},{phone:''},{phone:'abc'}])assert.equal(validate({...valid(),...patch}),null);
   assert.equal(validate([]),null);assert.equal(validate(null),null);
   assert.equal(validate({...valid(),untrusted:'drop'}).untrusted,undefined);
 });
@@ -37,7 +37,7 @@ test('preview refuses inherited production credentials and unconfigured delivery
 test('delivery forwards attribution and acknowledges only matching stored ID',async()=>{
   configure();const body=valid();let sent;
   global.fetch=async(url,options)=>{assert.ok(url.includes('/test/'));sent=JSON.parse(options.body);return {ok:true,json:async()=>({ok:true,submission_id:body.submission_id})};};
-  assert.equal((await invoke(body)).status,200);assert.equal(sent.shared_secret,'test-secret');assert.equal(sent.cta_source,'hero');assert.equal(sent.utm_source,'qa');assert.ok(sent.received_at);
+  assert.equal((await invoke(body)).status,200);assert.equal(sent.shared_secret,'test-secret');assert.equal(sent.cta_source,'hero');assert.equal(sent.phone_country_code,'+1');assert.equal(sent.phone,'415 555 0199');assert.equal(sent.utm_source,'qa');assert.ok(sent.received_at);
   global.fetch=async()=>({ok:true,json:async()=>({ok:true,submission_id:'wrong'})});assert.equal((await invoke(body)).status,503);
 });
 test('upstream rejection, timeout, malformed response and retry retain ID',async()=>{
@@ -59,7 +59,7 @@ function gasHarness(initial=[]){
 test('actual Apps Script stores exactly one row for repeated ID, including lost acknowledgement',()=>{
   const h=gasHarness();const data=valid();assert.equal(h.submit(data).ok,true);assert.equal(h.submit(data).ok,true);assert.equal(h.rows.length,2);
   const next=valid();h.loseResponse();assert.equal(h.submit(next).ok,false);assert.equal(h.submit(next).ok,true);assert.equal(h.rows.length,3);assert.equal(h.held(),false);
-  assert.equal(h.rows[1][8],'hero');assert.equal(h.rows[1][9],'qa');assert.equal(h.rows[1][14],'not_booked');
+  assert.equal(h.rows[1][8],'hero');assert.equal(h.rows[1][9],'qa');assert.equal(h.rows[1][14],'not_booked');assert.equal(h.rows[1][17],'+1');assert.equal(h.rows[1][18],'415 555 0199');
 });
 test('Apps Script rejects bad secret/schema and escapes spreadsheet formulas',()=>{
   const h=gasHarness();assert.equal(h.submit({...valid(),shared_secret:'wrong'}).ok,false);assert.equal(h.rows.length,0);
