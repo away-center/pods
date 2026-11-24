@@ -370,9 +370,6 @@ body:not(.support-page) .hero .eyebrow,
 .ap-page .ap-owner-away .ap-card-label{color:var(--pods-dune)}
 .ap-page .ap-owner-away .ap-list li::before{color:var(--pods-lime)}
 .ap-page .ap-breadth{background:var(--pods-periwinkle);color:var(--pods-ink)}
-.ap-page .ap-breadth .ap-chips .ap-chip-open{
-  background:var(--pods-moss);color:var(--pods-offwhite);
-}
 .ap-page .ap-model:nth-child(2){background:var(--pods-seashell)}
 .ap-page .ap-model-cell{
   background:var(--pods-lime);
@@ -657,4 +654,48 @@ body:not(.support-page) .hero .eyebrow,
 }
 #pricing .calc .eyebrow.on-dark-e::after{
   background:rgba(228,191,113,.6);
+}
+
+
+/* Functions overview: category chips are examples, not clickable buttons.
+   The single contextual link uses the existing /start/ CTA + attribution handler. */
+.ap-page .ap-function-invite{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:3px 14px;
+  margin-top:clamp(17px,2vw,25px);
+  color:var(--pods-ink);
+  font-family:"Hanken Grotesk",ui-sans-serif,system-ui,sans-serif;
+  font-size:14px;
+  line-height:1.5;
+}
+.ap-page .ap-function-invite > span{
+  font-weight:400;
+}
+.ap-page .ap-function-link{
+  min-height:44px;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-size:14px;
+  line-height:1.4;
+  font-weight:650;
+  color:var(--pods-moss)!important;
+  text-decoration:underline!important;
+  text-underline-offset:5px;
+  text-decoration-thickness:1px!important;
+}
+.ap-page .ap-function-link:hover{
+  color:var(--pods-pine)!important;
+  opacity:1;
+}
+.ap-page .ap-function-link:focus-visible{
+  outline:3px solid var(--pods-moss);
+  outline-offset:3px;
+}
+.ap-page .ap-function-link [aria-hidden]{
+  display:inline-block;
+  font-size:18px;
+  line-height:1;
 }
