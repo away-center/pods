@@ -90,6 +90,10 @@
     const data = {...Object.fromEntries(new FormData(form)),...context,...attribution};
     for (const key of Object.keys(data)) if (typeof data[key] === 'string') data[key] = data[key].trim();
     data.name ||= [data.first_name,data.last_name].filter(Boolean).join(' ');
+    if (!/^\+[1-9]\d{0,3}$/.test(data.phone_country_code || '') ||
+        !/^[0-9() .-]{6,25}$/.test(data.phone || ''))
+      throw new Error('Please enter a country code (such as +1) and a valid phone number.');
+
     if (!data.name || !data.brief || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email || ''))
       throw new Error('Please enter your name, a valid work email and the work you need help with.');
     data.submission_page = location.origin + location.pathname;
