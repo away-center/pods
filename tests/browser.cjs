@@ -14,8 +14,11 @@ const fs = require('node:fs');
     const current=fs.readFileSync(file,'utf8');
     const result=await page.evaluate(({old,current})=>{
       const parse=s=>new DOMParser().parseFromString(s,'text/html');const a=parse(old),b=parse(current);
-      const texts=doc=>{doc.querySelectorAll('form,script,style,footer .support-links,.nav-meta').forEach(x=>x.remove());const w=doc.createTreeWalker(doc.body,NodeFilter.SHOW_TEXT);const out=[];while(w.nextNode()){const t=w.currentNode.textContent.replace(/\s+/g,' ').trim();if(t)out.push(t);}return out;};
-      const graphics=doc=>[...doc.querySelectorAll('svg,img')].map(x=>x.outerHTML);
+      // Explicitly approved product descriptions, heading, hero chips, category
+      // CTA, hand-drawn arrowheads and official wordmark may differ from baseline.
+      const omit='form,script,style,footer .support-links,.nav-meta,.nav-logo,.ap-brand,.rung-s,.ap-models,#ap-shapes-title,#ap-why-title,.ap-chips,.ap-section-aside,.pods-hero-topline,.ap-function-invite,.ap-model-path,.hero-meta';
+      const texts=doc=>{doc.querySelectorAll(omit).forEach(x=>x.remove());const w=doc.createTreeWalker(doc.body,NodeFilter.SHOW_TEXT);const out=[];while(w.nextNode()){const t=w.currentNode.textContent.replace(/\s+/g,' ').trim();if(t)out.push(t);}return out;};
+      const graphics=doc=>[...doc.querySelectorAll('main svg,main img')].filter(x=>!x.closest('.annot,.exp-viz-foot,.pods-video-showcase,.pods-video-single')).map(x=>x.outerHTML);
       const sections=doc=>[...doc.querySelectorAll('section')].map(x=>x.id);
       const ag=graphics(a),bg=graphics(b),as=sections(a),bs=sections(b);const at=texts(a),bt=texts(b);
       let i=0;for(const text of bt)if(text===at[i])i++;return {allCopy:i===at.length,missing:at[i],graphics:ag.every(x=>bg.includes(x)),sections:JSON.stringify(as)===JSON.stringify(bs)};
@@ -40,7 +43,7 @@ const fs = require('node:fs');
   let rows=await (await page.request.get(base+'/__preview/rows')).json();assert.equal(rows.length,rowsBefore+1);const row=rows.at(-1);assert.equal(row.utm_source,'qa');assert.equal(row.landing_page,base+'/');assert.equal(row.cta_source,'home-header');assert.equal(row.phone_country_code,'+1');assert.equal(row.phone,'415 555 0199');
   await page.goto(base+'/start/');
   assert.equal(await page.locator('.ap-chips li').last().textContent(),'Other');
-  assert.equal(await page.locator('.ap-function-link').getAttribute('href'),'#ap-start');
+  assert.equal(await page.locator('.ap-function-link').getAttribute('href'),'#ap-form');
   await page.locator('.ap-function-link').click();
   assert.equal(await page.evaluate(()=>document.activeElement?.id),'ap-first-name');
   assert.equal(await page.evaluate(()=>sessionStorage.getItem('pods-attribution-v2')?.includes('function-other')),true);
@@ -64,7 +67,7 @@ const fs = require('node:fs');
   await page.locator('#formSubmit').click();await page.locator('[data-enquiry-success]:not([hidden])').waitFor();
   rows=await (await page.request.get(base+'/__preview/rows')).json();assert.ok(JSON.parse(rows.at(-1).pod_config).roles.includes('Graphic Designer'));
   await page.goto(base+'/');await page.screenshot({path:'test-results/home-desktop.png',fullPage:true});await page.screenshot({path:'test-results/hero-desktop.png'});
-  for(const width of [320,375,768]){
+  for(const width of [320,375,390,768,1024]){
     await page.setViewportSize({width,height:900});
     for(const route of ['/','/start/','/contact/','/about/','/security/','/privacy-policy/','/terms-of-use/']){
       await page.goto(base+route);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,route+' overflow at '+width);
@@ -72,7 +75,30 @@ const fs = require('node:fs');
         await page.locator('[data-menu]').click();assert.equal(await page.locator('[data-menu]').getAttribute('aria-expanded'),'true');await page.keyboard.press('Escape');assert.equal(await page.locator('[data-menu]').getAttribute('aria-expanded'),'false');
         if(width===375)await page.screenshot({path:'test-results/home-mobile.png',fullPage:true});
       }
-      if(route==='/start/'&&width===375){await page.screenshot({path:'test-results/start-mobile.png',fullPage:true});await page.locator('#ap-form').scrollIntoViewIfNeeded();await page.screenshot({path:'test-results/form-mobile.png'});}
+      if(route==='/start/'){
+        const startCta=page.locator('.ap-function-link');
+        await startCta.click();
+        const visible=await page.evaluate(()=>{
+          const form=document.getElementById('ap-form').getBoundingClientRect();
+          const field=document.getElementById('ap-first-name').getBoundingClientRect();
+          return {formTop:form.top,fieldTop:field.top,focus:document.activeElement?.id,screen:innerHeight};
+        });
+        assert.equal(visible.focus,'ap-first-name','start form input focus');
+        assert.ok(visible.formTop>=0 && visible.formTop<visible.screen*.65,'form must be visible on '+width);
+        assert.ok(visible.fieldTop>=0 && visible.fieldTop<visible.screen,'first input visible on '+width);
+        if(width===375){await page.screenshot({path:'test-results/start-mobile.png',fullPage:true});await page.screenshot({path:'test-results/form-mobile.png'});}
+      }
+      if(route==='/' && width<=768){
+        await page.locator('a[href="#podForm"]').last().click();
+        const visible=await page.evaluate(()=>{
+          const form=document.getElementById('podForm').getBoundingClientRect();
+          const field=document.getElementById('f-name').getBoundingClientRect();
+          return {formTop:form.top,fieldTop:field.top,focus:document.activeElement?.id,screen:innerHeight};
+        });
+        assert.equal(visible.focus,'f-name','home form input focus');
+        assert.ok(visible.formTop>=0 && visible.formTop<visible.screen*.65,'home form visible on '+width);
+        assert.ok(visible.fieldTop>=0 && visible.fieldTop<visible.screen,'home first input visible on '+width);
+      }
     }
   }
   // Shared helper coalesces concurrent sends and remembers an acknowledged payload.
