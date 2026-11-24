@@ -25,9 +25,9 @@
   // Additive native media players. Empty config means no empty/broken embeds.
   // Sources must be direct downloadable HTTPS MP4 URLs, not Drive viewing pages.
   const placements = {
-    nirvaan1: {label:'Away Pods — introduction', title:'An introduction to away Pods', index:'01', runtime:'1:13'},
-    nirvaan2: {label:'Away Pods — how the model works', title:'How away Pods works', index:'02', runtime:'1:22'},
-    uj: {label:'Away Pods — questions answered', title:'Questions about away Pods', index:'03', runtime:'1:50'}
+    nirvaan1: {label:'Away Pods: introduction', title:'An introduction to away Pods', index:'01', runtime:'1:13'},
+    nirvaan2: {label:'Away Pods: how the model works', title:'How away Pods works', index:'02', runtime:'1:22'},
+    uj: {label:'Away Pods: questions answered', title:'Questions about away Pods', index:'03', runtime:'1:50'}
   };
   const mediaConfig = window.PODS_CONFIG?.videos || {};
   const podsVideos = [];
