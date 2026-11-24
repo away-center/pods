@@ -292,3 +292,251 @@ h3,h4,.ap-page :is(h3,h4){font-weight:700;letter-spacing:-.015em}
     gap:12px;
   }
 }
+
+
+/* Away brandbook palette refinement — 2026-11-24.
+   Source: Away Brand Guidelines, pp 20, 23, 26–27.
+   Keep deep colors for selective interludes and never use >2 secondary
+   colours within one composition; preserve original content and layout. */
+:root {
+  --pods-moss:#274A27;
+  --pods-seashell:#E3DACE;
+  --pods-periwinkle:#C4D2FB;
+  --pods-dune:#E4BF71;
+  --pods-lime:#DFFDB3;
+  --pods-pine:#4E361E;
+  --pods-offwhite:#FDF7F3;
+  --pods-ink:#1A1A1A;
+}
+
+/* Typography in lighter areas: calm black and moss, keeping orange for CTA. */
+.hero .display.h1, .ap-page .hero .display.h1 {color:var(--pods-ink)}
+.hero .hero-sub,.ap-page .hero .hero-sub{color:var(--pods-pine)}
+body:not(.support-page) .hero .eyebrow,
+#ladder .eyebrow,#explorer .eyebrow,#layer .eyebrow,
+#workspace .eyebrow,#pricing .eyebrow,#gcc .eyebrow,
+#faq .eyebrow {color:var(--pods-moss)}
+#ladder .display,#explorer .display,#layer .display,
+#workspace .display,#pricing .display,#gcc .display,
+#faq .display {color:var(--pods-ink)}
+#ladder .display em,#explorer .display em,#layer .display em,
+#workspace .display em,#pricing .display em,#gcc .display em,
+#faq .display em {color:var(--pods-moss)}
+#layer .ops-item[aria-expanded="true"] .ix{color:var(--pods-moss)}
+
+/* A soft periwinkle halo retains the animation and all existing graphics. */
+.hero .stage{
+  background:radial-gradient(ellipse at 52% 48%,rgba(196,210,251,.56) 0%,rgba(196,210,251,.28) 42%,transparent 72%);
+}
+
+/* The main site alternates quieter light chapters and a few dark chapters. */
+#explorer{background:var(--pods-seashell)}
+#workspace{background:var(--pods-seashell)!important}
+#workos.os{background:var(--pods-moss);color:var(--pods-offwhite)}
+#build.cfg{background:var(--pods-pine);color:var(--pods-offwhite)}
+#pricing .calc{background:var(--pods-pine)}
+#gcc{background:var(--pods-periwinkle)!important}
+#gcc .gcc-step[aria-pressed="true"]{background:var(--pods-moss);color:var(--pods-offwhite)}
+.final#enquire{background:var(--pods-moss);color:var(--pods-offwhite)}
+#workos .eyebrow,#build .eyebrow,#enquire .eyebrow{color:var(--pods-dune)}
+#workos .display em,#build .display em,#enquire .final-h em{color:var(--pods-dune)}
+#build .step-dot.now .n{background:var(--pods-dune);color:var(--pods-ink)}
+#build .step-dot.done .n{background:var(--pods-lime);color:var(--pods-ink)}
+#build :focus-visible,#workos :focus-visible,#enquire :focus-visible{outline-color:var(--pods-lime)}
+#pricing .price-card:nth-child(2){background:var(--pods-seashell)}
+#pricing .price-card:nth-child(3){background:var(--pods-periwinkle)}
+#pricing .price-card .price-k{color:var(--pods-pine)}
+#pricing .price-card .price-n{color:var(--pods-moss)}
+#pricing .price-card{border:1px solid rgba(78,54,30,.1)}
+#faq .ff[aria-pressed="true"]{background:var(--pods-moss);color:var(--pods-offwhite)}
+#faq .faq-q{color:var(--pods-ink)}
+
+/* /start/: make the brand's secondary colors do more of the work. */
+.ap-page{--ap-line:rgba(78,54,30,.19)}
+.ap-page .ap-ownership .ap-owner-you{background:var(--pods-seashell)}
+.ap-page .ap-ownership .ap-owner-away{
+  background:var(--pods-moss);
+  border-color:var(--pods-moss);
+  color:var(--pods-offwhite);
+}
+.ap-page .ap-owner-away .ap-card-label{color:var(--pods-dune)}
+.ap-page .ap-owner-away .ap-list li::before{color:var(--pods-lime)}
+.ap-page .ap-breadth{background:var(--pods-periwinkle);color:var(--pods-ink)}
+.ap-page .ap-breadth .ap-chips .ap-chip-open{
+  background:var(--pods-moss);color:var(--pods-offwhite);
+}
+.ap-page .ap-model:nth-child(2){background:var(--pods-seashell)}
+.ap-page .ap-model-cell{
+  background:var(--pods-lime);
+  border-color:var(--pods-lime);
+  color:var(--pods-ink);
+}
+.ap-page .ap-model-cell .ap-model-dots i{background:var(--pods-moss)}
+.ap-page .ap-models h3{color:var(--pods-ink)}
+.ap-page .ap-model-path{color:var(--pods-pine)}
+.ap-page .ap-why{
+  background:var(--pods-moss);
+  color:var(--pods-offwhite);
+}
+.ap-page .ap-why .ap-eyebrow,
+.ap-page .ap-why .ap-benefit-num{color:var(--pods-dune)}
+.ap-page .ap-why h2 span,
+.ap-page .ap-why .ap-benefits h3{color:var(--pods-offwhite)}
+.ap-page .ap-why .ap-benefits article{border-top-color:rgba(253,247,243,.3)}
+.ap-page .ap-why .ap-heading-row > .ap-text-link{
+  background:var(--pods-dune);
+  border-color:var(--pods-dune);
+  color:var(--pods-ink);
+}
+.ap-page .ap-why .ap-heading-row > .ap-text-link:hover{
+  background:var(--pods-lime);
+  border-color:var(--pods-lime);
+  color:var(--pods-ink);
+}
+.ap-page #ap-workspace-title{color:var(--pods-ink)}
+.ap-page .ap-section[aria-labelledby="ap-workspace-title"]{
+  background:var(--pods-seashell);
+  border-radius:clamp(12px,2vw,26px);
+  padding-inline:clamp(20px,3.6vw,45px);
+}
+.ap-page .ap-samples>a:hover small{color:var(--pods-moss)}
+.ap-page .ap-convert{
+  background:var(--pods-dune);
+  color:var(--pods-ink);
+}
+.ap-page .ap-convert .ap-form-panel{
+  background:var(--pods-offwhite);
+  color:var(--pods-ink);
+  box-shadow:0 20px 55px -35px rgba(78,54,30,.32);
+}
+.ap-page .ap-convert .ap-submit{
+  background:var(--pods-moss);
+  color:var(--pods-offwhite)!important;
+  border-color:var(--pods-moss);
+}
+.ap-page .ap-convert .ap-submit:hover{
+  background:var(--pods-pine);
+  border-color:var(--pods-pine);
+}
+.ap-page .ap-faq{border-top:1px solid rgba(78,54,30,.2)}
+.ap-page .ap-faq h2,.ap-page .ap-faq summary{color:var(--pods-ink)}
+.ap-page .ap-faq h2 span{color:var(--pods-moss)}
+.ap-page .ap-why :focus-visible{outline-color:var(--pods-lime)}
+
+/* Supporting pages: accessible neutrals with less dark-teal type. */
+.support-page{background:var(--pods-offwhite);color:var(--pods-ink)}
+.support-page .support-main h1,.support-page .support-main h2{color:var(--pods-moss)}
+.support-page .legal-notice{background:var(--pods-seashell)}
+.support-page .support-header{background:var(--pods-offwhite)}
+.support-page .support-main a:not(.btn){text-decoration-color:var(--pods-pine)}
+
+/* A consistent editorial framing system for each user-supplied video. */
+.pods-video-showcase{
+  background:var(--pods-periwinkle);
+  border:1px solid rgba(78,54,30,.14);
+  border-radius:clamp(14px,2.2vw,28px);
+  width:min(var(--max),calc(100% - 32px));
+  max-width:var(--max);
+  padding:clamp(22px,3.7vw,48px);
+  margin-block:clamp(28px,5vw,64px);
+}
+.pods-video-showcase .pods-video-grid{margin:0}
+.pods-video-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(16px,2.3vw,26px);
+}
+.pods-video-grid figure,
+.pods-video-single{
+  min-width:0;
+  margin:0;
+  padding:clamp(10px,1.25vw,15px);
+  border:1px solid rgba(78,54,30,.18);
+  border-radius:clamp(12px,1.7vw,20px);
+  background:var(--pods-seashell);
+  box-shadow:0 12px 34px -26px rgba(78,54,30,.35);
+  overflow:hidden;
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){
+  .pods-video-grid figure:hover,.pods-video-single:hover{
+    transform:translateY(-3px);
+    box-shadow:0 18px 32px -22px rgba(78,54,30,.32);
+  }
+}
+.pods-video-grid video,
+.pods-video-single video,
+.ap-page .ap-video-start video,
+.ap-page .ap-faq .pods-faq-video video{
+  display:block;
+  width:100%;
+  max-width:100%;
+  height:auto;
+  aspect-ratio:16/9;
+  border-radius:clamp(8px,1.2vw,12px);
+  object-fit:contain;
+  background:#171717;
+}
+.pods-media-kicker{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px 16px;
+  padding:4px 5px 13px;
+  color:var(--pods-pine);
+  font:700 10.5px/1.35 "Hanken Grotesk",sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.11em;
+}
+.pods-media-kicker .pods-media-length{
+  font-weight:600;
+  letter-spacing:.06em;
+  color:var(--pods-moss);
+}
+.pods-video-grid figcaption,
+.pods-video-single figcaption,
+.ap-page .ap-video-start figcaption,
+.ap-page .ap-faq .pods-faq-video figcaption{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin:0;
+  padding:15px 5px 6px;
+  color:var(--pods-ink);
+  font-family:"Hanken Grotesk",sans-serif;
+  font-size:clamp(14px,1.3vw,17px);
+  line-height:1.4;
+  font-weight:650;
+}
+.pods-video-grid figcaption::after,
+.pods-video-single figcaption::after{
+  content:"↗";
+  display:inline-block;
+  color:var(--pods-moss);
+  font-size:19px;
+  line-height:1;
+  flex:none;
+}
+.ap-page .ap-video-start{
+  border-top:1px solid rgba(78,54,30,.22);
+}
+.ap-page .ap-video-start .pods-video-grid figure{background:var(--pods-seashell)}
+.ap-page .ap-faq .pods-faq-video{background:var(--pods-periwinkle)}
+.pods-faq-video video[data-mobile-portrait="true"]{
+  width:min(100%,360px);
+  aspect-ratio:9/16;
+  max-height:min(70vh,640px);
+  margin-inline:auto;
+}
+@media(max-width:700px){
+  .pods-video-showcase{width:calc(100% - 24px);padding:14px;margin-block:26px}
+  .pods-video-grid{grid-template-columns:minmax(0,1fr)}
+  .pods-video-grid figure,.pods-video-single{padding:10px}
+  .pods-media-kicker{font-size:10px}
+  .pods-video-grid figcaption,.pods-video-single figcaption{font-size:15px}
+}
+@media(prefers-reduced-motion:reduce){
+  .pods-video-grid figure,.pods-video-single{transition:none;transform:none!important}
+}
