@@ -25,9 +25,9 @@
   // Additive native media players. Empty config means no empty/broken embeds.
   // Sources must be direct downloadable HTTPS MP4 URLs, not Drive viewing pages.
   const placements = {
-    nirvaan1: {label:'Away Pods — introduction', title:'An introduction to away Pods'},
-    nirvaan2: {label:'Away Pods — how the model works', title:'How away Pods works'},
-    uj: {label:'Away Pods — questions answered', title:'Questions about away Pods'}
+    nirvaan1: {label:'Away Pods — introduction', title:'An introduction to away Pods', index:'01', runtime:'1:13'},
+    nirvaan2: {label:'Away Pods — how the model works', title:'How away Pods works', index:'02', runtime:'1:22'},
+    uj: {label:'Away Pods — questions answered', title:'Questions about away Pods', index:'03', runtime:'1:50'}
   };
   const mediaConfig = window.PODS_CONFIG?.videos || {};
   const podsVideos = [];
@@ -73,9 +73,17 @@
       track.kind = 'captions'; track.srclang = 'en'; track.label = 'English'; track.src = data.captions;
       video.append(track);
     }
+    const kicker = document.createElement('div');
+    kicker.className = 'pods-media-kicker';
+    const episode = document.createElement('span');
+    episode.textContent = `AWAY PODS / VIDEO ${placements[key]?.index || ''}`;
+    const runtime = document.createElement('span');
+    runtime.className = 'pods-media-length';
+    runtime.textContent = placements[key]?.runtime || '';
+    kicker.append(episode, runtime);
     const caption = document.createElement('figcaption');
     caption.textContent = placements[key]?.title || 'Away Pods video';
-    slot.append(video, caption);
+    slot.append(kicker, video, caption);
     slot.hidden = false;
     podsVideos.push(video);
     video.addEventListener('play', () => {
