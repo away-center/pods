@@ -326,7 +326,9 @@ body:not(.support-page) .hero .eyebrow,
 
 /* A soft periwinkle halo retains the animation and all existing graphics. */
 .hero .stage{
-  background:radial-gradient(ellipse at 52% 48%,rgba(196,210,251,.56) 0%,rgba(196,210,251,.28) 42%,transparent 72%);
+  /* Avoid a visible rectangular edge from the previous periwinkle radial fill.
+     Preserve the original animated SVG, rings and floating badges untouched. */
+  background:transparent;
 }
 
 /* The main site alternates quieter light chapters and a few dark chapters. */
@@ -539,4 +541,18 @@ body:not(.support-page) .hero .eyebrow,
 }
 @media(prefers-reduced-motion:reduce){
   .pods-video-grid figure,.pods-video-single{transition:none;transform:none!important}
+}
+
+
+/* Desktop /start workspace card: retain Seashell rounded panel, but
+   separate it visually from the preceding Moss and following Dune sections. */
+@media(min-width:701px){
+  .ap-page .ap-section[aria-labelledby="ap-workspace-title"]{
+    margin-block:clamp(40px,5vw,78px);
+  }
+}
+@media(min-width:1200px){
+  .ap-page .ap-section[aria-labelledby="ap-workspace-title"]{
+    margin-block:72px;
+  }
 }
