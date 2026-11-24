@@ -55,3 +55,10 @@ Mapping:
 - uj portrait: `Away_Pods_3_9x16_animated.mp4`, Drive file ID `1lq5QGVbqILqrJ_C4vvpNGAwstsjv9NX-` (1:51).
 
 **Publishing blocker:** Original downloads are available but the connected GitHub text-file tool does not upload native MP4 binaries, and suitable direct streaming URLs have not been published. Upload optimized encodes to dedicated static media hosting (e.g. Vercel Blob/CDN) before populating `site-config.js`. Do not introduce iframe-based Drive video players: their playback cannot be reliably paused/resumed via native HTMLVideoElement. No production deployment made.
+
+
+## Vercel Blob URLs connected (24 November 2026)
+
+Four MP4 assets and four poster images were supplied by the site owner in the public Blob store `7d2sylb7vqedsnra`, in directories `Pods Videos` and `Pods Video Posters`. The preview branch `preview/pods-v2` now enables all three players via `site-config.js`; UJ uses the portrait video and corresponding portrait poster below 700px. Video embeds remain click-to-play and automatically pause when under 20% visible, when another video starts, or when the tab is hidden.
+
+Production `main` and `pods.away.center` are not changed. These third-party HTTPS resources could not be independently HEAD-verified in this execution environment, which blocks external DNS requests; verify playback in Vercel preview on desktop and phone before distributing widely. Empty caption URLs remain pending transcripts.
