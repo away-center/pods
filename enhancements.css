@@ -699,3 +699,47 @@ body:not(.support-page) .hero .eyebrow,
   font-size:18px;
   line-height:1;
 }
+
+
+/* 2026-11-24 — Calm editorial homepage navigation.
+   The former Signal Orange progress/separator looked like a hard border
+   against the cream hero. Retain scroll progress but soften its colour. */
+body:not(.ap-page) > .nav,
+body > header.nav {
+  background:rgba(253,247,243,.97);
+  border-bottom:1px solid rgba(78,54,30,.16);
+  box-shadow:none;
+  transition:background-color .25s ease,box-shadow .25s ease,border-color .25s ease;
+}
+body > header.nav.stuck {
+  background:rgba(253,247,243,.985);
+  border-bottom-color:rgba(78,54,30,.21);
+  box-shadow:0 8px 24px -22px rgba(78,54,30,.28);
+}
+body > header.nav .progress {
+  height:2px;
+  bottom:-1px;
+  background:var(--pods-moss);
+  opacity:.72;
+  border-radius:0;
+}
+body > header.nav:not(.stuck) .progress{opacity:0}
+body > header.nav .nav-links a{
+  color:rgba(26,26,26,.70);
+  transition:color .25s ease;
+}
+body > header.nav .nav-links a:hover,
+body > header.nav .nav-links a:focus-visible {
+  color:var(--pods-moss);
+}
+body > header.nav .nav-links a::after{
+  background:var(--pods-moss);
+  height:1px;
+}
+@media(max-width:1000px){
+  body > header.nav .nav-links.is-open{
+    background:var(--pods-offwhite);
+    border-color:rgba(78,54,30,.17);
+    box-shadow:0 16px 26px -20px rgba(78,54,30,.25);
+  }
+}
