@@ -162,12 +162,45 @@
                 <div class="ap-field"><label for="ap-first-name">First name <span aria-hidden="true">*</span></label><input class="ap-input" id="ap-first-name" name="first_name" type="text" autocomplete="given-name" maxlength="120" required></div>
                 <div class="ap-field"><label for="ap-email">Company email <span aria-hidden="true">*</span></label><input class="ap-input" id="ap-email" name="email" type="email" autocomplete="email" maxlength="254" required></div>
                 <div class="ap-field"><label for="ap-company">Company name</label><input class="ap-input" id="ap-company" name="company" type="text" autocomplete="organization" maxlength="160"></div>
+<fieldset class="ap-field pods-phone-fieldset">
+  <legend>Phone / WhatsApp <span aria-hidden="true">*</span></legend>
+  <div class="pods-phone-fields">
+    <div class="pods-dial-field">
+      <label for="ap-phone-code">Country code <span aria-hidden="true">*</span></label>
+      <input class="ap-input" id="ap-phone-code" name="phone_country_code" type="tel" autocomplete="tel-country-code" inputmode="tel" list="ap-dial-codes" placeholder="+1" pattern="\+[1-9][0-9]{0,3}" maxlength="5" required title="Include + and the international dialling code, e.g. +1 or +91">
+    </div>
+    <div class="pods-national-field">
+      <label for="ap-phone">Phone number <span aria-hidden="true">*</span></label>
+      <input class="ap-input" id="ap-phone" name="phone" type="tel" autocomplete="tel-national" inputmode="tel" placeholder="Number without country code" pattern="[0-9() .-]{6,25}" maxlength="25" required title="Enter the national phone number without the country code">
+    </div>
+  </div>
+  <datalist id="ap-dial-codes">
+  <option value="+1" label="United States / Canada"></option>
+  <option value="+44" label="United Kingdom"></option>
+  <option value="+91" label="India"></option>
+  <option value="+61" label="Australia"></option>
+  <option value="+65" label="Singapore"></option>
+  <option value="+971" label="United Arab Emirates"></option>
+  <option value="+49" label="Germany"></option>
+  <option value="+33" label="France"></option>
+  <option value="+31" label="Netherlands"></option>
+  <option value="+353" label="Ireland"></option>
+  <option value="+41" label="Switzerland"></option>
+  <option value="+81" label="Japan"></option>
+  <option value="+82" label="South Korea"></option>
+  <option value="+64" label="New Zealand"></option>
+  <option value="+27" label="South Africa"></option>
+  <option value="+55" label="Brazil"></option>
+  <option value="+52" label="Mexico"></option>
+  <option value="+966" label="Saudi Arabia"></option>
+</datalist>
+</fieldset>
 </div>
               <div class="ap-field"><label for="ap-message">Message <span aria-hidden="true">*</span></label><textarea class="ap-input ap-textarea" id="ap-message" name="brief" required maxlength="5000" rows="4" placeholder="How can we help you?"></textarea></div>
 <details class="optional-fields"><summary>Additional details (optional)</summary><div class="ap-fields">
                 <div class="ap-field"><label for="ap-last-name">Last name</label><input class="ap-input" id="ap-last-name" name="last_name" type="text" autocomplete="family-name" maxlength="120"></div>
                 <div class="ap-field"><label for="ap-country">HQ country</label><select class="ap-input" id="ap-country" name="hq_country" autocomplete="country-name"><option value="">Select a country</option></select></div>
-                <div class="ap-field"><label for="ap-phone">Phone number</label><input class="ap-input" id="ap-phone" name="phone" type="tel" autocomplete="tel" maxlength="50"></div>
+
 </div></details>
               <div id="ap-hidden-fields"></div>
               <div hidden aria-hidden="true"><label>Leave this blank<input name="contact_url" tabindex="-1" autocomplete="off"></label></div>
